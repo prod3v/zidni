@@ -8,7 +8,7 @@
 }
 
 .navbar-nav {
-  @apply text-center md:text-left;
+  @apply text-center md:text-start;
 }
 
 .nav-item {
@@ -33,7 +33,7 @@
 
 /* search style */
 .search-modal {
-  @apply invisible absolute top-0 left-0 right-0 z-10 h-10 bg-white opacity-0 transition md:h-full;
+  @apply invisible absolute top-0 start-0 end-0 z-10 h-10 bg-white opacity-0 transition md:h-full;
 }
 
 .search-modal .form-input {
@@ -41,7 +41,7 @@
 }
 
 .search-modal .search-close {
-  @apply absolute top-1/2 right-2 -translate-y-1/2 p-3 text-h4;
+  @apply absolute top-1/2 end-2 -translate-y-1/2 p-3 text-h4;
 }
 
 .search-modal.open {

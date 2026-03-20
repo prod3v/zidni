@@ -29,7 +29,7 @@
 
 /* author-image */
 .author-image {
-  @apply mr-2 align-top;
+  @apply me-2 align-top;
   img {
     @apply max-h-[25px] max-w-[25px] rounded-full;
   }
@@ -77,7 +77,7 @@
   @apply prose max-w-none prose-headings:font-bold prose-h1:mb-4 prose-h1:text-h1-sm prose-h2:mb-4 prose-h2:mt-4 prose-h2:text-h2-sm prose-h3:mt-4 prose-h3:text-h3-sm prose-h4:mt-4 prose-h5:mb-4 prose-h6:mb-6 prose-blockquote:rounded-lg prose-blockquote:border-primary prose-blockquote:bg-light prose-blockquote:px-7 prose-blockquote:py-3 prose-blockquote:text-lg prose-blockquote:leading-8 prose-pre:px-6 prose-pre:py-5 md:prose-h1:text-h1 md:prose-h2:text-h2 md:prose-h3:text-h3;
   @apply prose-a:text-primary prose-a:transition prose-a:duration-200 prose-a:hover:text-dark;
   @apply prose-img:rounded-lg;
-  @apply prose-table:relative prose-table:overflow-hidden prose-table:rounded-lg prose-table:before:absolute prose-table:before:left-0 prose-table:before:top-0 prose-table:before:h-full prose-table:before:w-full prose-table:before:rounded-[inherit] prose-table:before:border prose-table:before:border-border prose-table:before:content-[""];
+  @apply prose-table:relative prose-table:overflow-hidden prose-table:rounded-lg prose-table:before:absolute prose-table:before:start-0 prose-table:before:top-0 prose-table:before:h-full prose-table:before:w-full prose-table:before:rounded-[inherit] prose-table:before:border prose-table:before:border-border prose-table:before:content-[""];
   @apply prose-thead:border-border prose-thead:bg-light;
   @apply prose-th:relative prose-th:z-10 prose-th:px-4 prose-th:py-[18px] prose-th:text-text-dark;
   @apply prose-tr:border-border;
@@ -127,7 +127,7 @@
 }
 
 .accordion-icon {
-  @apply ml-auto h-[.8em] w-[.8em] rotate-[-90deg] transition-transform duration-200;
+  @apply ms-auto h-[.8em] w-[.8em] rotate-[-90deg] transition-transform duration-200;
 }
 
 .accordion-content {
@@ -152,7 +152,7 @@
 }
 
 .notice-head svg {
-  @apply mr-3;
+  @apply me-3;
 }
 
 .notice-head p {
