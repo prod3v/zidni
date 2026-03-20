@@ -1,40 +1,40 @@
 {
   "main": [
     {
-      "name": "Home",
+      "name": "الرئيسية",
       "url": "/"
     },
     {
-      "name": "About",
+      "name": "عن المدونة",
       "url": "/about"
     },
     {
-      "name": "Contact",
+      "name": "تواصل",
       "url": "/contact"
     },
     {
-      "name": "Pages",
+      "name": "صفحات",
       "url": "",
       "hasChildren": true,
       "children": [
         {
-          "name": "Authors",
+          "name": "الكُتّاب",
           "url": "/authors"
         },
         {
-          "name": "Categories",
+          "name": "التصنيفات",
           "url": "/categories"
         },
         {
-          "name": "Tags",
+          "name": "الوسوم",
           "url": "/tags"
         },
         {
-          "name": "Elements",
+          "name": "العناصر",
           "url": "/elements"
         },
         {
-          "name": "Privacy Policy",
+          "name": "سياسة الخصوصية",
           "url": "/privacy-policy"
         }
       ]
@@ -42,19 +42,19 @@
   ],
   "footer": [
     {
-      "name": "About",
+      "name": "عن المدونة",
       "url": "/about"
     },
     {
-      "name": "Contact",
+      "name": "تواصل",
       "url": "/contact"
     },
     {
-      "name": "Elements",
+      "name": "العناصر",
       "url": "/elements"
     },
     {
-      "name": "Privacy Policy",
+      "name": "سياسة الخصوصية",
       "url": "/privacy-policy"
     }
   ]

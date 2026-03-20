@@ -1,14 +1,14 @@
 {
   "site": {
-    "title": "Bookworm Light Astro | Blog Template",
-    "base_url": "https://bookworm-light-astro.vercel.app",
+    "title": "زدني | مدونة للطلاب الجامعيين",
+    "base_url": "https://zidni.vercel.app",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",
     "logo": "/images/logo.png",
     "logo_width": "200",
     "logo_height": "34",
-    "logo_text": "Bookworm Light"
+    "logo_text": "زدني"
   },
 
   "settings": {
@@ -16,9 +16,9 @@
   },
 
   "metadata": {
-    "meta_author": "Themefisher",
+    "meta_author": "محمد",
     "meta_image": "/images/og-image.png",
-    "meta_description": "Bookworm Light Astro Blog Template"
+    "meta_description": "مدونة زدني للطلاب الجامعيين — نصائح دراسية، ملخصات، وأدلة أكاديمية"
   },
 
   "google_tag_manager": {
@@ -28,12 +28,12 @@
 
   "params": {
     "contact_form_action": "#",
-    "copyright": "Copyright © 2025 a theme by [Themefisher](https://themefisher.com)"
+    "copyright": "جميع الحقوق محفوظة © 2026 زدني"
   },
 
   "contactinfo": {
-    "address": "355 S Grand Ave <br/> Los Angeles, CA 90071",
-    "email": "info@bookworm.org",
-    "phone": "+800 567 1234"
+    "address": "",
+    "email": "moh4med.ameen@gmail.com",
+    "phone": ""
   }
 }
