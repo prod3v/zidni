@@ -3,4 +3,4 @@ Allow: /
 
 Disallow: /api/*
 
-Sitemap: https://zidni.vercel.app/sitemap-index.xml
+Sitemap: https://zidni.moh4med-ameen.workers.dev/sitemap-index.xml

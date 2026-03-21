@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "زدني | مدونة للطلاب الجامعيين",
-    "base_url": "https://zidni.vercel.app",
+    "base_url": "https://zidni.moh4med-ameen.workers.dev",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",
