@@ -1,0 +1,85 @@
+---
+interface Props {
+  type?: "tip" | "warning" | "info" | "important";
+  title?: string;
+}
+
+const { type = "tip", title } = Astro.props;
+
+const styles = {
+  tip: {
+    bg: "bg-emerald-50",
+    border: "border-emerald-500",
+    titleColor: "text-emerald-800",
+    icon: "💡",
+    defaultTitle: "نصيحة",
+  },
+  warning: {
+    bg: "bg-amber-50",
+    border: "border-amber-500",
+    titleColor: "text-amber-800",
+    icon: "⚠️",
+    defaultTitle: "تنبيه",
+  },
+  info: {
+    bg: "bg-sky-50",
+    border: "border-sky-500",
+    titleColor: "text-sky-800",
+    icon: "ℹ️",
+    defaultTitle: "معلومة",
+  },
+  important: {
+    bg: "bg-rose-50",
+    border: "border-rose-500",
+    titleColor: "text-rose-800",
+    icon: "🔴",
+    defaultTitle: "مهم",
+  },
+};
+
+const s = styles[type];
+---
+
+<div class={`callout ${s.bg} border-s-4 ${s.border} rounded-xl p-5 my-8`}>
+  <p class={`font-bold text-base ${s.titleColor} mb-2 flex items-center gap-2`}>
+    <span>{s.icon}</span>
+    {title || s.defaultTitle}
+  </p>
+  <div class="callout-body text-dark/80 leading-8">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .callout-body :global(p) {
+    margin: 0.25rem 0;
+  }
+
+  .callout-body :global(ul),
+  .callout-body :global(ol) {
+    padding-inline-start: 1.25rem;
+    margin: 0.5rem 0;
+  }
+
+  .callout-body :global(ul) {
+    list-style-type: disc;
+  }
+
+  .callout-body :global(ol) {
+    list-style-type: decimal;
+  }
+
+  .callout-body :global(li) {
+    margin: 0.25rem 0;
+  }
+
+  .callout-body :global(strong) {
+    color: var(--color-dark, #152035);
+  }
+
+  .callout-body :global(a) {
+    color: var(--color-primary, #01ad9f);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

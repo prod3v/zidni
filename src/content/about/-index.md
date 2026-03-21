@@ -1,23 +1,25 @@
 ---
-title: "I’m John Doe, A content writer based in LDN, Currently at Bookworm"
-meta_title: "About"
+title: "زدني — مدونة لكل طالب جامعي يبحث عن النجاح"
+meta_title: "عن زدني"
 image: "/images/author.png"
 draft: false
 
 what_i_do:
-  title: "What I Do"
+  title: "خدماتنا"
   items:
-  - title: "Content Writing"
-    description: "Purus eget ipsum elementum venenatis, quis rutrum mi semper nonpurus eget ipsum elementum venenatis."
-  
-  - title: "Photography"
-    description: "Aenean maximus urna magna elementum, quis rutrum mi semper non purus eget ipsum venenatis."
-  
-  - title: "Web Research"
-    description: "Aenean maximus urna magna elementum venenatis, quis semper non purus eget ipsum venenatis."
+  - title: "مشاريع التخرج"
+    description: "ننفّذ مشروع تخرجك من الفكرة إلى التسليم — كود، توثيق، عرض تقديمي، وتحضير للمناقشة."
+
+  - title: "الواجبات الجامعية"
+    description: "نساعدك في حل واجباتك بجودة عالية وفي الموعد — برمجة، تقارير، مشاريع مواد، وأكثر."
+
+  - title: "الترجمة الأكاديمية"
+    description: "ترجمة دقيقة لأبحاثك ورسائلك بين العربية والإنجليزية، بمصطلحات أكاديمية صحيحة وتنسيق محفوظ."
 
 ---
 
-A content writer with over 12 years experience working across brand identity, publishing and digital products. Maecenas sit amet purus eget ipsum elementum venenatis. Aenean maximus urna magna elementum venenatis quis non purus.
+زدني مدونة عربية تأسست بهدف واحد: مساعدة الطلاب الجامعيين في مشوارهم الأكاديمي. نقدم محتوى عملي ومبسّط يغطي المواد الجامعية، مهارات الدراسة، مشاريع التخرج، والترجمة الأكاديمية.
 
-Purus eget ipsum elementum venenatis. Aenean maximus urna magna elementum venenatis, quis rutrum mi semper non purus eget ipsum elementum venenatis, aenean maximus urna magna elementum.
+نؤمن أن كل طالب يستحق محتوى عربي بجودة عالية يساعده يفهم مادته ويتفوق في دراسته. وإذا احتاج مساعدة إضافية، فريقنا جاهز يقدم خدمات أكاديمية احترافية تشمل تنفيذ مشاريع التخرج، حل الواجبات، والترجمة الأكاديمية.
+
+سواء كنت تدرس علوم حاسب، تقنية معلومات، هندسة، أو أي تخصص آخر — ستجد في زدني ما يساعدك تنجح.

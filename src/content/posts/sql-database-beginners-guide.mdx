@@ -1,0 +1,614 @@
+---
+title: "شرح قواعد البيانات SQL للمبتدئين — دليل شامل للطلاب"
+meta_title: "شرح قواعد البيانات SQL للمبتدئين | دليل عملي شامل للطلاب الجامعيين"
+description: "تعلّم أساسيات قواعد البيانات SQL من الصفر: مفهوم قواعد البيانات، أوامر SELECT وINSERT وUPDATE وDELETE، تصميم الجداول، والعلاقات بين الجداول. دليل عملي بأمثلة واضحة لكل طالب جامعي."
+date: 2026-03-21T07:00:00Z
+image: "/images/posts/02.jpg"
+categories: ["دليل المواد"]
+authors: ["فريق زدني"]
+tags: ["قواعد بيانات", "SQL", "برمجة", "تعلم برمجة"]
+draft: false
+---
+
+إذا كنت طالب جامعي في تخصص علوم الحاسب أو تقنية المعلومات أو نظم المعلومات، فمن شبه المؤكد أنك ستدرس مادة قواعد البيانات. وإذا وصلت لهذا المقال، فغالبًا تبحث عن شرح SQL للمبتدئين بأسلوب واضح وعملي بعيد عن التعقيد الأكاديمي الجاف.
+
+في هذا الدليل، سنشرح لك كل ما تحتاجه لتبدأ مع SQL من الصفر: من مفهوم قواعد البيانات وأنواعها، إلى إنشاء الجداول وكتابة الاستعلامات الأساسية، مرورًا بالعلاقات بين الجداول والاستعلامات المتقدمة. كل شيء بأمثلة عملية تقدر تجربها بنفسك.
+
+<QuickSummary>
+- ما هي قواعد البيانات ولماذا نحتاجها
+- أنواع قواعد البيانات والفرق بينها
+- تثبيت بيئة العمل وأدوات التطبيق العملي
+- إنشاء قواعد البيانات والجداول (CREATE)
+- أنواع البيانات الأساسية في SQL
+- إدخال البيانات (INSERT)، الاستعلام عنها (SELECT)، تعديلها (UPDATE)، وحذفها (DELETE)
+- تصفية النتائج باستخدام WHERE وترتيبها بـ ORDER BY
+- الدوال التجميعية: COUNT وSUM وAVG وMAX وMIN
+- العلاقات بين الجداول والمفاتيح الأساسية والأجنبية
+- ربط الجداول باستخدام JOIN
+- تمارين عملية تقدر تطبقها مباشرة
+</QuickSummary>
+
+## ما هي قواعد البيانات ولماذا نحتاجها
+
+قاعدة البيانات (Database) هي ببساطة مكان منظّم لتخزين البيانات بطريقة تسهّل الوصول إليها والتعامل معها. تخيّل أنك تدير جامعة فيها آلاف الطلاب — تحتاج تحفظ بياناتهم (الأسماء، الأرقام الجامعية، الدرجات، المواد المسجلة) بطريقة تسمح لك بالبحث والتعديل والاسترجاع بسرعة. هنا يأتي دور قواعد البيانات.
+
+لماذا لا نستخدم Excel مثلًا؟ الجواب بسيط:
+
+- **الحجم**: قواعد البيانات تتعامل مع ملايين السجلات بكفاءة عالية، بينما Excel يبدأ يتعثر مع عشرات الآلاف
+- **التزامن**: أكثر من مستخدم يقدر يتعامل مع البيانات نفسها في نفس الوقت
+- **الأمان**: تحكّم دقيق في الصلاحيات — مَن يقدر يقرأ البيانات ومَن يقدر يعدّلها
+- **العلاقات**: ربط البيانات ببعض بطريقة ذكية تمنع التكرار والتناقض
+
+### أنواع قواعد البيانات
+
+هناك أنواع كثيرة، لكن أهمها:
+
+- **قواعد البيانات العلائقية (Relational Databases):** تخزّن البيانات في جداول مترابطة. هذا النوع هو اللي نركّز عليه في هذا المقال، وتستخدم لغة SQL للتعامل معها. أمثلة: MySQL، PostgreSQL، Oracle، SQL Server
+- **قواعد البيانات غير العلائقية (NoSQL):** تخزّن البيانات بأشكال مختلفة (مستندات، أزواج مفتاح-قيمة، رسوم بيانية). أمثلة: MongoDB، Redis، Cassandra
+
+<Callout type="info" title="ما هي SQL؟">
+SQL اختصار لـ Structured Query Language أي "لغة الاستعلام المُهيكلة". هي ليست لغة برمجة بالمعنى التقليدي، بل هي لغة متخصصة للتعامل مع قواعد البيانات العلائقية — تقدر من خلالها تنشئ جداول، تدخّل بيانات، تبحث فيها، تعدّلها، وتحذفها. تم تطويرها في السبعينات في مختبرات IBM، ومن وقتها وهي المعيار الأساسي في هذا المجال.
+</Callout>
+
+## تجهيز بيئة العمل
+
+قبل ما تبدأ تكتب أوامر SQL، تحتاج أداة تنفّذ فيها هذه الأوامر. عندك عدة خيارات:
+
+### الخيار الأسهل: أدوات أونلاين
+
+إذا تبي تبدأ فورًا بدون تثبيت أي شيء:
+- **[DB Fiddle](https://www.db-fiddle.com/):** تكتب SQL وتنفّذه مباشرة في المتصفح
+- **[SQLiteOnline](https://sqliteonline.com/):** بيئة SQLite في المتصفح
+
+### الخيار المحلي: تثبيت MySQL
+
+إذا تبي بيئة كاملة على جهازك:
+
+1. حمّل وثبّت [MySQL Community Server](https://dev.mysql.com/downloads/mysql/)
+2. حمّل [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) — واجهة رسومية سهلة للتعامل مع قاعدة البيانات
+3. بعد التثبيت، افتح MySQL Workbench واتصل بالسيرفر المحلي
+
+<Callout type="tip" title="نصيحة">
+إذا الدكتور يستخدم أداة معينة في المحاضرة (مثل Oracle أو SQL Server أو phpMyAdmin)، استخدم نفس الأداة. لا تعقّد حياتك بأداة مختلفة وأنت تتعلم. أوامر SQL متشابهة بشكل كبير بين الأنظمة مع فروقات بسيطة.
+</Callout>
+
+## إنشاء قاعدة بيانات وجداول
+
+### إنشاء قاعدة بيانات
+
+أول خطوة هي إنشاء قاعدة بيانات تحتوي على جداولك:
+
+```sql
+-- إنشاء قاعدة بيانات جديدة باسم university
+CREATE DATABASE university;
+
+-- اختيار قاعدة البيانات للعمل عليها
+USE university;
+```
+
+### إنشاء جدول
+
+الجدول هو الوحدة الأساسية لتخزين البيانات في قاعدة البيانات العلائقية. كل جدول يتكون من أعمدة (Columns) وصفوف (Rows).
+
+```sql
+-- إنشاء جدول الطلاب
+CREATE TABLE students (
+    student_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    date_of_birth DATE,
+    gpa DECIMAL(3, 2),
+    major VARCHAR(100),
+    enrollment_date DATE DEFAULT CURRENT_DATE
+);
+```
+
+خلّنا نفكّك هذا الأمر:
+
+- **`student_id INT PRIMARY KEY AUTO_INCREMENT`**: عمود رقمي يتزايد تلقائيًا، وهو المفتاح الأساسي (المعرّف الفريد لكل طالب)
+- **`VARCHAR(50)`**: نص متغير الطول بحد أقصى 50 حرف
+- **`NOT NULL`**: يعني هذا العمود إلزامي — ما تقدر تتركه فاضي
+- **`UNIQUE`**: ما يسمح بتكرار القيمة — كل إيميل يكون مختلف
+- **`DECIMAL(3, 2)`**: رقم عشري بـ 3 خانات منها 2 بعد الفاصلة (مثل 3.75)
+- **`DEFAULT CURRENT_DATE`**: إذا ما حددت قيمة، يأخذ تاريخ اليوم تلقائيًا
+
+### أنواع البيانات الأساسية
+
+| النوع | الوصف | مثال |
+|-------|-------|------|
+| `INT` | عدد صحيح | `student_id INT` |
+| `VARCHAR(n)` | نص متغير الطول | `name VARCHAR(100)` |
+| `TEXT` | نص طويل | `description TEXT` |
+| `DATE` | تاريخ | `birth_date DATE` |
+| `DECIMAL(p, s)` | رقم عشري | `gpa DECIMAL(3, 2)` |
+| `BOOLEAN` | صح أو خطأ | `is_active BOOLEAN` |
+| `DATETIME` | تاريخ ووقت | `created_at DATETIME` |
+
+<Callout type="info" title="الفرق بين VARCHAR و TEXT">
+استخدم `VARCHAR` عندما تعرف الحد الأقصى للنص (مثل الأسماء والإيميلات). استخدم `TEXT` للنصوص الطويلة غير محددة الطول (مثل الملاحظات أو الوصف). `VARCHAR` أسرع في البحث والفهرسة من `TEXT`.
+</Callout>
+
+## إدخال البيانات: INSERT
+
+بعد ما أنشأنا الجدول، نحتاج ندخّل بيانات فيه:
+
+```sql
+-- إدخال طالب واحد
+INSERT INTO students (first_name, last_name, email, date_of_birth, gpa, major)
+VALUES ('أحمد', 'الشمري', 'ahmed@university.edu', '2002-05-15', 3.75, 'علوم حاسب');
+
+-- إدخال عدة طلاب دفعة واحدة
+INSERT INTO students (first_name, last_name, email, date_of_birth, gpa, major)
+VALUES
+    ('سارة', 'العتيبي', 'sara@university.edu', '2003-01-20', 3.90, 'تقنية معلومات'),
+    ('خالد', 'القحطاني', 'khalid@university.edu', '2002-09-10', 3.20, 'علوم حاسب'),
+    ('نورة', 'الدوسري', 'noura@university.edu', '2003-03-25', 3.55, 'نظم معلومات'),
+    ('محمد', 'الحربي', 'mohammed@university.edu', '2001-11-08', 2.85, 'علوم حاسب'),
+    ('فاطمة', 'الغامدي', 'fatima@university.edu', '2002-07-14', 3.95, 'تقنية معلومات');
+```
+
+لاحظ أننا لم نحدد قيمة لـ `student_id` لأنه `AUTO_INCREMENT` — قاعدة البيانات تتكفّل بتوليد الرقم تلقائيًا. وكذلك لم نحدد `enrollment_date` لأننا وضعنا له قيمة افتراضية.
+
+<Callout type="warning" title="انتبه: ترتيب القيم">
+ترتيب القيم في `VALUES` لازم يطابق ترتيب الأعمدة اللي ذكرتها بعد اسم الجدول. إذا كتبت الأعمدة بترتيب `(first_name, last_name, email)` فالقيم لازم تكون بنفس الترتيب. أي خلل في الترتيب يسبب أخطاء أو بيانات خاطئة.
+</Callout>
+
+## الاستعلام عن البيانات: SELECT
+
+أمر `SELECT` هو أكثر أمر ستستخدمه في SQL. من خلاله تسترجع البيانات من الجداول.
+
+### استعلام بسيط
+
+```sql
+-- استرجاع جميع الأعمدة لجميع الطلاب
+SELECT * FROM students;
+
+-- استرجاع أعمدة محددة فقط
+SELECT first_name, last_name, gpa FROM students;
+```
+
+### التصفية باستخدام WHERE
+
+```sql
+-- الطلاب اللي تخصصهم علوم حاسب
+SELECT * FROM students
+WHERE major = 'علوم حاسب';
+
+-- الطلاب اللي معدلهم أعلى من 3.5
+SELECT first_name, last_name, gpa FROM students
+WHERE gpa > 3.50;
+
+-- الطلاب اللي تخصصهم علوم حاسب ومعدلهم أعلى من 3.0
+SELECT * FROM students
+WHERE major = 'علوم حاسب' AND gpa > 3.00;
+
+-- الطلاب من تخصص علوم حاسب أو تقنية معلومات
+SELECT * FROM students
+WHERE major = 'علوم حاسب' OR major = 'تقنية معلومات';
+
+-- طريقة أنظف لنفس الاستعلام السابق باستخدام IN
+SELECT * FROM students
+WHERE major IN ('علوم حاسب', 'تقنية معلومات');
+```
+
+### الترتيب باستخدام ORDER BY
+
+```sql
+-- ترتيب الطلاب حسب المعدل من الأعلى للأقل
+SELECT first_name, last_name, gpa FROM students
+ORDER BY gpa DESC;
+
+-- ترتيب حسب المعدل من الأقل للأعلى (الافتراضي)
+SELECT first_name, last_name, gpa FROM students
+ORDER BY gpa ASC;
+
+-- ترتيب حسب التخصص ثم المعدل
+SELECT first_name, last_name, major, gpa FROM students
+ORDER BY major ASC, gpa DESC;
+```
+
+### تحديد عدد النتائج باستخدام LIMIT
+
+```sql
+-- أعلى 3 طلاب من حيث المعدل
+SELECT first_name, last_name, gpa FROM students
+ORDER BY gpa DESC
+LIMIT 3;
+```
+
+### البحث في النصوص باستخدام LIKE
+
+```sql
+-- الطلاب اللي اسمهم الأول يبدأ بـ "أ"
+SELECT * FROM students
+WHERE first_name LIKE 'أ%';
+
+-- الطلاب اللي إيميلهم يحتوي على "university"
+SELECT * FROM students
+WHERE email LIKE '%university%';
+```
+
+الرمز `%` يعني "أي عدد من الأحرف". والرمز `_` يعني "حرف واحد بالضبط".
+
+## تعديل البيانات: UPDATE
+
+```sql
+-- تعديل معدل طالب معين
+UPDATE students
+SET gpa = 3.80
+WHERE student_id = 3;
+
+-- تعديل تخصص ومعدل طالب
+UPDATE students
+SET major = 'هندسة برمجيات', gpa = 3.45
+WHERE student_id = 4;
+```
+
+<Callout type="important" title="تحذير: لا تنسَ WHERE مع UPDATE">
+إذا نفّذت أمر `UPDATE` بدون `WHERE`، سيُعدّل **جميع** السجلات في الجدول. مثلًا `UPDATE students SET gpa = 0;` يحط صفر لكل الطلاب. هذا من أخطر الأخطاء. دائمًا تأكد من وجود شرط `WHERE` يحدد السجلات المطلوبة فقط.
+</Callout>
+
+## حذف البيانات: DELETE
+
+```sql
+-- حذف طالب معين
+DELETE FROM students
+WHERE student_id = 5;
+
+-- حذف جميع الطلاب اللي معدلهم أقل من 2.0
+DELETE FROM students
+WHERE gpa < 2.00;
+```
+
+نفس التحذير ينطبق هنا: `DELETE FROM students;` بدون `WHERE` يحذف **جميع** البيانات من الجدول. احذر.
+
+## الدوال التجميعية (Aggregate Functions)
+
+الدوال التجميعية تحسب قيمة واحدة من مجموعة قيم. مفيدة جدًا للتقارير والإحصائيات.
+
+```sql
+-- عدد الطلاب الكلي
+SELECT COUNT(*) AS total_students FROM students;
+
+-- متوسط المعدلات
+SELECT AVG(gpa) AS average_gpa FROM students;
+
+-- أعلى وأقل معدل
+SELECT MAX(gpa) AS highest_gpa, MIN(gpa) AS lowest_gpa FROM students;
+
+-- مجموع (مفيد أكثر مع أرقام مثل الدرجات أو الأسعار)
+SELECT SUM(gpa) FROM students;
+```
+
+### التجميع حسب مجموعات: GROUP BY
+
+```sql
+-- عدد الطلاب في كل تخصص
+SELECT major, COUNT(*) AS student_count
+FROM students
+GROUP BY major;
+
+-- متوسط المعدل لكل تخصص
+SELECT major, AVG(gpa) AS avg_gpa
+FROM students
+GROUP BY major;
+
+-- التخصصات اللي فيها أكثر من طالبين
+SELECT major, COUNT(*) AS student_count
+FROM students
+GROUP BY major
+HAVING COUNT(*) > 2;
+```
+
+<Callout type="info" title="الفرق بين WHERE و HAVING">
+`WHERE` تصفّي الصفوف **قبل** التجميع — أي تشتغل على البيانات الخام. `HAVING` تصفّي النتائج **بعد** التجميع — أي تشتغل على نتيجة الدوال التجميعية مثل `COUNT` و `AVG`. قاعدة بسيطة: إذا الشرط على عمود عادي استخدم `WHERE`، إذا الشرط على دالة تجميعية استخدم `HAVING`.
+</Callout>
+
+## العلاقات بين الجداول
+
+هنا يأتي الجزء الأهم في قواعد البيانات العلائقية: الربط بين الجداول. بدل ما نكرر البيانات، نوزّعها على جداول مترابطة.
+
+### المفتاح الأساسي والمفتاح الأجنبي
+
+- **المفتاح الأساسي (Primary Key):** عمود (أو مجموعة أعمدة) يُعرّف كل صف بشكل فريد. مثل الرقم الجامعي — لا يتكرر
+- **المفتاح الأجنبي (Foreign Key):** عمود في جدول يشير إلى المفتاح الأساسي في جدول آخر. هذا هو الرابط بين الجداول
+
+### مثال عملي: نظام جامعي
+
+خلّنا نبني نظام بسيط فيه طلاب ومواد وتسجيل:
+
+```sql
+-- جدول المواد الدراسية
+CREATE TABLE courses (
+    course_id INT PRIMARY KEY AUTO_INCREMENT,
+    course_name VARCHAR(100) NOT NULL,
+    course_code VARCHAR(10) UNIQUE NOT NULL,
+    credit_hours INT NOT NULL,
+    department VARCHAR(100)
+);
+
+-- جدول التسجيل — يربط بين الطلاب والمواد
+CREATE TABLE enrollments (
+    enrollment_id INT PRIMARY KEY AUTO_INCREMENT,
+    student_id INT,
+    course_id INT,
+    semester VARCHAR(20),
+    grade DECIMAL(4, 2),
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (course_id) REFERENCES courses(course_id)
+);
+```
+
+لاحظ كيف أن جدول `enrollments` يحتوي على `student_id` و `course_id` كمفاتيح أجنبية. هذا يعني:
+- كل سجل تسجيل مرتبط بطالب موجود في جدول `students`
+- وكل سجل تسجيل مرتبط بمادة موجودة في جدول `courses`
+- لا يمكنك تسجيل طالب غير موجود أو في مادة غير موجودة — قاعدة البيانات ترفض العملية
+
+```sql
+-- إدخال مواد
+INSERT INTO courses (course_name, course_code, credit_hours, department)
+VALUES
+    ('قواعد البيانات', 'CS301', 3, 'علوم الحاسب'),
+    ('هياكل البيانات', 'CS201', 3, 'علوم الحاسب'),
+    ('الشبكات', 'IT205', 3, 'تقنية المعلومات'),
+    ('تحليل النظم', 'IS301', 3, 'نظم المعلومات');
+
+-- تسجيل طلاب في مواد
+INSERT INTO enrollments (student_id, course_id, semester, grade)
+VALUES
+    (1, 1, '1447-1', 92.50),
+    (1, 2, '1447-1', 88.00),
+    (2, 1, '1447-1', 95.00),
+    (2, 3, '1447-1', 90.50),
+    (3, 2, '1447-1', 78.00),
+    (3, 4, '1447-1', 85.00);
+```
+
+## ربط الجداول: JOIN
+
+`JOIN` هو الأمر اللي يسمح لك بدمج بيانات من جدولين أو أكثر في استعلام واحد. هذا من أهم المفاهيم في SQL.
+
+### INNER JOIN
+
+يُرجع فقط الصفوف اللي لها تطابق في كلا الجدولين:
+
+```sql
+-- عرض أسماء الطلاب مع المواد المسجلين فيها ودرجاتهم
+SELECT
+    s.first_name,
+    s.last_name,
+    c.course_name,
+    c.course_code,
+    e.grade
+FROM enrollments e
+INNER JOIN students s ON e.student_id = s.student_id
+INNER JOIN courses c ON e.course_id = c.course_id;
+```
+
+لاحظ استخدام الأسماء المختصرة (Aliases): `s` للطلاب، `c` للمواد، `e` للتسجيل. هذا يجعل الاستعلام أنظف وأقصر.
+
+### LEFT JOIN
+
+يُرجع جميع الصفوف من الجدول الأيسر، حتى لو ما كان لها تطابق في الجدول الأيمن:
+
+```sql
+-- عرض جميع الطلاب حتى اللي ما سجّلوا في أي مادة
+SELECT
+    s.first_name,
+    s.last_name,
+    c.course_name
+FROM students s
+LEFT JOIN enrollments e ON s.student_id = e.student_id
+LEFT JOIN courses c ON e.course_id = c.course_id;
+```
+
+الطلاب اللي ما سجّلوا في أي مادة سيظهرون في النتيجة مع `NULL` في عمود المادة.
+
+### RIGHT JOIN
+
+عكس LEFT JOIN — يُرجع جميع الصفوف من الجدول الأيمن:
+
+```sql
+-- عرض جميع المواد حتى اللي ما فيها طلاب مسجلين
+SELECT
+    c.course_name,
+    s.first_name,
+    s.last_name
+FROM students s
+RIGHT JOIN enrollments e ON s.student_id = e.student_id
+RIGHT JOIN courses c ON e.course_id = c.course_id;
+```
+
+<Callout type="tip" title="نصيحة لفهم JOIN">
+أسهل طريقة لفهم أنواع JOIN هي تخيّل دائرتين متداخلتين (مخطط Venn). `INNER JOIN` يُرجع المنطقة المشتركة بينهما. `LEFT JOIN` يُرجع كل الدائرة اليسرى بما فيها الجزء المشترك. `RIGHT JOIN` يُرجع كل الدائرة اليمنى. جرّب ارسم هذا المخطط على ورقة وستتضح الفكرة فورًا.
+</Callout>
+
+## استعلامات متقدمة مفيدة
+
+بعد ما فهمت الأساسيات، هذه بعض الاستعلامات اللي تجمع عدة مفاهيم مع بعض:
+
+```sql
+-- متوسط درجات كل طالب في جميع مواده
+SELECT
+    s.first_name,
+    s.last_name,
+    COUNT(e.course_id) AS total_courses,
+    AVG(e.grade) AS avg_grade
+FROM students s
+INNER JOIN enrollments e ON s.student_id = e.student_id
+GROUP BY s.student_id, s.first_name, s.last_name
+ORDER BY avg_grade DESC;
+
+-- الطلاب اللي متوسط درجاتهم أعلى من 85
+SELECT
+    s.first_name,
+    s.last_name,
+    AVG(e.grade) AS avg_grade
+FROM students s
+INNER JOIN enrollments e ON s.student_id = e.student_id
+GROUP BY s.student_id, s.first_name, s.last_name
+HAVING AVG(e.grade) > 85
+ORDER BY avg_grade DESC;
+
+-- عدد الطلاب المسجلين في كل مادة
+SELECT
+    c.course_name,
+    c.course_code,
+    COUNT(e.student_id) AS enrolled_students
+FROM courses c
+LEFT JOIN enrollments e ON c.course_id = e.course_id
+GROUP BY c.course_id, c.course_name, c.course_code
+ORDER BY enrolled_students DESC;
+```
+
+### الاستعلامات الفرعية (Subqueries)
+
+أحيانًا تحتاج تستخدم نتيجة استعلام كجزء من استعلام آخر:
+
+```sql
+-- الطلاب اللي معدلهم أعلى من المتوسط العام
+SELECT first_name, last_name, gpa
+FROM students
+WHERE gpa > (SELECT AVG(gpa) FROM students);
+
+-- المواد اللي ما سجّل فيها أحد
+SELECT course_name, course_code
+FROM courses
+WHERE course_id NOT IN (SELECT DISTINCT course_id FROM enrollments);
+```
+
+<CTABox
+  title="تحتاج مساعدة في واجب أو مشروع قواعد البيانات؟"
+  description="نشرح لك المفاهيم ونراجع استعلاماتك — تتعلم وتنجز واجبك بثقة"
+  buttonText="تواصل معنا"
+  buttonUrl="https://wa.me/201557703662"
+/>
+
+## تعديل هيكل الجداول: ALTER TABLE
+
+أحيانًا تحتاج تعدّل جدول بعد إنشائه — تضيف عمود جديد أو تحذف عمود أو تغيّر نوع بيانات:
+
+```sql
+-- إضافة عمود رقم الهاتف
+ALTER TABLE students
+ADD COLUMN phone VARCHAR(15);
+
+-- حذف عمود
+ALTER TABLE students
+DROP COLUMN phone;
+
+-- تعديل نوع بيانات عمود
+ALTER TABLE students
+MODIFY COLUMN email VARCHAR(150);
+```
+
+## تمارين عملية
+
+الآن وقت التطبيق. جرّب حل هذه التمارين على البيانات اللي أدخلناها:
+
+<StepList title="تمارين — جرّبها بنفسك">
+<div><span>1</span><div>اكتب استعلام يُرجع أسماء الطلاب المسجلين في مادة "قواعد البيانات" مع درجاتهم، مرتبة من الأعلى للأقل.</div></div>
+<div><span>2</span><div>اكتب استعلام يحسب متوسط الدرجات لكل مادة، ويعرض فقط المواد اللي متوسطها أعلى من 85.</div></div>
+<div><span>3</span><div>اكتب استعلام يعرض أسماء الطلاب اللي سجّلوا في أكثر من مادة واحدة.</div></div>
+<div><span>4</span><div>أنشئ جدولًا جديدًا اسمه `professors` يحتوي على: رقم الدكتور، الاسم، الإيميل، القسم. ثم أضف عمود `professor_id` لجدول المواد كمفتاح أجنبي.</div></div>
+<div><span>5</span><div>اكتب استعلام يعرض الطلاب اللي لم يسجّلوا في أي مادة (باستخدام LEFT JOIN).</div></div>
+</StepList>
+
+### حلول التمارين
+
+إليك الحلول — لكن حاول تحلها بنفسك أولًا قبل ما تقرأ:
+
+```sql
+-- حل التمرين 1
+SELECT s.first_name, s.last_name, e.grade
+FROM enrollments e
+INNER JOIN students s ON e.student_id = s.student_id
+INNER JOIN courses c ON e.course_id = c.course_id
+WHERE c.course_name = 'قواعد البيانات'
+ORDER BY e.grade DESC;
+
+-- حل التمرين 2
+SELECT c.course_name, AVG(e.grade) AS avg_grade
+FROM courses c
+INNER JOIN enrollments e ON c.course_id = e.course_id
+GROUP BY c.course_id, c.course_name
+HAVING AVG(e.grade) > 85;
+
+-- حل التمرين 3
+SELECT s.first_name, s.last_name, COUNT(e.course_id) AS course_count
+FROM students s
+INNER JOIN enrollments e ON s.student_id = e.student_id
+GROUP BY s.student_id, s.first_name, s.last_name
+HAVING COUNT(e.course_id) > 1;
+
+-- حل التمرين 4
+CREATE TABLE professors (
+    professor_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    department VARCHAR(100)
+);
+
+ALTER TABLE courses
+ADD COLUMN professor_id INT,
+ADD FOREIGN KEY (professor_id) REFERENCES professors(professor_id);
+
+-- حل التمرين 5
+SELECT s.first_name, s.last_name
+FROM students s
+LEFT JOIN enrollments e ON s.student_id = e.student_id
+WHERE e.enrollment_id IS NULL;
+```
+
+## أخطاء شائعة يقع فيها المبتدئون
+
+<Callout type="warning" title="أخطاء احذر منها">
+هذه الأخطاء الأكثر تكرارًا في واجبات واختبارات قواعد البيانات. راجعها كلما واجهت مشكلة في استعلاماتك:
+
+- **نسيان `WHERE` مع `UPDATE` أو `DELETE`:** يؤدي إلى تعديل أو حذف جميع البيانات
+- **الخلط بين `WHERE` و `HAVING`:** الأول قبل التجميع والثاني بعده
+- **نسيان ذكر الأعمدة في `GROUP BY`:** كل عمود في `SELECT` ليس داخل دالة تجميعية لازم يكون في `GROUP BY`
+- **مقارنة `NULL` بـ `=`:** لا تكتب `WHERE column = NULL`، الصحيح `WHERE column IS NULL`
+- **نسيان الفاصلة بين الأعمدة:** خطأ بسيط لكنه شائع ورسالة الخطأ أحيانًا تكون مُربكة
+- **استخدام أسماء محجوزة كأسماء أعمدة:** كلمات مثل `order` و `group` و `select` محجوزة في SQL. إذا استخدمتها كأسماء أعمدة، ضعها بين علامتي `` ` `` (backticks)
+</Callout>
+
+## ترتيب تنفيذ أوامر SQL
+
+نقطة يغفلها كثير من الطلاب: ترتيب كتابة أجزاء الاستعلام يختلف عن ترتيب تنفيذها. هذا الترتيب يساعدك تفهم لماذا بعض الأشياء تعمل وبعضها لا:
+
+<StepList title="ترتيب تنفيذ الاستعلام">
+<div><span>1</span><div>**FROM / JOIN** — تحديد الجداول ودمجها</div></div>
+<div><span>2</span><div>**WHERE** — تصفية الصفوف</div></div>
+<div><span>3</span><div>**GROUP BY** — تجميع الصفوف</div></div>
+<div><span>4</span><div>**HAVING** — تصفية المجموعات</div></div>
+<div><span>5</span><div>**SELECT** — تحديد الأعمدة المطلوبة</div></div>
+<div><span>6</span><div>**ORDER BY** — ترتيب النتائج</div></div>
+<div><span>7</span><div>**LIMIT** — تحديد عدد النتائج</div></div>
+</StepList>
+
+هذا يفسّر لماذا لا تقدر تستخدم Alias اللي عرّفته في `SELECT` داخل `WHERE` — لأن `WHERE` تُنفّذ قبل `SELECT`.
+
+## نصائح لاجتياز مادة قواعد البيانات
+
+- **طبّق كل مثال بيدك:** لا تكتفِ بالقراءة. افتح بيئة SQL واكتب الأوامر وشوف النتائج بنفسك
+- **افهم المنطق قبل الحفظ:** SQL لغة قريبة من اللغة الطبيعية. `SELECT name FROM students WHERE gpa > 3` تقريبًا تقرأها كجملة إنجليزية
+- **ارسم العلاقات:** قبل ما تكتب أي استعلام يشمل أكثر من جدول، ارسم الجداول والعلاقات على ورقة. هذا يوضّح لك أي `JOIN` تحتاج
+- **جرّب وأخطئ:** أفضل طريقة لتعلم SQL هي كتابة استعلامات وتجربتها. إذا الاستعلام أعطاك نتيجة غير متوقعة، حاول تفهم ليش
+- **ابدأ بسيط ثم عقّد:** لا تحاول تكتب استعلام معقد دفعة واحدة. ابدأ بـ `SELECT` بسيط، أضف `WHERE`، ثم `JOIN`، وهكذا
+
+## الخلاصة
+
+قواعد البيانات و SQL من المواد الأساسية اللي بتفيدك في أي مسار تقني — سواء كنت مطور ويب أو مطور تطبيقات أو محلل بيانات أو حتى مدير مشاريع تقنية. في هذا المقال غطينا الأساسيات اللي تحتاجها: من إنشاء الجداول وإدخال البيانات، إلى الاستعلامات والتصفية والدوال التجميعية، وصولًا إلى العلاقات وربط الجداول بـ JOIN.
+
+المفتاح هو الممارسة. كل استعلام تكتبه يقرّبك من الفهم الحقيقي. ابدأ بالأمثلة البسيطة في هذا المقال، ثم حل التمارين، ثم حاول تبني مشروع صغير بنفسك — مثل نظام مكتبة أو نظام طلبات مطعم. هذا النوع من الممارسة أفضل بمراحل من حفظ الأوامر نظريًا.
+
+وتذكّر: كل مبرمج محترف بدأ مثلك تمامًا. الفرق الوحيد هو الاستمرارية.
+
+<CTABox
+  title="تحتاج مساعدة في مشروع التخرج أو واجب قواعد البيانات؟"
+  description="فريق زدني يساعدك تفهم المفاهيم وتبني مشروعك خطوة بخطوة — نشرح لك ونراجع شغلك عشان تتعلم وتنجز بثقة"
+  buttonText="اطلب المساعدة الآن"
+  buttonUrl="https://wa.me/201557703662"
+/>

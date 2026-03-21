@@ -1,4 +1,3 @@
-// content reading
 const readingTime = (content: string) => {
   const WPS = 275 / 60;
 
@@ -26,14 +25,14 @@ const readingTime = (content: string) => {
 
   const minutes = Math.ceil(((words - imageAdjust) / WPS + imageSecs) / 60);
 
-  if (minutes < 10) {
-    if (minutes < 2) {
-      return "0" + minutes + ` Min read`;
-    } else {
-      return "0" + minutes + ` Mins read`;
-    }
+  if (minutes === 1) {
+    return `دقيقة واحدة للقراءة`;
+  } else if (minutes === 2) {
+    return `دقيقتان للقراءة`;
+  } else if (minutes >= 3 && minutes <= 10) {
+    return `${minutes} دقائق للقراءة`;
   } else {
-    return minutes + ` Mins read`;
+    return `${minutes} دقيقة للقراءة`;
   }
 };
 

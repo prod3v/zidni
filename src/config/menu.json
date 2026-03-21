@@ -5,53 +5,57 @@
       "url": "/"
     },
     {
-      "name": "عن المدونة",
-      "url": "/about"
+      "name": "المقالات",
+      "url": "/categories"
     },
     {
-      "name": "تواصل",
-      "url": "/contact"
-    },
-    {
-      "name": "صفحات",
+      "name": "خدماتنا",
       "url": "",
       "hasChildren": true,
       "children": [
         {
-          "name": "الكُتّاب",
-          "url": "/authors"
+          "name": "مشاريع التخرج",
+          "url": "/graduation-projects-service"
         },
         {
-          "name": "التصنيفات",
-          "url": "/categories"
+          "name": "الواجبات الجامعية",
+          "url": "/university-assignments"
         },
         {
-          "name": "الوسوم",
-          "url": "/tags"
-        },
-        {
-          "name": "العناصر",
-          "url": "/elements"
-        },
-        {
-          "name": "سياسة الخصوصية",
-          "url": "/privacy-policy"
+          "name": "الترجمة الأكاديمية",
+          "url": "/academic-translation-service"
         }
       ]
+    },
+    {
+      "name": "عن زدني",
+      "url": "/about"
+    },
+    {
+      "name": "تواصل معنا",
+      "url": "/contact"
     }
   ],
   "footer": [
     {
-      "name": "عن المدونة",
+      "name": "مشاريع التخرج",
+      "url": "/graduation-projects-service"
+    },
+    {
+      "name": "الواجبات الجامعية",
+      "url": "/university-assignments"
+    },
+    {
+      "name": "الترجمة الأكاديمية",
+      "url": "/academic-translation-service"
+    },
+    {
+      "name": "عن زدني",
       "url": "/about"
     },
     {
-      "name": "تواصل",
+      "name": "تواصل معنا",
       "url": "/contact"
-    },
-    {
-      "name": "العناصر",
-      "url": "/elements"
     },
     {
       "name": "سياسة الخصوصية",

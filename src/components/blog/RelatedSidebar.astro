@@ -1,0 +1,50 @@
+---
+import dateFormat from "@/lib/utils/dateFormat";
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  posts: CollectionEntry<"posts">[];
+};
+
+const { posts } = Astro.props;
+---
+
+{
+  posts.length > 0 && (
+    <aside class="sticky top-24">
+      <h3 class="font-bold text-dark mb-5 flex items-center gap-2">
+        <span class="w-1 h-5 bg-primary rounded-full inline-block" />
+        مقالات ذات صلة
+      </h3>
+      <div class="space-y-4">
+        {posts.map((post) => (
+          <a
+            href={`/blog/${post.id}`}
+            class="flex gap-3 group rounded-xl p-2 -m-2 transition duration-200 hover:bg-light"
+          >
+            {post.data.image && (
+              <div class="w-20 h-16 rounded-lg overflow-hidden shrink-0">
+                <Image
+                  src={post.data.image}
+                  alt={post.data.title}
+                  width={160}
+                  height={128}
+                  class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                />
+              </div>
+            )}
+            <div class="flex-1 min-w-0">
+              <h4 class="text-sm font-semibold text-dark leading-snug line-clamp-2 group-hover:text-primary transition duration-200">
+                {post.data.title}
+              </h4>
+              <time class="text-xs text-text/60 mt-1.5 block">
+                {dateFormat(post.data.date!)}
+              </time>
+            </div>
+          </a>
+        ))}
+      </div>
+    </aside>
+  )
+}

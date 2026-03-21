@@ -1,133 +1,195 @@
 ---
 import Share from "@/components/Share.astro";
 import SimilarPosts from "@/components/SimilarPosts.astro";
+import ReadingProgress from "@/components/blog/ReadingProgress.astro";
+import RelatedSidebar from "@/components/blog/RelatedSidebar.astro";
+import Callout from "@/components/blog/Callout.astro";
+import CTABox from "@/components/blog/CTABox.astro";
+import StepList from "@/components/blog/StepList.astro";
+import QuickSummary from "@/components/blog/QuickSummary.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import dateFormat from "@/lib/utils/dateFormat";
+import readingTime from "@/lib/utils/readingTime";
 import similerItems from "@/lib/utils/similarItems";
 import { humanize, markdownify, slugify } from "@/lib/utils/textConverter";
 import { Image } from "astro:assets";
 import { render } from "astro:content";
-import { BiCalendarEdit, BiCategoryAlt } from "react-icons/bi";
+import { BiCalendarEdit, BiCategoryAlt, BiTime } from "react-icons/bi";
 
 const allAuthors = await getSinglePage("authors");
 const posts = await getSinglePage("posts");
 const { post } = Astro.props;
-const similarPosts = similerItems(post, posts, post.slug);
+const similarPosts = similerItems(post, posts, post.id);
 const { Content } = await render(post);
 const { title, description, authors, categories, image, date, tags } =
   post.data;
+const readTime = readingTime(post.body ?? "");
 ---
 
-<section class="section">
-  <div class="container">
-    <article class="row justify-center">
-      <div class="md:col-10 text-center">
-        <h1 set:html={markdownify(title)} class="h2" />
-        <ul class="mt-4 flex flex-wrap items-center justify-center text-text">
-          <li class="mx-3">
-            {
-              allAuthors
-                .filter((author) =>
-                  authors
-                    .map((author: string) => slugify(author))
-                    .includes(slugify(author.data.title))
-                )
-                .map((author) => (
-                  <a
-                    href={`/authors/${slugify(author.id)}`}
-                    class="flex items-center hover:text-primary font-medium"
-                  >
-                    {author.data.image && (
-                      <Image
-                        src={author.data.image}
-                        alt={author.data.title}
-                        height={50}
-                        width={50}
-                        class="me-2 h-6 w-6 rounded-full"
-                      />
-                    )}
-                    <span>{author.data.title}</span>
-                  </a>
-                ))
-            }
-          </li>
-          <li class="mx-3 flex items-center flex-wrap font-medium">
-            <BiCalendarEdit className="me-1 h-5 w-5 text-gray-600" />
-            {dateFormat(date)}
-          </li>
-          <li class="mx-3 flex items-center flex-wrap">
-            <BiCategoryAlt className="me-1 h-[18px] w-[18px] text-gray-600" />
+<ReadingProgress />
 
-            <ul>
-              {
-                categories.map((category: string, i: number) => (
-                  <li class="inline-block">
-                    <a
-                      href={`/categories/${slugify(category)}`}
-                      class="me-2 hover:text-primary font-medium"
-                    >
-                      {humanize(category)}
-                      {i !== post.data.categories.length - 1 && ","}
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </li>
-        </ul>
+<section class="section pb-8">
+  <div class="container">
+    <!-- Breadcrumb -->
+    <nav class="mb-8 text-sm text-text" aria-label="breadcrumb">
+      <ol class="flex items-center gap-2">
+        <li><a href="/" class="hover:text-primary transition duration-200">الرئيسية</a></li>
+        <li class="text-border select-none">/</li>
+        {
+          categories.length > 0 && (
+            <>
+              <li>
+                <a
+                  href={`/categories/${slugify(categories[0])}`}
+                  class="hover:text-primary transition duration-200"
+                >
+                  {humanize(categories[0])}
+                </a>
+              </li>
+              <li class="text-border select-none">/</li>
+            </>
+          )
+        }
+        <li class="text-dark font-medium line-clamp-1">{title}</li>
+      </ol>
+    </nav>
+
+    <article>
+      <!-- Article Header (full width) -->
+      <div class="mb-6">
+        <!-- Category badges -->
+        <div class="flex flex-wrap gap-2 mb-4">
+          {
+            categories.map((category: string) => (
+              <a
+                href={`/categories/${slugify(category)}`}
+                class="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1 rounded-full hover:bg-primary hover:text-white transition duration-300"
+              >
+                {humanize(category)}
+              </a>
+            ))
+          }
+        </div>
+
+        <!-- Title -->
+        <h1 set:html={markdownify(title)} class="h2 mb-5 leading-snug" />
+
+        <!-- Meta row -->
+        <div
+          class="flex flex-wrap items-center gap-x-5 gap-y-2 text-text text-sm border-b border-border pb-5"
+        >
+          {
+            allAuthors
+              .filter((author) =>
+                authors
+                  .map((author: string) => slugify(author))
+                  .includes(slugify(author.data.title)),
+              )
+              .map((author) => (
+                <a
+                  href={`/authors/${slugify(author.id)}`}
+                  class="flex items-center hover:text-primary font-medium transition duration-200"
+                >
+                  {author.data.image && (
+                    <Image
+                      src={author.data.image}
+                      alt={author.data.title}
+                      height={50}
+                      width={50}
+                      class="me-2 h-8 w-8 rounded-full ring-2 ring-light"
+                    />
+                  )}
+                  <span>{author.data.title}</span>
+                </a>
+              ))
+          }
+          <span class="flex items-center gap-1.5 font-medium">
+            <BiCalendarEdit className="h-4 w-4 text-text/50" />
+            {dateFormat(date)}
+          </span>
+          <span class="flex items-center gap-1.5 font-medium">
+            <BiTime className="h-4 w-4 text-text/50" />
+            {readTime}
+          </span>
+        </div>
       </div>
 
-      <div class="col-12 mt-8 mb-2">
+      <!-- Hero Image (full width) -->
+      <div class="mb-10">
         {
           image && (
-            <Image
-              src={image}
-              height={500}
-              width={1000}
-              alt={title}
-              class="rounded-lg"
-            />
+            <div class="overflow-hidden rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
+              <Image
+                src={image}
+                height={500}
+                width={1000}
+                alt={title}
+                class="w-full"
+              />
+            </div>
           )
         }
       </div>
 
-      <div class="md:col-10">
-        <div class="content mb-16 text-start">
-          <Content />
-        </div>
-        <div class="flex flex-wrap items-center justify-between">
-          <ul class="me-4 mb-4 space-x-3">
+      <!-- Two-column layout: Content + Sidebar -->
+      <div class="row gx-5">
+        <!-- Main content -->
+        <div class="md:col-8">
+          <div class="content mb-12 text-start">
+            <Content components={{ Callout, CTABox, StepList, QuickSummary }} />
+          </div>
+
+          <!-- Tags & Share -->
+          <div class="border-t border-border pt-8">
             {
-              tags.map((tag: string) => (
-                <li class="inline-block">
-                  <a
-                    href={`/tags/${slugify(tag)}`}
-                    class="block rounded-lg bg-light px-4 py-2 font-semibold text-dark text-sm hover:text-primary transition duration-300"
-                  >
-                    #{humanize(tag)}
-                  </a>
-                </li>
-              ))
+              tags.length > 0 && (
+                <div class="mb-6">
+                  <ul class="flex flex-wrap gap-2">
+                    {tags.map((tag: string) => (
+                      <li>
+                        <a
+                          href={`/tags/${slugify(tag)}`}
+                          class="inline-block rounded-full border border-border px-4 py-1.5 text-sm font-medium text-dark hover:border-primary hover:bg-primary/5 hover:text-primary transition duration-300"
+                        >
+                          #{humanize(tag)}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
             }
-          </ul>
-          <Share
-            className="social-share mb-4"
-            title={title}
-            description={description}
-            slug={post.id}
-          />
+
+            <div class="flex items-center justify-between pt-2">
+              <span class="text-sm font-semibold text-dark">شارك المقال</span>
+              <Share
+                className="social-share"
+                title={title}
+                description={description}
+                slug={post.id}
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar (desktop only) -->
+        <div class="hidden md:block md:col-4">
+          <RelatedSidebar posts={similarPosts.slice(0, 5)} />
         </div>
       </div>
     </article>
   </div>
 </section>
 
-<!-- similar posts -->
+<!-- Similar Posts (mobile only) -->
 {
   similarPosts.length > 0 && (
-    <section class="section pt-0">
+    <section class="section pt-0 md:hidden">
       <div class="container">
-        <h2 class="mb-8 text-center h3">Similar Posts</h2>
+        <div class="flex items-center gap-4 mb-8">
+          <h2 class="h3 whitespace-nowrap">مقالات مشابهة</h2>
+          <div class="h-px bg-border flex-1" />
+        </div>
         <SimilarPosts posts={similarPosts.slice(0, 3)} />
       </div>
     </section>

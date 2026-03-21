@@ -1,0 +1,859 @@
+---
+title: "تعلم HTML و CSS من الصفر — بوابتك لتطوير المواقع"
+meta_title: "تعلم HTML و CSS من الصفر | دليل عملي شامل للمبتدئين بالعربي"
+description: "دليل شامل لتعلم HTML و CSS من الصفر: بنية صفحات الويب، العناصر الأساسية، التنسيق والألوان، التصميم المتجاوب، وبناء أول صفحة ويب. دليل عملي بأمثلة لكل طالب مبتدئ."
+date: 2026-03-20T18:00:00Z
+image: "/images/posts/07.jpg"
+categories: ["دليل المواد"]
+authors: ["فريق زدني"]
+tags: ["HTML", "CSS", "تطوير مواقع", "تعلم برمجة"]
+draft: false
+---
+
+
+إذا فتحت أي موقع على الإنترنت — سواء جوجل أو تويتر أو حتى موقع جامعتك — فأنت تنظر لنتيجة عمل لغتين أساسيتين: HTML و CSS. الأولى تبني الهيكل والمحتوى، والثانية تضيف الشكل والألوان والتنسيق. تعلّمهما هو الخطوة الأولى الحقيقية لأي شخص يريد دخول عالم تطوير المواقع.
+
+في هذا الدليل، راح نبدأ معك من الصفر تمامًا — لا نفترض أنك تعرف أي شيء مسبقًا. سنشرح كل مفهوم بأمثلة عملية وتعليقات بالعربي، وفي النهاية ستبني صفحة ويب شخصية كاملة بيدك.
+
+<QuickSummary>
+- ما هي HTML و CSS وما الفرق بينهما
+- بنية صفحة HTML الأساسية (DOCTYPE, head, body)
+- العناصر الأكثر استخدامًا: العناوين، الفقرات، الروابط، الصور، القوائم، الجداول، النماذج
+- أساسيات CSS: المحددات، الخصائص، الألوان، الخطوط
+- نموذج الصندوق (Box Model) وكيف يتحكم بالتخطيط
+- مقدمة عن Flexbox لترتيب العناصر
+- التصميم المتجاوب باستخدام Media Queries
+- مشروع عملي: بناء صفحة شخصية بسيطة
+</QuickSummary>
+
+## ما هي HTML و CSS؟
+
+### HTML — هيكل الصفحة
+
+HTML اختصار لـ HyperText Markup Language، وهي ليست لغة برمجة بالمعنى التقليدي، بل هي **لغة توصيف** (Markup Language). وظيفتها تحديد بنية المحتوى في صفحة الويب: هذا عنوان، هذه فقرة، هذه صورة، هذا رابط.
+
+فكّر فيها مثل الهيكل العظمي للإنسان — تعطي الصفحة شكلها الأساسي وتحدد أين يقع كل عنصر.
+
+### CSS — شكل الصفحة
+
+CSS اختصار لـ Cascading Style Sheets، وهي اللغة المسؤولة عن **تنسيق وتصميم** صفحة الويب. بها تتحكم في الألوان والخطوط والأحجام والهوامش والتخطيط العام.
+
+إذا كانت HTML هي الهيكل العظمي، فـ CSS هي الملابس والمظهر الخارجي.
+
+<Callout type="info" title="معلومة مهمة">
+HTML و CSS ليستا لغتي برمجة — لا تحتوي على متغيرات أو حلقات أو شروط مثل Java أو Python. هما لغتا **وصف وتنسيق**. لكنهما الأساس الذي تُبنى عليه كل مواقع الإنترنت بدون استثناء، وتعلّمهما ضروري قبل الانتقال إلى أي لغة برمجة ويب مثل JavaScript.
+</Callout>
+
+## تجهيز بيئة العمل
+
+لا تحتاج أي تثبيت معقد. كل ما تحتاجه:
+
+1. **محرر أكواد:** نوصي بـ [Visual Studio Code](https://code.visualstudio.com/) (مجاني وخفيف). ثبّت إضافة "Live Server" التي تعرض التغييرات مباشرة في المتصفح.
+2. **متصفح ويب:** أي متصفح حديث يكفي (Chrome أو Firefox أو Edge).
+
+هذا كل شيء. لا تحتاج سيرفر ولا قاعدة بيانات ولا أي إعدادات إضافية.
+
+<Callout type="tip" title="نصيحة">
+فعّل إضافة "Live Server" في VS Code. بمجرد حفظ الملف، الصفحة تتحدث تلقائيًا في المتصفح — هذا يوفر عليك وقت كبير ويجعل التعلم أسرع وأمتع.
+</Callout>
+
+## بنية صفحة HTML الأساسية
+
+كل صفحة HTML تتبع هيكلًا ثابتًا. هذا أبسط ملف HTML صالح:
+
+```html
+<!-- بنية صفحة HTML الأساسية -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <!-- معلومات الصفحة (لا تظهر للمستخدم) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أول صفحة لي</title>
+</head>
+<body>
+    <!-- المحتوى المرئي للصفحة -->
+    <h1>مرحبًا بالعالم</h1>
+    <p>هذه أول صفحة ويب أبنيها بنفسي.</p>
+</body>
+</html>
+```
+
+لنشرح كل جزء:
+
+- **`<!DOCTYPE html>`** — يخبر المتصفح أن هذا ملف HTML5
+- **`<html lang="ar" dir="rtl">`** — العنصر الجذر، حددنا اللغة العربية والاتجاه من اليمين لليسار
+- **`<head>`** — يحتوي على معلومات عن الصفحة (العنوان، الترميز، إعدادات العرض) ولا تظهر للزائر
+- **`<meta charset="UTF-8">`** — يدعم الأحرف العربية والرموز الخاصة
+- **`<meta name="viewport">`** — يجعل الصفحة تتجاوب مع شاشات الجوال
+- **`<title>`** — العنوان الذي يظهر في تبويب المتصفح
+- **`<body>`** — كل المحتوى المرئي يوضع هنا
+
+<Callout type="warning" title="خطأ شائع">
+لا تنسَ إغلاق كل وسم تفتحه. إذا كتبت `<h1>` لازم تكتب `</h1>` بعد المحتوى. نسيان وسم الإغلاق من أكثر الأخطاء التي تسبب مشاكل غريبة في عرض الصفحة.
+</Callout>
+
+## عناصر HTML الأساسية
+
+### العناوين (Headings)
+
+HTML يوفر 6 مستويات من العناوين، من `<h1>` (الأكبر) إلى `<h6>` (الأصغر):
+
+```html
+<h1>عنوان رئيسي — مستوى أول</h1>
+<h2>عنوان فرعي — مستوى ثاني</h2>
+<h3>عنوان فرعي — مستوى ثالث</h3>
+```
+
+استخدم `<h1>` مرة واحدة فقط في الصفحة (للعنوان الرئيسي)، ثم `<h2>` للأقسام الكبيرة، و `<h3>` للأقسام الفرعية، وهكذا.
+
+### الفقرات والنصوص
+
+```html
+<!-- فقرة نصية عادية -->
+<p>هذه فقرة نصية. المتصفح يضيف مسافة تلقائية قبلها وبعدها.</p>
+
+<!-- نص عريض ونص مائل -->
+<p>هذا نص <strong>عريض ومهم</strong> وهذا نص <em>مائل للتأكيد</em>.</p>
+
+<!-- سطر جديد داخل فقرة -->
+<p>السطر الأول<br>السطر الثاني في نفس الفقرة</p>
+```
+
+### الروابط (Links)
+
+```html
+<!-- رابط خارجي يفتح في تبويب جديد -->
+<a href="https://www.example.com" target="_blank">زيارة الموقع</a>
+
+<!-- رابط داخلي -->
+<a href="about.html">صفحة عن الموقع</a>
+
+<!-- رابط بريد إلكتروني -->
+<a href="mailto:info@example.com">تواصل معنا</a>
+```
+
+الخاصية `href` تحدد وجهة الرابط، و `target="_blank"` تجعله يفتح في تبويب جديد.
+
+### الصور (Images)
+
+```html
+<!-- إدراج صورة مع نص بديل -->
+<img src="profile.jpg" alt="صورة شخصية" width="300">
+```
+
+خاصية `alt` مهمة جدًا: تظهر إذا لم تُحمّل الصورة، وتساعد محركات البحث وذوي الاحتياجات البصرية في فهم محتوى الصورة. لا تتركها فارغة أبدًا.
+
+### القوائم (Lists)
+
+```html
+<!-- قائمة غير مرتبة (نقاط) -->
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+</ul>
+
+<!-- قائمة مرتبة (أرقام) -->
+<ol>
+    <li>تعلم HTML</li>
+    <li>تعلم CSS</li>
+    <li>تعلم JavaScript</li>
+</ol>
+```
+
+### الجداول (Tables)
+
+```html
+<!-- جدول بسيط بثلاثة أعمدة -->
+<table>
+    <thead>
+        <tr>
+            <th>اللغة</th>
+            <th>الوظيفة</th>
+            <th>الصعوبة</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>HTML</td>
+            <td>بنية الصفحة</td>
+            <td>سهلة</td>
+        </tr>
+        <tr>
+            <td>CSS</td>
+            <td>التنسيق والتصميم</td>
+            <td>متوسطة</td>
+        </tr>
+        <tr>
+            <td>JavaScript</td>
+            <td>التفاعل والمنطق</td>
+            <td>متوسطة - صعبة</td>
+        </tr>
+    </tbody>
+</table>
+```
+
+- `<thead>` لصف العناوين، `<tbody>` لصفوف البيانات
+- `<tr>` لكل صف، `<th>` لخلية العنوان، `<td>` لخلية البيانات
+
+### النماذج (Forms)
+
+النماذج تسمح للمستخدم بإدخال بيانات — مثل نماذج تسجيل الدخول أو الاستبيانات:
+
+```html
+<!-- نموذج تواصل بسيط -->
+<form action="/submit" method="POST">
+    <label for="name">الاسم:</label>
+    <input type="text" id="name" name="name" placeholder="أدخل اسمك" required>
+
+    <label for="email">البريد الإلكتروني:</label>
+    <input type="email" id="email" name="email" placeholder="example@mail.com" required>
+
+    <label for="message">الرسالة:</label>
+    <textarea id="message" name="message" rows="4" placeholder="اكتب رسالتك هنا"></textarea>
+
+    <button type="submit">إرسال</button>
+</form>
+```
+
+- `<label>` يربط النص بحقل الإدخال لتحسين سهولة الاستخدام
+- `required` تجعل الحقل إلزاميًا
+- `type="email"` يتحقق تلقائيًا من صحة صيغة البريد
+
+<Callout type="info" title="أنواع حقول الإدخال الشائعة">
+`type="text"` — نص عادي | `type="email"` — بريد إلكتروني | `type="password"` — كلمة مرور | `type="number"` — أرقام فقط | `type="date"` — تاريخ | `type="checkbox"` — مربع اختيار | `type="radio"` — زر اختيار واحد | `type="file"` — رفع ملف. جرّب كل نوع واشوف الفرق في المتصفح.
+</Callout>
+
+---
+
+## أساسيات CSS
+
+الآن بعد ما تعرفت على HTML، حان وقت إضافة الجمال والتنسيق باستخدام CSS.
+
+### طرق ربط CSS بـ HTML
+
+هناك ثلاث طرق:
+
+```html
+<!-- الطريقة الأولى: ملف خارجي (الأفضل) -->
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<!-- الطريقة الثانية: داخل وسم style في الـ head -->
+<head>
+    <style>
+        body { background-color: #f0f0f0; }
+    </style>
+</head>
+
+<!-- الطريقة الثالثة: مباشرة على العنصر (تجنّبها) -->
+<p style="color: red;">نص أحمر</p>
+```
+
+دائمًا استخدم الطريقة الأولى (ملف خارجي) لأنها تفصل المحتوى عن التصميم وتسهّل الصيانة.
+
+### المحددات (Selectors)
+
+المحدد يخبر CSS أي عناصر HTML تريد تنسيقها:
+
+```css
+/* محدد العنصر — يستهدف كل عناصر من هذا النوع */
+p {
+    color: #333;
+}
+
+/* محدد الكلاس — يستهدف العناصر التي تحمل هذا الكلاس */
+.highlight {
+    background-color: yellow;
+}
+
+/* محدد المعرف — يستهدف عنصر واحد فقط */
+#main-title {
+    font-size: 32px;
+}
+
+/* محدد مركب — فقرات داخل عنصر بكلاس container */
+.container p {
+    line-height: 1.8;
+}
+```
+
+وفي HTML تستخدمها هكذا:
+
+```html
+<h1 id="main-title">العنوان الرئيسي</h1>
+<p class="highlight">هذا نص مميز بخلفية صفراء.</p>
+<div class="container">
+    <p>هذه فقرة داخل الحاوية.</p>
+</div>
+```
+
+### الألوان
+
+```css
+/* طرق مختلفة لتحديد الألوان */
+h1 {
+    color: red;                    /* اسم اللون */
+    color: #ff0000;                /* كود HEX */
+    color: rgb(255, 0, 0);        /* قيم RGB */
+    color: rgba(255, 0, 0, 0.5);  /* RGB مع شفافية */
+}
+```
+
+<Callout type="tip" title="نصيحة للألوان">
+لا تحتاج حفظ أكواد الألوان. استخدم أدوات مجانية مثل [coolors.co](https://coolors.co) لتوليد لوحات ألوان متناسقة، أو اضغط على مربع اللون في VS Code لفتح منتقي الألوان المدمج.
+</Callout>
+
+### الخطوط (Fonts)
+
+```css
+body {
+    /* عائلة الخط — المتصفح يستخدم أول خط متوفر */
+    font-family: 'Cairo', 'Segoe UI', sans-serif;
+
+    /* حجم الخط */
+    font-size: 16px;
+
+    /* وزن الخط (عادي أو عريض) */
+    font-weight: normal;
+
+    /* ارتفاع السطر — مهم للقراءة المريحة */
+    line-height: 1.7;
+
+    /* محاذاة النص */
+    text-align: right;
+}
+
+h1 {
+    font-size: 2rem;       /* ضعف حجم الخط الأساسي */
+    font-weight: bold;
+    text-decoration: none; /* بدون خط تحت النص */
+}
+```
+
+لاستخدام خطوط عربية جميلة مثل Cairo أو Tajawal، أضف هذا السطر في `<head>`:
+
+```html
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+```
+
+## نموذج الصندوق (Box Model)
+
+هذا من أهم المفاهيم في CSS. كل عنصر HTML هو عبارة عن **صندوق** يتكون من أربع طبقات:
+
+1. **Content** — المحتوى الفعلي (نص، صورة، إلخ)
+2. **Padding** — مسافة داخلية بين المحتوى والحدود
+3. **Border** — الإطار حول العنصر
+4. **Margin** — مسافة خارجية بين العنصر والعناصر المجاورة
+
+```css
+.card {
+    /* المحتوى */
+    width: 300px;
+    height: 200px;
+
+    /* مسافة داخلية */
+    padding: 20px;
+
+    /* إطار */
+    border: 2px solid #ddd;
+
+    /* مسافة خارجية */
+    margin: 15px;
+
+    /* لون الخلفية */
+    background-color: #ffffff;
+
+    /* حواف مستديرة */
+    border-radius: 8px;
+}
+```
+
+```html
+<div class="card">
+    <h3>بطاقة تعريف</h3>
+    <p>هذا محتوى داخل بطاقة منسّقة بنموذج الصندوق.</p>
+</div>
+```
+
+<Callout type="important" title="نقطة مهمة عن box-sizing">
+بشكل افتراضي، `width` و `height` تحدد حجم المحتوى فقط، والـ padding والـ border تُضاف فوقهما. هذا يسبب إرباك للمبتدئين. الحل: أضف هذا الكود في بداية كل مشروع لتجعل العرض والارتفاع يشملان كل شيء:
+
+```css
+* {
+    box-sizing: border-box;
+}
+```
+
+هذا السطر يوفر عليك ساعات من الإحباط في حساب الأبعاد.
+</Callout>
+
+## مقدمة عن Flexbox
+
+قبل Flexbox، كان ترتيب العناصر بجانب بعضها أمرًا مزعجًا. Flexbox جعل الأمر بسيطًا وبديهيًا.
+
+### المفهوم الأساسي
+
+تحوّل العنصر الأب إلى حاوية مرنة (Flex Container)، والعناصر بداخله تتوزع تلقائيًا:
+
+```css
+/* الحاوية المرنة */
+.nav {
+    display: flex;              /* تفعيل Flexbox */
+    justify-content: space-between; /* توزيع أفقي متساوي */
+    align-items: center;        /* محاذاة عمودية في المنتصف */
+    gap: 15px;                  /* مسافة بين العناصر */
+    padding: 10px 20px;
+    background-color: #2c3e50;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+}
+```
+
+```html
+<nav class="nav">
+    <a href="#">الرئيسية</a>
+    <a href="#">المقالات</a>
+    <a href="#">عن الموقع</a>
+    <a href="#">تواصل معنا</a>
+</nav>
+```
+
+### أهم خصائص Flexbox
+
+| الخاصية | الوظيفة | القيم الشائعة |
+|---------|---------|--------------|
+| `display: flex` | تفعيل Flexbox | `flex` |
+| `flex-direction` | اتجاه العناصر | `row` (أفقي)، `column` (عمودي) |
+| `justify-content` | التوزيع الأفقي | `center`، `space-between`، `space-around` |
+| `align-items` | المحاذاة العمودية | `center`، `flex-start`، `flex-end` |
+| `flex-wrap` | التفاف العناصر عند ضيق المساحة | `wrap`، `nowrap` |
+| `gap` | المسافة بين العناصر | أي قيمة بالبكسل أو rem |
+
+### مثال عملي: شبكة بطاقات
+
+```css
+/* حاوية البطاقات */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;       /* السماح بالالتفاف لسطر جديد */
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* كل بطاقة */
+.card {
+    flex: 1 1 250px;       /* تنمو وتتقلص، بحد أدنى 250px */
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+```
+
+```html
+<div class="cards-container">
+    <div class="card">
+        <h3>بطاقة 1</h3>
+        <p>محتوى البطاقة الأولى</p>
+    </div>
+    <div class="card">
+        <h3>بطاقة 2</h3>
+        <p>محتوى البطاقة الثانية</p>
+    </div>
+    <div class="card">
+        <h3>بطاقة 3</h3>
+        <p>محتوى البطاقة الثالثة</p>
+    </div>
+</div>
+```
+
+هذا الكود ينشئ شبكة بطاقات تتوزع بشكل متساوٍ على الشاشات الكبيرة وتنتقل لعمود واحد على الشاشات الصغيرة.
+
+## التصميم المتجاوب (Responsive Design)
+
+التصميم المتجاوب يعني أن صفحتك تبدو جيدة على كل الشاشات: جوال، تابلت، ولابتوب. الأداة الأساسية لذلك هي **Media Queries**.
+
+### كيف تعمل Media Queries
+
+```css
+/* التنسيق الأساسي — للشاشات الكبيرة */
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 40px;
+}
+
+.sidebar {
+    width: 250px;
+}
+
+.main-content {
+    flex: 1;
+}
+
+/* شاشات التابلت (أقل من 768px) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* تحويل من أفقي لعمودي */
+        padding: 20px;
+    }
+
+    .sidebar {
+        width: 100%;            /* الشريط الجانبي يأخذ العرض الكامل */
+    }
+}
+
+/* شاشات الجوال (أقل من 480px) */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;       /* تصغير الخط قليلًا */
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+```
+
+### نصائح للتصميم المتجاوب
+
+- استخدم وحدات نسبية (`%`, `rem`, `em`) بدلًا من وحدات ثابتة (`px`) قدر الإمكان
+- استخدم `max-width` بدلًا من `width` لمنع العناصر من تجاوز الشاشة
+- اختبر صفحتك على أحجام شاشات مختلفة باستخدام أدوات المطور في المتصفح (اضغط F12)
+
+<Callout type="tip" title="اختصار مفيد">
+في Chrome أو Edge، اضغط F12 لفتح أدوات المطور، ثم اضغط Ctrl+Shift+M لتفعيل وضع محاكاة الأجهزة. هذا يسمح لك بمشاهدة صفحتك كما تبدو على هاتف iPhone أو Samsung أو أي جهاز آخر بدون ما تحتاج جوال فعلي.
+</Callout>
+
+---
+
+## مشروع عملي: بناء صفحة شخصية
+
+حان وقت التطبيق. سنبني صفحة شخصية بسيطة تحتوي على: قسم تعريف، قائمة مهارات، ونموذج تواصل.
+
+### ملف HTML (index.html)
+
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحتي الشخصية</title>
+    <!-- ربط ملف CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- خط عربي من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="logo">اسمك هنا</div>
+        <div class="nav-links">
+            <a href="#about">عنّي</a>
+            <a href="#skills">المهارات</a>
+            <a href="#contact">تواصل</a>
+        </div>
+    </nav>
+
+    <!-- قسم الترحيب -->
+    <header class="hero">
+        <h1>مرحبًا، أنا أحمد</h1>
+        <p>طالب علوم حاسب، أتعلم تطوير المواقع وأحب التقنية</p>
+    </header>
+
+    <!-- قسم عنّي -->
+    <section id="about" class="section">
+        <h2>عنّي</h2>
+        <p>
+            طالب في السنة الثالثة في تخصص علوم الحاسب. شغوف بتطوير المواقع
+            وتصميم تجارب المستخدم. أبحث دائمًا عن فرص لتطبيق ما أتعلمه
+            في مشاريع حقيقية.
+        </p>
+    </section>
+
+    <!-- قسم المهارات -->
+    <section id="skills" class="section">
+        <h2>مهاراتي</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>HTML</h3>
+                <p>بناء صفحات ويب بنية سليمة ودلالية</p>
+            </div>
+            <div class="skill-card">
+                <h3>CSS</h3>
+                <p>تنسيق وتصميم متجاوب للمواقع</p>
+            </div>
+            <div class="skill-card">
+                <h3>JavaScript</h3>
+                <p>إضافة تفاعل وديناميكية للصفحات</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التواصل -->
+    <section id="contact" class="section">
+        <h2>تواصل معي</h2>
+        <form class="contact-form">
+            <label for="name">الاسم:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">البريد الإلكتروني:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">الرسالة:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">إرسال</button>
+        </form>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <p>جميع الحقوق محفوظة &copy; 2026</p>
+    </footer>
+
+</body>
+</html>
+```
+
+### ملف CSS (style.css)
+
+```css
+/* === إعدادات عامة === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    line-height: 1.7;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+/* === شريط التنقل === */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #2c3e50;
+    color: white;
+    position: sticky;      /* يثبت أعلى الصفحة عند التمرير */
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-inline-start: 20px;   /* مسافة بين الروابط */
+    transition: color 0.3s;      /* تأثير انتقالي عند المرور */
+}
+
+.nav-links a:hover {
+    color: #3498db;              /* لون أزرق عند المرور */
+}
+
+/* === قسم الترحيب === */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    color: white;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* === الأقسام العامة === */
+.section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* === شبكة المهارات === */
+.skills-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.skill-card {
+    flex: 1 1 200px;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);   /* ارتفاع خفيف عند المرور */
+}
+
+.skill-card h3 {
+    color: #3498db;
+    margin-bottom: 8px;
+}
+
+/* === نموذج التواصل === */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-form label {
+    font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #3498db;       /* إطار أزرق عند التركيز */
+}
+
+.contact-form button {
+    padding: 12px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contact-form button:hover {
+    background-color: #2980b9;
+}
+
+/* === التذييل === */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #2c3e50;
+    color: white;
+    margin-top: 40px;
+}
+
+/* === التصميم المتجاوب === */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .skills-grid {
+        flex-direction: column;
+    }
+}
+```
+
+<StepList title="خطوات تشغيل المشروع">
+<div><span>1</span><div>أنشئ مجلدًا جديدًا باسم "my-portfolio" على سطح المكتب.</div></div>
+<div><span>2</span><div>داخل المجلد، أنشئ ملفين: "index.html" و "style.css".</div></div>
+<div><span>3</span><div>انسخ كود HTML في ملف index.html وكود CSS في ملف style.css.</div></div>
+<div><span>4</span><div>افتح المجلد في VS Code، ثم اضغط بزر الفأرة الأيمن على index.html واختر "Open with Live Server".</div></div>
+<div><span>5</span><div>شاهد صفحتك في المتصفح وابدأ بتعديل الألوان والنصوص لتخصيصها.</div></div>
+</StepList>
+
+<CTABox
+  title="تحتاج مساعدة في مشروع تطوير مواقع؟"
+  description="سواء كان واجب جامعي أو مشروع تخرج، فريق زدني يساعدك تفهم الكود وتبني مشروعك بنفسك بثقة."
+  buttonText="تواصل معنا"
+  buttonUrl="https://wa.me/201557703662"
+/>
+
+---
+
+## أخطاء شائعة عند المبتدئين
+
+هذه أكثر الأخطاء التي نراها تتكرر عند من يبدأ تعلم HTML و CSS:
+
+- **نسيان إغلاق الوسوم.** كل `<div>` يحتاج `</div>`، وكل `<p>` يحتاج `</p>`. الوسوم المفتوحة بدون إغلاق تسبب مشاكل تخطيط غريبة.
+- **كتابة CSS بدون ربط الملف.** تكتب تنسيقات جميلة لكن تنسى إضافة `<link rel="stylesheet" href="style.css">` في `<head>`.
+- **الخلط بين class و id.** الـ `class` تستخدمه لعدة عناصر (بنقطة `.` في CSS)، والـ `id` لعنصر واحد فقط (بعلامة `#` في CSS).
+- **عدم استخدام أدوات المطور.** اضغط F12 في المتصفح. أدوات المطور تعرض لك كل عنصر وتنسيقه، وتساعدك تكتشف الأخطاء فورًا.
+- **محاولة حفظ كل شيء.** لا أحد يحفظ كل خصائص CSS. حتى المحترفون يبحثون يوميًا. المهم أن تفهم المنطق وتعرف كيف تبحث.
+
+<Callout type="warning" title="خطأ قاتل: تجاهل أدوات المطور">
+كثير من المبتدئين يعدّلون الكود ويحدّثون الصفحة بشكل عشوائي لمعرفة المشكلة. هذا أبطأ وأصعب طريقة. تعلّم استخدام أدوات المطور (F12) من البداية. يمكنك تعديل CSS مباشرة في المتصفح وتشوف النتيجة فوريًا قبل ما تنقل التعديل لملفك. هذه المهارة وحدها توفر عليك ساعات.
+</Callout>
+
+## مصادر إضافية للتعلم
+
+- **[MDN Web Docs](https://developer.mozilla.org/ar/)** — المرجع الأول والأشمل لـ HTML و CSS و JavaScript، ومتوفر جزئيًا بالعربي.
+- **[W3Schools](https://www.w3schools.com/)** — شرح مبسط مع أمثلة تفاعلية تجربها مباشرة في المتصفح.
+- **[freeCodeCamp](https://www.freecodecamp.org/)** — دورة مجانية كاملة لتطوير الويب مع تمارين عملية وشهادات.
+- **[CSS-Tricks](https://css-tricks.com/)** — مقالات وأدلة متقدمة خصوصًا عن Flexbox و Grid.
+
+## الخطوة التالية: JavaScript
+
+بعد ما تتقن HTML و CSS، الخطوة الطبيعية التالية هي تعلم **JavaScript** — اللغة التي تضيف التفاعل والديناميكية لصفحات الويب. بها تقدر تعمل قوائم تنسدل عند الضغط، تتحقق من بيانات النماذج قبل الإرسال، تحمّل محتوى بدون إعادة تحميل الصفحة، وأكثر بكثير.
+
+HTML + CSS + JavaScript = الثلاثي الأساسي لتطوير الويب. أتقن الأولين (وهذا ما فعلته اليوم)، ثم انتقل للثالث وستكون جاهزًا لبناء مواقع كاملة.
+
+ابدأ اليوم: افتح VS Code، أنشئ ملف HTML جديد، وابدأ بالتجربة. كل سطر تكتبه يقرّبك خطوة من هدفك. وإذا واجهتك مشكلة، جرّب، ابحث، وجرّب مرة ثانية — هذا هو جوهر تعلم البرمجة.
+
+<CTABox
+  title="تحتاج مساعدة تفهم المادة؟"
+  description="نشرح لك المفاهيم ونراجع حلولك — تتعلم وتنجز واجبك بثقة"
+  buttonText="تواصل معنا"
+  buttonUrl="https://wa.me/201557703662"
+/>

@@ -1,0 +1,699 @@
+---
+title: "شرح مادة البرمجة بلغة جافا للمبتدئين"
+meta_title: "شرح جافا للمبتدئين | تعلم جافا بالعربي خطوة بخطوة - زدني"
+description: "دليل شامل لتعلم جافا بالعربي للمبتدئين. شرح المتغيرات وأنواع البيانات والحلقات والمصفوفات والبرمجة كائنية التوجه مع أمثلة عملية وأكواد مشروحة بالعربي."
+date: 2026-03-21T08:00:00Z
+image: "/images/posts/01.jpg"
+categories: ["دليل المواد"]
+authors: ["فريق زدني"]
+tags: ["جافا", "برمجة", "تعلم برمجة", "Java"]
+draft: false
+---
+
+
+إذا كنت طالب جامعي في تخصص علوم الحاسب أو تقنية المعلومات أو الهندسة، فالأغلب أنك ستصادف مادة البرمجة بلغة جافا في خطتك الدراسية. وإذا وصلت لهذا المقال، فأنت على الأرجح تبحث عن شرح جافا للمبتدئين بأسلوب واضح وبسيط بعيد عن التعقيد الأكاديمي.
+
+في هذا الدليل، سنمشي معك خطوة بخطوة من الصفر: من تثبيت بيئة التطوير إلى كتابة أول برنامج، مرورًا بالمفاهيم الأساسية مثل المتغيرات والشروط والحلقات والمصفوفات، وصولًا إلى أساسيات البرمجة كائنية التوجه (OOP). كل شيء مشروح بالعربي مع أمثلة أكواد عملية.
+
+<QuickSummary>
+- ما هي لغة جافا ولماذا تُدرَّس في الجامعات
+- تجهيز بيئة التطوير وكتابة أول برنامج
+- المتغيرات وأنواع البيانات والعمليات الحسابية والمنطقية
+- التحكم في التدفق: الشروط (if/else, switch) والحلقات (for, while)
+- المصفوفات الأحادية والثنائية الأبعاد
+- أساسيات البرمجة كائنية التوجه (OOP): الكلاسات، التغليف، الوراثة، تعدد الأشكال
+- الدوال (Methods) وكيفية استخدامها
+- أخطاء شائعة يقع فيها المبتدئون وكيف تتجنبها
+</QuickSummary>
+
+## ما هي لغة جافا ولماذا تُدرَّس في الجامعات
+
+جافا (Java) لغة برمجة طورتها شركة Sun Microsystems عام 1995، وتملكها الآن Oracle. تتميز بعدة خصائص تجعلها الخيار الأول في كثير من الجامعات:
+
+- **مستقلة عن النظام**: الكود يُترجم إلى bytecode يعمل على أي جهاز فيه Java Virtual Machine — يعني تكتب الكود مرة واحدة ويشتغل في كل مكان
+- **كائنية التوجه**: تُجبرك على التفكير بطريقة منظمة من البداية، وهذا بالضبط ما تريد الجامعة أن تتعلمه
+- **مطلوبة في سوق العمل**: تُستخدم في تطبيقات الأندرويد، الأنظمة البنكية، تطبيقات الويب الكبيرة (Enterprise)، وغيرها
+- **مجتمع ضخم**: أي مشكلة تواجهك ستجد لها حل على Stack Overflow أو في التوثيق الرسمي
+
+باختصار، الجامعة لا تُدرّسك جافا لأنها أسهل لغة، بل لأنها تُعلّمك أساسيات البرمجة الصحيحة التي تنفعك في أي لغة بعدها.
+
+## تجهيز بيئة التطوير
+
+قبل ما تكتب أي سطر كود، تحتاج شيئين أساسيين:
+
+### أولًا: تثبيت JDK
+
+الـ JDK (Java Development Kit) هو الحزمة اللي تحتوي على كل الأدوات اللازمة لكتابة وتشغيل برامج جافا.
+
+1. ادخل على الموقع الرسمي لـ Oracle أو حمّل [OpenJDK](https://openjdk.org/)
+2. اختر النسخة المناسبة لنظامك (Windows / Mac / Linux)
+3. ثبّت الحزمة واتبع الخطوات الافتراضية
+4. تأكد من التثبيت بفتح Terminal أو Command Prompt وكتابة:
+
+```bash
+java -version
+```
+
+إذا ظهر رقم الإصدار، فالتثبيت تم بنجاح.
+
+<Callout type="info" title="معلومة مهمة عن JDK">
+تأكد من تحميل JDK وليس JRE فقط. الـ JRE (Java Runtime Environment) يسمح لك بتشغيل برامج جافا فقط، لكن الـ JDK يحتوي أيضًا على أدوات التطوير مثل المترجم (compiler) اللي تحتاجه لكتابة وبناء برامجك. للمبتدئين، يُنصح بتحميل JDK 17 أو أحدث لأنها نسخة LTS (دعم طويل الأمد).
+</Callout>
+
+### ثانيًا: اختيار بيئة التطوير (IDE)
+
+بيئة التطوير هي البرنامج الذي تكتب فيه الكود. أشهر الخيارات:
+
+- **IntelliJ IDEA** (النسخة المجانية Community كافية تمامًا) — الأكثر شيوعًا بين المحترفين
+- **Eclipse** — مجاني ومفتوح المصدر، كثير من الجامعات تستخدمه
+- **VS Code** — خفيف وسريع، لكن يحتاج إضافات (Extensions) لدعم جافا
+
+نصيحة: إذا الدكتور يستخدم Eclipse في المحاضرات، استخدم Eclipse. لا تُعقّد حياتك بأداة مختلفة في البداية.
+
+<Callout type="tip" title="نصيحة">
+إذا كنت تستخدم IntelliJ IDEA، فعّل خيار "Show line numbers" من الإعدادات. هذا يساعدك كثيرًا في قراءة رسائل الأخطاء لأنها تشير لرقم السطر الذي حدث فيه الخطأ.
+</Callout>
+
+### أول برنامج: Hello World
+
+```java
+// هذا أول برنامج لك بلغة جافا
+public class HelloWorld {
+    // نقطة البداية لأي برنامج جافا
+    public static void main(String[] args) {
+        // طباعة نص على الشاشة
+        System.out.println("مرحبًا بالعالم");
+    }
+}
+```
+
+كل برنامج جافا يبدأ من الدالة `main`. السطر `System.out.println` يطبع النص على الشاشة. لاحظ أن اسم الملف لازم يكون نفس اسم الـ class (في هذه الحالة `HelloWorld.java`).
+
+## المتغيرات وأنواع البيانات
+
+المتغير (Variable) هو صندوق تخزّن فيه قيمة معينة. في جافا، لازم تحدد نوع البيانات لكل متغير قبل ما تستخدمه.
+
+### أنواع البيانات الأساسية (Primitive Types)
+
+```java
+public class DataTypes {
+    public static void main(String[] args) {
+        // عدد صحيح
+        int age = 21;
+
+        // عدد عشري
+        double gpa = 3.75;
+
+        // حرف واحد
+        char grade = 'A';
+
+        // قيمة منطقية (صح أو خطأ)
+        boolean isPassed = true;
+
+        // نص (ليس primitive لكنه شائع جدًا)
+        String name = "أحمد";
+
+        // طباعة القيم
+        System.out.println("الاسم: " + name);
+        System.out.println("العمر: " + age);
+        System.out.println("المعدل: " + gpa);
+        System.out.println("التقدير: " + grade);
+        System.out.println("ناجح: " + isPassed);
+    }
+}
+```
+
+ملخص سريع لأهم الأنواع:
+
+| النوع | الوصف | مثال |
+|-------|-------|------|
+| `int` | عدد صحيح | `int x = 10;` |
+| `double` | عدد عشري | `double pi = 3.14;` |
+| `char` | حرف واحد | `char c = 'A';` |
+| `boolean` | صح أو خطأ | `boolean b = true;` |
+| `String` | نص | `String s = "مرحبا";` |
+| `long` | عدد صحيح كبير | `long big = 100000L;` |
+| `float` | عدد عشري (دقة أقل) | `float f = 3.14f;` |
+
+### العمليات الحسابية والمنطقية (Operators)
+
+```java
+public class Operators {
+    public static void main(String[] args) {
+        int a = 10;
+        int b = 3;
+
+        // العمليات الحسابية
+        System.out.println("الجمع: " + (a + b));      // 13
+        System.out.println("الطرح: " + (a - b));      // 7
+        System.out.println("الضرب: " + (a * b));      // 30
+        System.out.println("القسمة: " + (a / b));     // 3 (قسمة صحيحة)
+        System.out.println("الباقي: " + (a % b));     // 1
+
+        // العمليات المنطقية
+        boolean x = true;
+        boolean y = false;
+        System.out.println("AND: " + (x && y));  // false
+        System.out.println("OR: " + (x || y));   // true
+        System.out.println("NOT: " + (!x));       // false
+
+        // عمليات المقارنة
+        System.out.println("أكبر من: " + (a > b));    // true
+        System.out.println("يساوي: " + (a == b));     // false
+        System.out.println("لا يساوي: " + (a != b));  // true
+    }
+}
+```
+
+نقطة مهمة: الفرق بين `=` و `==`. الأول للتعيين (تحط قيمة في متغير)، والثاني للمقارنة (تقارن قيمتين). هذا من أكثر الأخطاء شيوعًا عند المبتدئين.
+
+<Callout type="tip" title="نصيحة">
+عند التعامل مع المتغيرات، اختر أسماء واضحة تدل على محتوى المتغير. مثلًا استخدم `studentAge` بدل `x` و `totalGrade` بدل `t`. هذا يجعل الكود مفهومًا لك ولغيرك، وهو من أساسيات كتابة كود نظيف (Clean Code).
+</Callout>
+
+## التحكم في التدفق: الشروط والحلقات
+
+### جملة if / else
+
+```java
+public class Conditions {
+    public static void main(String[] args) {
+        int score = 85;
+
+        // التحقق من الدرجة وتحديد التقدير
+        if (score >= 90) {
+            System.out.println("ممتاز");
+        } else if (score >= 80) {
+            System.out.println("جيد جدًا");
+        } else if (score >= 70) {
+            System.out.println("جيد");
+        } else if (score >= 60) {
+            System.out.println("مقبول");
+        } else {
+            System.out.println("راسب");
+        }
+    }
+}
+```
+
+### جملة switch
+
+عندما تقارن متغير واحد بعدة قيم محددة، `switch` أنظف من سلسلة `if/else`:
+
+```java
+public class SwitchExample {
+    public static void main(String[] args) {
+        int day = 3;
+
+        // تحديد اسم اليوم بناءً على رقمه
+        switch (day) {
+            case 1:
+                System.out.println("الأحد");
+                break;
+            case 2:
+                System.out.println("الإثنين");
+                break;
+            case 3:
+                System.out.println("الثلاثاء");
+                break;
+            default:
+                System.out.println("يوم غير معروف");
+        }
+    }
+}
+```
+
+لا تنسَ كلمة `break` بعد كل `case`، وإلا سينفّذ البرنامج كل الحالات التي بعدها.
+
+### حلقة for
+
+```java
+public class ForLoop {
+    public static void main(String[] args) {
+        // طباعة الأرقام من 1 إلى 5
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("العدد: " + i);
+        }
+
+        // جدول الضرب للعدد 7
+        System.out.println("جدول ضرب العدد 7:");
+        for (int i = 1; i <= 10; i++) {
+            System.out.println("7 × " + i + " = " + (7 * i));
+        }
+    }
+}
+```
+
+### حلقة while
+
+```java
+public class WhileLoop {
+    public static void main(String[] args) {
+        // العد التنازلي من 5 إلى 1
+        int count = 5;
+        while (count > 0) {
+            System.out.println(count);
+            count--; // إنقاص العداد بواحد
+        }
+        System.out.println("انطلق");
+    }
+}
+```
+
+الفرق بين `for` و `while`: استخدم `for` عندما تعرف عدد التكرارات مسبقًا، و `while` عندما يعتمد التكرار على شرط معين.
+
+## المصفوفات (Arrays)
+
+المصفوفة هي هيكل بيانات يسمح لك بتخزين عدة قيم من نفس النوع في متغير واحد.
+
+```java
+public class ArrayExample {
+    public static void main(String[] args) {
+        // إنشاء مصفوفة من الأعداد الصحيحة
+        int[] grades = {85, 92, 78, 95, 88};
+
+        // الوصول لعنصر معين (الترقيم يبدأ من 0)
+        System.out.println("الدرجة الأولى: " + grades[0]); // 85
+        System.out.println("الدرجة الثالثة: " + grades[2]); // 78
+
+        // طباعة جميع العناصر باستخدام حلقة
+        System.out.println("جميع الدرجات:");
+        for (int i = 0; i < grades.length; i++) {
+            System.out.println("الدرجة " + (i + 1) + ": " + grades[i]);
+        }
+
+        // حساب المتوسط
+        int sum = 0;
+        for (int grade : grades) { // طريقة for-each المختصرة
+            sum += grade;
+        }
+        double average = (double) sum / grades.length;
+        System.out.println("المتوسط: " + average);
+    }
+}
+```
+
+### المصفوفات ثنائية الأبعاد
+
+```java
+public class TwoDArray {
+    public static void main(String[] args) {
+        // مصفوفة ثنائية تمثل درجات 3 طلاب في مادتين
+        int[][] studentGrades = {
+            {85, 90},  // الطالب الأول
+            {78, 82},  // الطالب الثاني
+            {92, 95}   // الطالب الثالث
+        };
+
+        // طباعة درجات كل طالب
+        for (int i = 0; i < studentGrades.length; i++) {
+            System.out.print("الطالب " + (i + 1) + ": ");
+            for (int j = 0; j < studentGrades[i].length; j++) {
+                System.out.print(studentGrades[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+نقطة مهمة: ترقيم عناصر المصفوفة يبدأ من 0 وليس 1. يعني أول عنصر هو `array[0]`، وآخر عنصر هو `array[array.length - 1]`. إذا حاولت الوصول لعنصر خارج النطاق، ستحصل على خطأ `ArrayIndexOutOfBoundsException`.
+
+<Callout type="info" title="معلومة">
+في جافا، حجم المصفوفة ثابت بعد إنشائها ولا يمكن تغييره. إذا احتجت هيكل بيانات يتغير حجمه ديناميكيًا، استخدم `ArrayList` من مكتبة `java.util`. ستتعلمها لاحقًا في المادة.
+</Callout>
+
+<CTABox
+  title="تحتاج مساعدة تفهم المادة؟"
+  description="نشرح لك المفاهيم ونراجع حلولك — تتعلم وتنجز واجبك بثقة"
+  buttonText="تواصل معنا"
+  buttonUrl="https://wa.me/201557703662"
+/>
+
+---
+
+## أساسيات البرمجة كائنية التوجه (OOP)
+
+هنا الجزء الذي يُربك كثير من الطلاب، لكن الفكرة أبسط مما تتخيل. البرمجة كائنية التوجه (Object-Oriented Programming) هي طريقة لتنظيم الكود عن طريق تقسيمه إلى "كائنات" تمثل أشياء من العالم الحقيقي.
+
+### الكلاسات والكائنات (Classes & Objects)
+
+الـ Class هو القالب أو المخطط، والـ Object هو النسخة الفعلية من هذا القالب. فكّر فيه كالفرق بين مخطط بناء بيت (Class) والبيت الفعلي (Object).
+
+```java
+// هذا هو الكلاس — القالب
+public class Student {
+    // الخصائص (المتغيرات)
+    String name;
+    int id;
+    double gpa;
+
+    // الدالة البانية — تُستدعى عند إنشاء كائن جديد
+    public Student(String name, int id, double gpa) {
+        this.name = name;
+        this.id = id;
+        this.gpa = gpa;
+    }
+
+    // دالة لعرض بيانات الطالب
+    public void displayInfo() {
+        System.out.println("الاسم: " + name);
+        System.out.println("الرقم الجامعي: " + id);
+        System.out.println("المعدل: " + gpa);
+    }
+}
+```
+
+```java
+// هنا نستخدم الكلاس لإنشاء كائنات
+public class Main {
+    public static void main(String[] args) {
+        // إنشاء كائن من نوع Student
+        Student student1 = new Student("سارة", 12345, 3.8);
+        Student student2 = new Student("خالد", 67890, 3.5);
+
+        // استدعاء الدوال
+        student1.displayInfo();
+        System.out.println("---");
+        student2.displayInfo();
+    }
+}
+```
+
+### التغليف (Encapsulation)
+
+التغليف يعني إخفاء البيانات الداخلية للكلاس ومنع الوصول المباشر لها، والتعامل معها فقط من خلال دوال getter و setter.
+
+```java
+public class BankAccount {
+    // المتغير private — لا يمكن الوصول له من خارج الكلاس
+    private double balance;
+    private String owner;
+
+    public BankAccount(String owner, double initialBalance) {
+        this.owner = owner;
+        this.balance = initialBalance;
+    }
+
+    // getter — للقراءة فقط
+    public double getBalance() {
+        return balance;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    // دالة الإيداع مع تحقق
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("تم إيداع " + amount + " ريال");
+        } else {
+            System.out.println("المبلغ غير صالح");
+        }
+    }
+
+    // دالة السحب مع تحقق من الرصيد
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("تم سحب " + amount + " ريال");
+        } else {
+            System.out.println("رصيد غير كافٍ أو مبلغ غير صالح");
+        }
+    }
+}
+```
+
+لاحظ كيف أن `balance` من نوع `private` — لا يستطيع أحد تغييره مباشرة. لازم يمر عبر الدوال `deposit` و `withdraw` اللي تتحقق من صحة العملية أولًا. هذا هو جوهر التغليف.
+
+### الوراثة (Inheritance)
+
+الوراثة تسمح لك بإنشاء كلاس جديد يرث خصائص ودوال كلاس موجود. نستخدم كلمة `extends`.
+
+```java
+// الكلاس الأب
+public class Person {
+    String name;
+    int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void introduce() {
+        System.out.println("أنا " + name + " وعمري " + age + " سنة");
+    }
+}
+```
+
+```java
+// الكلاس الابن — يرث من Person
+public class UniversityStudent extends Person {
+    String major;
+    int level;
+
+    public UniversityStudent(String name, int age, String major, int level) {
+        super(name, age); // استدعاء الدالة البانية للكلاس الأب
+        this.major = major;
+        this.level = level;
+    }
+
+    // دالة إضافية خاصة بالطالب الجامعي
+    public void showDetails() {
+        introduce(); // دالة موروثة من الكلاس الأب
+        System.out.println("التخصص: " + major);
+        System.out.println("المستوى: " + level);
+    }
+}
+```
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        UniversityStudent student = new UniversityStudent("نورة", 20, "علوم حاسب", 5);
+        student.showDetails();
+    }
+}
+```
+
+الخرج سيكون:
+```
+أنا نورة وعمري 20 سنة
+التخصص: علوم حاسب
+المستوى: 5
+```
+
+### تعدد الأشكال (Polymorphism)
+
+تعدد الأشكال يعني أن الدالة الواحدة تتصرف بطرق مختلفة حسب الكائن الذي يستدعيها. الطريقة الأشهر هي إعادة تعريف الدالة (Override) في الكلاس الابن.
+
+```java
+public class Shape {
+    public double calculateArea() {
+        return 0;
+    }
+}
+
+public class Circle extends Shape {
+    double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    // إعادة تعريف الدالة لحساب مساحة الدائرة
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+public class Rectangle extends Shape {
+    double width;
+    double height;
+
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    // إعادة تعريف الدالة لحساب مساحة المستطيل
+    @Override
+    public double calculateArea() {
+        return width * height;
+    }
+}
+```
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        // نفس النوع Shape لكن كائنات مختلفة
+        Shape circle = new Circle(5);
+        Shape rectangle = new Rectangle(4, 6);
+
+        // نفس الدالة تُعطي نتائج مختلفة
+        System.out.println("مساحة الدائرة: " + circle.calculateArea());
+        System.out.println("مساحة المستطيل: " + rectangle.calculateArea());
+    }
+}
+```
+
+الجميل هنا أن `calculateArea()` تتصرف بشكل مختلف حسب نوع الشكل الفعلي — رغم أن المتغير من نوع `Shape`. هذا هو تعدد الأشكال.
+
+<Callout type="tip" title="نصيحة لفهم OOP">
+لا تحاول حفظ مفاهيم OOP نظريًا. أفضل طريقة لفهمها هي تطبيقها على أمثلة من حياتك. فكّر في أي نظام حولك (مكتبة، مطعم، جامعة) وحاول تمثيله بكلاسات وكائنات. مثلًا: كلاس `Course` يرث من كلاس `AcademicUnit`، وكلاس `Student` يحتوي على مصفوفة من الكورسات.
+</Callout>
+
+## الدوال (Methods)
+
+الدوال هي كتل من الكود تنفّذ مهمة محددة. بدل ما تكرر نفس الكود عدة مرات، تكتبه مرة واحدة في دالة وتستدعيها متى ما احتجت.
+
+```java
+public class MethodsExample {
+
+    // دالة لحساب المتوسط — تستقبل مصفوفة وتُرجع قيمة
+    public static double calculateAverage(int[] numbers) {
+        int sum = 0;
+        for (int num : numbers) {
+            sum += num;
+        }
+        return (double) sum / numbers.length;
+    }
+
+    // دالة للتحقق من كون العدد زوجي أو فردي
+    public static boolean isEven(int number) {
+        return number % 2 == 0;
+    }
+
+    // دالة لا تُرجع قيمة (void)
+    public static void printLine(int length) {
+        for (int i = 0; i < length; i++) {
+            System.out.print("-");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int[] grades = {85, 92, 78, 95, 88};
+
+        printLine(30);
+        System.out.println("المتوسط: " + calculateAverage(grades));
+        System.out.println("هل 4 زوجي؟ " + isEven(4));
+        System.out.println("هل 7 زوجي؟ " + isEven(7));
+        printLine(30);
+    }
+}
+```
+
+## أخطاء شائعة يقع فيها المبتدئون
+
+بعد سنوات من مساعدة الطلاب في مشاريعهم وواجباتهم، هذه أكثر الأخطاء التي نراها تتكرر:
+
+<Callout type="warning" title="انتبه">
+الأخطاء التالية هي الأكثر تكرارًا في واجبات واختبارات طلاب جافا. اقرأها بتمعّن وارجع لها كلما واجهت مشكلة في كودك — غالبًا السبب يكون واحدًا منها.
+</Callout>
+
+### 1. نسيان الفاصلة المنقوطة
+
+كل جملة في جافا لازم تنتهي بفاصلة منقوطة `;`. المترجم لن يرحمك إذا نسيتها.
+
+```java
+// خطأ
+System.out.println("مرحبا")
+
+// صح
+System.out.println("مرحبا");
+```
+
+### 2. الخلط بين = و ==
+
+```java
+// هذا تعيين — يحط القيمة 5 في x
+int x = 5;
+
+// هذا مقارنة — يتحقق هل x يساوي 5
+if (x == 5) { ... }
+
+// هذا خطأ منطقي شائع — لن يعطي خطأ في الترجمة لكن النتيجة غلط
+if (x = 5) { ... } // خطأ: تعيين وليس مقارنة
+```
+
+### 3. مقارنة النصوص بـ == بدل equals
+
+```java
+String a = "مرحبا";
+String b = "مرحبا";
+
+// خطأ — يقارن العنوان في الذاكرة وليس المحتوى
+if (a == b) { ... }
+
+// صح — يقارن المحتوى الفعلي للنص
+if (a.equals(b)) { ... }
+```
+
+### 4. تجاوز حدود المصفوفة
+
+```java
+int[] arr = {1, 2, 3};
+// المصفوفة فيها 3 عناصر: arr[0], arr[1], arr[2]
+System.out.println(arr[3]); // خطأ: ArrayIndexOutOfBoundsException
+```
+
+### 5. عدم تهيئة المتغيرات
+
+```java
+int x;
+System.out.println(x); // خطأ: المتغير لم يُعطَ قيمة ابتدائية
+```
+
+### 6. نسيان break في switch
+
+```java
+// بدون break، التنفيذ يستمر للحالة التالية
+switch (day) {
+    case 1:
+        System.out.println("أحد");
+        // نسيت break هنا — ستطبع "أحد" ثم "إثنين"
+    case 2:
+        System.out.println("إثنين");
+        break;
+}
+```
+
+### 7. NullPointerException
+
+```java
+String text = null;
+System.out.println(text.length()); // خطأ: لا يمكنك استدعاء دالة على قيمة null
+```
+
+هذا أشهر خطأ في جافا. دائمًا تحقق من أن المتغير ليس `null` قبل استخدامه.
+
+<Callout type="warning" title="NullPointerException">
+هذا الخطأ هو السبب الأول لضياع الدرجات في الاختبارات العملية. القاعدة الذهبية: قبل ما تستدعي أي دالة على متغير، تأكد أنه ليس `null`. استخدم شرط `if (variable != null)` للتحقق.
+</Callout>
+
+## نصائح لاجتياز مادة جافا
+
+- **اكتب الكود بيدك**: لا تكتفِ بالقراءة أو مشاهدة الفيديوهات. افتح الـ IDE واكتب كل مثال بنفسك
+- **افهم الخطأ قبل ما تبحث عن حله**: اقرأ رسالة الخطأ — غالبًا تخبرك بالضبط ما المشكلة
+- **قسّم المشكلة**: إذا الواجب يبدو صعب، قسّمه لخطوات صغيرة. حل كل خطوة لوحدها
+- **استخدم الـ debugger**: تعلم كيف تستخدم أداة التنقيح في الـ IDE. أفضل بكثير من طباعة كل شيء بـ `System.out.println`
+- **مارس بانتظام**: البرمجة مهارة عملية. ساعة يوميًا أفضل من 7 ساعات يوم السبت
+
+## الخلاصة
+
+لغة جافا ليست صعبة بقدر ما تحتاج صبرًا وممارسة. في هذا المقال غطينا الأساسيات التي ستحتاجها في أول فصل دراسي: من تثبيت البيئة إلى المتغيرات والشروط والحلقات والمصفوفات، وصولًا إلى أساسيات OOP مثل الكلاسات والوراثة وتعدد الأشكال.
+
+المفتاح هو أن تكتب كود كل يوم. كل خطأ تواجهه وتحله يقرّبك من الفهم الحقيقي. وإذا واجهتك مشكلة في واجب أو مشروع، لا تتردد في طلب المساعدة.
+
+<CTABox
+  title="تحتاج مساعدة تفهم المادة؟"
+  description="نشرح لك المفاهيم ونراجع حلولك — تتعلم وتنجز واجبك بثقة"
+  buttonText="تواصل معنا"
+  buttonUrl="https://wa.me/201557703662"
+/>

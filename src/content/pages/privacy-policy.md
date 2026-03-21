@@ -1,30 +1,61 @@
 ---
-title: "Privacy"
-meta_title: ""
-description: "this is meta description"
+title: "سياسة الخصوصية"
+meta_title: "سياسة الخصوصية — زدني"
+description: "سياسة الخصوصية الخاصة بمدونة زدني. نوضح كيف نجمع بياناتك ونستخدمها ونحميها."
 draft: false
 ---
 
-#### Responsibility of Contributors
+آخر تحديث: 21 مارس 2026
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, donec nunc eros, ullamcorper id feugiat quisque aliquam sagittis. Sem turpis sed viverra massa gravida pharetra. Non dui dolor potenti eu dignissim fusce. Ultrices amet, in curabitur a arcu a lectus morbi id. Iaculis erat sagittis in tortor cursus. Molestie urna eu tortor, erat scelerisque eget. Nunc hendrerit sed interdum lacus. Lorem quis viverra sed
+نحن في زدني نحترم خصوصيتك ونلتزم بحماية بياناتك الشخصية. توضح هذه السياسة كيف نتعامل مع المعلومات التي نجمعها عند استخدامك لموقعنا وخدماتنا.
 
-pretium, aliquam sit. Praesent elementum magna amet, tincidunt eros, nibh in leo. Malesuada purus, lacus, at aliquam suspendisse tempus. Quis tempus amet, velit nascetur sollicitudin. At sollicitudin eget amet in. Eu velit nascetur sollicitudin erhdfvssfvrgss eget viverra nec elementum. Lacus, facilisis tristique lectus in.
+#### المعلومات التي نجمعها
 
-#### Gathering of Personal Information
+عند تواصلك معنا أو استخدام خدماتنا، قد نجمع المعلومات التالية:
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, donec nunc eros, ullamcorper id feugiat quisque aliquam sagittis. Sem turpis sed viverra massa gravida pharetra. Non dui dolor potenti eu dignissim fusce. Ultrices amet, in curabitur a arcu a lectus morbi id. Iaculis erat sagittis in tortor cursus. Molestie urna eu tortor, erat scelerisque eget. Nunc hendrerit sed interdum lacus. Lorem quis viverra sed
+- **معلومات التواصل**: الاسم، البريد الإلكتروني، رقم الهاتف أو حساب واتساب
+- **المعلومات الأكاديمية**: تفاصيل الواجبات، مشاريع التخرج، أو النصوص المطلوب ترجمتها
+- **بيانات التصفح**: معلومات تقنية مثل نوع المتصفح، عنوان IP، والصفحات التي تزورها (عبر أدوات التحليل)
 
-#### Protection of Personal- Information
+#### كيف نستخدم معلوماتك
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, donec nunc eros, ullamcorper id feugiat quisque aliquam sagittis. Sem turpis sed viverra massa gravida pharetra. Non dui dolor potenti eu dignissim fusce. Ultrices amet, in curabitur a arcu a lectus morbi id. Iaculis erat sagittis in tortor cursus.
+نستخدم المعلومات التي نجمعها للأغراض التالية فقط:
 
-Molestie urna eu tortor, erat scelerisque eget. Nunc hendrerit sed interdum lacus. Lorem quis viverra sed
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, donec nunc eros, ullamcorper id feugiat
+- تقديم الخدمات الأكاديمية التي طلبتها (مشاريع تخرج، واجبات، ترجمة)
+- التواصل معك بخصوص طلبك أو استفسارك
+- تحسين محتوى الموقع وتجربة المستخدم
+- إرسال تحديثات عن خدماتنا (فقط إذا وافقت على ذلك)
 
-#### Privacy Policy Changes
+#### سرية الخدمات الأكاديمية
 
-1. Sll the Themefisher items are designed to be with the latest , We check all
-2. comments that threaten or harm the reputation of any person or organization
-3. personal information including, but limited to, email addresses, telephone numbers
-4. Any Update come in The technology Customer will get automatic Notification.
+نتعامل مع جميع الطلبات الأكاديمية بسرية تامة. لا نشارك أي تفاصيل عن مشاريعك أو واجباتك مع أي طرف ثالث. جميع الملفات التي تُسلّم لنا تُحذف بعد إتمام الخدمة وانتهاء فترة المراجعة.
+
+#### حماية المعلومات
+
+نتخذ إجراءات معقولة لحماية معلوماتك الشخصية من الوصول غير المصرح به أو الاستخدام غير المشروع. نستخدم اتصالات مشفرة (HTTPS) ولا نخزّن معلومات حساسة على خوادم غير آمنة.
+
+#### ملفات تعريف الارتباط (Cookies)
+
+قد يستخدم موقعنا ملفات تعريف الارتباط لتحسين تجربتك. تشمل هذه:
+
+- **ملفات ضرورية**: لتشغيل الموقع بشكل صحيح
+- **ملفات تحليلية**: لفهم كيف يستخدم الزوار الموقع وتحسين المحتوى
+
+يمكنك تعطيل ملفات تعريف الارتباط من إعدادات متصفحك.
+
+#### حقوقك
+
+لديك الحق في:
+
+- طلب نسخة من بياناتك الشخصية المخزنة لدينا
+- طلب تصحيح أو حذف بياناتك
+- إلغاء الاشتراك في أي رسائل تسويقية
+- طلب حذف جميع ملفاتك الأكاديمية من أنظمتنا
+
+#### تعديلات على السياسة
+
+قد نحدّث هذه السياسة من وقت لآخر. سننشر أي تغييرات على هذه الصفحة مع تحديث تاريخ آخر تعديل.
+
+#### تواصل معنا
+
+إذا كان لديك أي سؤال حول سياسة الخصوصية، تواصل معنا عبر [صفحة التواصل](/contact) أو عبر البريد الإلكتروني: smart4cademy@gmail.com
