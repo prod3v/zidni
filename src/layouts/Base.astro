@@ -26,10 +26,11 @@ export interface Props {
   image?: string;
   noindex?: boolean;
   canonical?: string;
+  og_type?: string;
 }
 
 // distructure frontmatters
-const { title, meta_title, description, image, noindex, canonical } =
+const { title, meta_title, description, image, noindex, canonical, og_type } =
   Astro.props;
 ---
 
@@ -114,11 +115,13 @@ const { title, meta_title, description, image, noindex, canonical } =
         description ? description : config.metadata.meta_description
       )}
     />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={og_type || "website"} />
     <meta
       property="og:url"
-      content={`${config.site.base_url}/${Astro.url.pathname.replace("/", "")}`}
+      content={canonical || `${config.site.base_url}${Astro.url.pathname}`}
     />
+    <meta property="og:locale" content="ar_AR" />
+    <meta property="og:site_name" content={config.site.title} />
 
     <!-- twitter-title -->
     <meta
@@ -152,6 +155,7 @@ const { title, meta_title, description, image, noindex, canonical } =
       }`}
     />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@zidni_blog" />
   </head>
   <body>
     {/* google tag manager noscript */}

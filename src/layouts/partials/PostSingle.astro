@@ -44,10 +44,15 @@ const articleSchema = {
     name: a.data.title,
     url: `${baseUrl}/authors/${slugify(a.id)}`,
   })),
+  dateModified: date ? new Date(date).toISOString() : undefined,
   publisher: {
     "@type": "Organization",
     name: "زدني",
     url: baseUrl,
+    logo: {
+      "@type": "ImageObject",
+      url: `${baseUrl}${config.site.logo}`,
+    },
   },
   mainEntityOfPage: postUrl,
   keywords: tags.join(", "),
