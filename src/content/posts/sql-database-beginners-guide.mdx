@@ -1,7 +1,7 @@
 ---
 title: "شرح قواعد البيانات SQL للمبتدئين — دليل شامل للطلاب"
 meta_title: "شرح SQL وقواعد البيانات للمبتدئين | أوامر وأمثلة عملية بالعربي"
-description: "تعلّم أساسيات قواعد البيانات SQL من الصفر: أوامر SELECT وINSERT وUPDATE وDELETE، تصميم الجداول، والعلاقات. دليل عملي بأمثلة واضحة."
+description: "تعلّم أساسيات قواعد البيانات SQL من الصفر: أوامر SELECT وINSERT وUPDATE وDELETE، تصميم الجداول، والعلاقات بين البيانات. دليل عملي بأمثلة واضحة للطلاب."
 date: 2026-03-21T07:00:00Z
 image: "/images/posts/code-typing.svg"
 categories: ["دليل المواد"]
@@ -439,7 +439,11 @@ FROM students s
 INNER JOIN enrollments e ON s.student_id = e.student_id
 GROUP BY s.student_id, s.first_name, s.last_name
 ORDER BY avg_grade DESC;
+```
 
+ويمكنك تصفية النتائج باستخدام `HAVING` لعرض الطلاب المتفوقين فقط، أو حساب عدد المسجلين في كل مادة:
+
+```sql
 -- الطلاب اللي متوسط درجاتهم أعلى من 85
 SELECT
     s.first_name,
@@ -482,7 +486,7 @@ WHERE course_id NOT IN (SELECT DISTINCT course_id FROM enrollments);
   title="تحتاج مساعدة في واجب أو مشروع قواعد البيانات؟"
   description="نشرح لك المفاهيم ونراجع استعلاماتك — تتعلم وتنجز واجبك بثقة"
   buttonText="تواصل معنا"
-  buttonUrl="https://wa.me/201557703662"
+  buttonUrl="https://wa.me/201557703662?text=مرحبا، أحتاج مساعدة في واجب قواعد البيانات SQL"
 />
 
 ## تعديل هيكل الجداول: ALTER TABLE
@@ -534,7 +538,11 @@ FROM courses c
 INNER JOIN enrollments e ON c.course_id = e.course_id
 GROUP BY c.course_id, c.course_name
 HAVING AVG(e.grade) > 85;
+```
 
+التمرين الثالث يستخدم `HAVING COUNT` لتصفية الطلاب حسب عدد المواد، والرابع يوضح كيفية إنشاء جدول جديد وربطه بجدول قائم:
+
+```sql
 -- حل التمرين 3
 SELECT s.first_name, s.last_name, COUNT(e.course_id) AS course_count
 FROM students s
@@ -553,7 +561,11 @@ CREATE TABLE professors (
 ALTER TABLE courses
 ADD COLUMN professor_id INT,
 ADD FOREIGN KEY (professor_id) REFERENCES professors(professor_id);
+```
 
+التمرين الخامس يستخدم `LEFT JOIN` مع شرط `IS NULL` لإيجاد الطلاب غير المسجلين:
+
+```sql
 -- حل التمرين 5
 SELECT s.first_name, s.last_name
 FROM students s
@@ -610,5 +622,5 @@ WHERE e.enrollment_id IS NULL;
   title="تحتاج مساعدة في مشروع التخرج أو واجب قواعد البيانات؟"
   description="فريق زدني يساعدك تفهم المفاهيم وتبني مشروعك خطوة بخطوة — نشرح لك ونراجع شغلك عشان تتعلم وتنجز بثقة"
   buttonText="اطلب المساعدة الآن"
-  buttonUrl="https://wa.me/201557703662"
+  buttonUrl="https://wa.me/201557703662?text=مرحبا، أحتاج مساعدة في واجب قواعد البيانات SQL"
 />

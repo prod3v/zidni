@@ -1,7 +1,7 @@
 ---
 title: "تعلم بايثون من الصفر — دليل عملي للطلاب الجامعيين"
 meta_title: "تعلم بايثون من الصفر للمبتدئين بالعربي"
-description: "تعلم بايثون من الصفر بالعربي: المتغيرات والشروط والحلقات والدوال والتعامل مع الملفات وتطبيقات عملية. شرح مبسّط بأمثلة بسيطة مصمّم للطلاب الجامعيين."
+description: "تعلم بايثون من الصفر بالعربي: المتغيرات والشروط والحلقات والدوال والتعامل مع الملفات وتطبيقات عملية. شرح مبسّط بأمثلة تفاعلية مصمّم خصيصًا للطلاب الجامعيين."
 date: 2026-03-21T06:00:00Z
 image: "/images/posts/programming.svg"
 categories: ["دليل المواد"]
@@ -212,7 +212,11 @@ else:
 num1 = float(input("أدخل العدد الأول: "))
 operator = input("أدخل العملية (+, -, *, /): ")
 num2 = float(input("أدخل العدد الثاني: "))
+```
 
+بعد أخذ المدخلات، نستخدم سلسلة شروط لتحديد العملية وتنفيذها:
+
+```python
 if operator == "+":
     result = num1 + num2
 elif operator == "-":
@@ -324,7 +328,11 @@ print(grades)  # [85, 92, 78, 95, 88, 91]
 # حذف عنصر
 grades.remove(78)
 print(grades)  # [85, 92, 95, 88, 91]
+```
 
+بعد الإنشاء والتعديل، يمكنك حساب الإحصائيات وترتيب القائمة:
+
+```python
 # طول القائمة
 print("عدد الدرجات:", len(grades))
 
@@ -368,7 +376,11 @@ student = {
 # الوصول لقيمة عن طريق المفتاح
 print("الاسم:", student["name"])
 print("التخصص:", student["major"])
+```
 
+يمكنك أيضًا إضافة مفاتيح جديدة أو تعديل القيم الموجودة والمرور على كل عناصر القاموس:
+
+```python
 # إضافة مفتاح جديد
 student["email"] = "khalid@university.edu"
 
@@ -395,10 +407,10 @@ for name, grades in students_grades.items():
 ```
 
 <CTABox
-  title="تحتاج مساعدة في واجبات البرمجة؟"
-  description="نشرح لك المفاهيم ونراجع حلولك — تتعلم وتنجز واجبك بثقة"
+  title="تحتاج مساعدة في واجبات بايثون؟"
+  description="نشرح لك مفاهيم بايثون ونراجع حلولك — تتعلم وتنجز واجبك بثقة"
   buttonText="تواصل معنا"
-  buttonUrl="https://wa.me/201557703662"
+  buttonUrl="https://wa.me/201557703662?text=مرحبا، أحتاج مساعدة في واجب بايثون"
 />
 
 ---
@@ -462,7 +474,11 @@ def check_password_strength(password):
             break
     if has_digit:
         score += 1
+```
 
+نكمل الدالة بالتحقق من الأحرف الكبيرة ثم تحديد التقييم النهائي:
+
+```python
     # التحقق من وجود أحرف كبيرة
     has_upper = False
     for char in password:
@@ -552,7 +568,11 @@ with open("grades.csv", "w", encoding="utf-8") as file:
         file.write(f"{s['name']},{s['math']},{s['cs']},{s['english']},{avg:.1f}\n")
 
 print("تم حفظ الدرجات في grades.csv")
+```
 
+بعد حفظ الملف، نقرأه ونتحقق من محتواه:
+
+```python
 # قراءة الملف والتحقق
 with open("grades.csv", "r", encoding="utf-8") as file:
     for line in file:
@@ -611,7 +631,11 @@ def show_menu():
     print("5. تحميل المهام من ملف")
     print("0. خروج")
     print("-" * 30)
+```
 
+بعد القائمة، نعرّف دالتين: واحدة لعرض المهام وأخرى لإضافة مهمة جديدة.
+
+```python
 def show_tasks(tasks):
     """تعرض جميع المهام"""
     if not tasks:
@@ -628,7 +652,11 @@ def add_task(tasks):
         print(f"تمت إضافة: {task}")
     else:
         print("لم تدخل أي نص.")
+```
 
+ثم نعرّف دالة الحذف التي تتحقق من صحة الرقم المُدخل قبل تنفيذ العملية.
+
+```python
 def delete_task(tasks):
     """تحذف مهمة بناءً على رقمها"""
     show_tasks(tasks)
@@ -643,7 +671,11 @@ def delete_task(tasks):
             print("رقم غير صالح.")
     except ValueError:
         print("الرجاء إدخال رقم صحيح.")
+```
 
+نضيف دالتي الحفظ والتحميل للتعامل مع الملفات، حتى لا تضيع المهام عند إغلاق البرنامج.
+
+```python
 def save_tasks(tasks, filename="tasks.txt"):
     """تحفظ المهام في ملف"""
     with open(filename, "w", encoding="utf-8") as file:
@@ -661,7 +693,11 @@ def load_tasks(filename="tasks.txt"):
     except FileNotFoundError:
         print("ملف المهام غير موجود.")
         return []
+```
 
+أخيرًا، نكتب الحلقة الرئيسية التي تعرض القائمة وتنفّذ العملية التي يختارها المستخدم.
+
+```python
 # البرنامج الرئيسي
 tasks = []
 
@@ -784,8 +820,8 @@ print(age + 5)
 ابدأ الآن. افتح المحرر واكتب أول سطر كود. رحلتك في عالم البرمجة تبدأ من هنا.
 
 <CTABox
-  title="تحتاج مساعدة تفهم المادة؟"
-  description="نشرح لك المفاهيم ونراجع حلولك — تتعلم وتنجز واجبك بثقة"
+  title="تحتاج مساعدة في مشروع أو واجب بايثون؟"
+  description="فريق زدني يساعدك تفهم بايثون وتحل واجباتك بنفسك — نشرح لك ونراجع كودك خطوة بخطوة"
   buttonText="تواصل معنا"
-  buttonUrl="https://wa.me/201557703662"
+  buttonUrl="https://wa.me/201557703662?text=مرحبا، أحتاج مساعدة في واجب بايثون"
 />
