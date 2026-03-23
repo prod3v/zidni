@@ -18,16 +18,17 @@ const { posts } = Astro.props;
       <div class={`col-12 sm:col-6 md:col-4 ${i === 2 && "hidden md:block"}`}>
         {post.data.image && (
           <a
-            href={`/${post.id}`}
+            href={`/blog/${post.id}`}
             class="rounded-2xl block overflow-hidden group relative"
           >
-            <Image
-              class="group-hover:scale-[1.05] transition duration-500 w-full"
-              src={post.data.image}
-              alt={post.data.title}
-              width={445}
-              height={230}
-            />
+            <div class="bg-light p-4">
+              <img
+                class="group-hover:scale-[1.05] transition duration-500 w-full h-48 object-contain"
+                src={post.data.image}
+                alt={post.data.title}
+                loading="lazy"
+              />
+            </div>
             <div class="absolute top-3 start-3 flex gap-2">
               {post.data.categories.map((category: string) => (
                 <span class="bg-white/90 backdrop-blur-sm text-dark text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
@@ -49,7 +50,7 @@ const { posts } = Astro.props;
         </div>
         <h3 class="h5 mt-2">
           <a
-            href={`/${post.id}`}
+            href={`/blog/${post.id}`}
             class="block hover:text-primary transition duration-300"
           >
             {post.data.title}
