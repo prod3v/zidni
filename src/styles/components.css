@@ -96,9 +96,15 @@
   /* blockquotes */
   @apply prose-blockquote:rounded-xl prose-blockquote:border-s-4 prose-blockquote:border-primary prose-blockquote:bg-primary/[0.03] prose-blockquote:px-7 prose-blockquote:py-4 prose-blockquote:text-lg prose-blockquote:leading-8 prose-blockquote:not-italic;
 
-  /* code */
+  /* code — force LTR direction for code blocks in RTL pages */
   @apply prose-pre:rounded-xl prose-pre:px-6 prose-pre:py-5;
   @apply prose-code:text-primary prose-code:before:content-none prose-code:after:content-none;
+
+  pre,
+  pre code {
+    direction: ltr;
+    text-align: left;
+  }
 
   /* tables */
   @apply prose-table:relative prose-table:overflow-hidden prose-table:rounded-xl;

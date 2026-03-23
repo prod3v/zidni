@@ -57,31 +57,38 @@ draft: false
 
 Big-O يقيس **أسوأ حالة** — كم عملية يحتاج الكود مع زيادة حجم البيانات.
 
-```java
-// O(1) — وقت ثابت: ما يتغير مع حجم البيانات
-public static int getFirst(int[] arr) {
-    return arr[0]; // عملية واحدة دائما
-}
+**O(1) — وقت ثابت:** عملية واحدة بغض النظر عن حجم البيانات.
 
-// O(n) — خطي: يزيد بشكل طردي مع حجم البيانات
+```java
+public static int getFirst(int[] arr) {
+    return arr[0];
+}
+```
+
+**O(n) — خطي:** حلقة واحدة تمر على كل العناصر.
+
+```java
 public static int sum(int[] arr) {
     int total = 0;
-    for (int i = 0; i < arr.length; i++) { // n مرة
+    for (int i = 0; i < arr.length; i++)
         total += arr[i];
-    }
     return total;
 }
+```
 
-// O(n²) — تربيعي: حلقتين متداخلتين
+**O(n²) — تربيعي:** حلقتين متداخلتين.
+
+```java
 public static void printPairs(int[] arr) {
-    for (int i = 0; i < arr.length; i++) {        // n مرة
-        for (int j = 0; j < arr.length; j++) {    // n مرة لكل i
+    for (int i = 0; i < arr.length; i++)
+        for (int j = 0; j < arr.length; j++)
             System.out.println(arr[i] + ", " + arr[j]);
-        }
-    }
 }
+```
 
-// O(log n) — لوغاريتمي: ينص البيانات كل خطوة
+**O(log n) — لوغاريتمي:** ينصّ البيانات كل خطوة (مثل البحث الثنائي).
+
+```java
 public static int binarySearch(int[] arr, int target) {
     int low = 0, high = arr.length - 1;
     while (low <= high) {
@@ -113,6 +120,8 @@ public static int binarySearch(int[] arr, int target) {
 في الاختبار، غالبا يعطيك كود ويسألك عن التعقيد — تمرّن على هذا النوع كثير.
 </Callout>
 
+التكرار (Recursion) من أكثر المواضيع اللي تسبب إحباط لطلاب CPCS 204 — لو حسيت إن الفكرة مو واضحة من أول مرة، هذا طبيعي جدا. المفتاح هو التتبع خطوة بخطوة.
+
 ## 2. التكرار — Recursion
 
 كل ما تحاول تفهم الـ Recursion يضيع تركيزك؟ التكرار ببساطة: **دالة تستدعي نفسها** حتى توصل لحالة أساس (base case) وتتوقف.
@@ -124,53 +133,48 @@ public static int binarySearch(int[] arr, int target) {
 2. **Recursive Case** (الحالة التكرارية): الحالة اللي تستدعي فيها الدالة نفسها مع مدخل أصغر
 
 ```java
-// حساب المضروب (Factorial): n! = n × (n-1) × ... × 1
 public static int factorial(int n) {
-    // حالة الأساس
-    if (n == 0 || n == 1) {
-        return 1;
-    }
-    // الحالة التكرارية
-    return n * factorial(n - 1);
+    if (n <= 1) return 1;           // حالة الأساس
+    return n * factorial(n - 1);    // حالة تكرارية
 }
-
-// factorial(4) = 4 * factorial(3)
-//              = 4 * 3 * factorial(2)
-//              = 4 * 3 * 2 * factorial(1)
-//              = 4 * 3 * 2 * 1
-//              = 24
+// factorial(4) = 4 * 3 * 2 * 1 = 24
 ```
 
 ### متتالية فيبوناتشي
 
+كل رقم = مجموع الرقمين اللي قبله: `0, 1, 1, 2, 3, 5, 8, 13, ...`
+
 ```java
-// Fibonacci: 0, 1, 1, 2, 3, 5, 8, 13, ...
-// كل رقم = مجموع الرقمين اللي قبله
 public static int fibonacci(int n) {
-    if (n == 0) return 0;       // حالة أساس
-    if (n == 1) return 1;       // حالة أساس
-    return fibonacci(n - 1) + fibonacci(n - 2); // حالة تكرارية
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+    return fibonacci(n - 1) + fibonacci(n - 2);
 }
 ```
 
 ### برج هانوي (Tower of Hanoi)
 
+نقل n أقراص من عمود المصدر إلى عمود الهدف باستخدام عمود مساعد:
+
 ```java
-// نقل n أقراص من عمود المصدر إلى عمود الهدف باستخدام عمود مساعد
-public static void towerOfHanoi(int n, char source, char target, char helper) {
+public static void towerOfHanoi(int n, char src, char dst, char tmp) {
     if (n == 1) {
-        System.out.println("انقل القرص 1 من " + source + " إلى " + target);
+        System.out.println("انقل 1 من " + src + " إلى " + dst);
         return;
     }
-    towerOfHanoi(n - 1, source, helper, target); // انقل n-1 أقراص للمساعد
-    System.out.println("انقل القرص " + n + " من " + source + " إلى " + target);
-    towerOfHanoi(n - 1, helper, target, source); // انقل n-1 أقراص من المساعد للهدف
+    towerOfHanoi(n - 1, src, tmp, dst);  // انقل n-1 للمساعد
+    System.out.println("انقل " + n + " من " + src + " إلى " + dst);
+    towerOfHanoi(n - 1, tmp, dst, src);  // انقل n-1 للهدف
 }
 ```
 
 <Callout type="warning" title="أهم خطأ في Recursion">
 لو نسيت حالة الأساس (Base Case) أو كتبتها غلط، الدالة تستدعي نفسها للأبد ويطلع لك **StackOverflowError**. دائما اكتب حالة الأساس أول شيء قبل الحالة التكرارية.
 </Callout>
+
+<CTABox title="التكرار (Recursion) لسه مو واضح؟" description="كثير من طلاب CPCS 204 يواجهون صعوبة في فهم التكرار وتتبع الاستدعاءات. أرسل لنا واجب الـ Recursion ونشرح لك الحل خطوة بخطوة." buttonText="أرسل واجبك على واتساب" buttonUrl="https://wa.me/201557703662?text=مرحبا، أحتاج مساعدة في واجب Recursion - CPCS 204" />
+
+القوائم المتصلة هي أول هيكل بيانات "حقيقي" تتعامل معه — التعامل مع الـ Nodes والمؤشرات يحتاج طريقة تفكير مختلفة عن المصفوفات. خذ وقتك وارسم كل عملية على ورقة.
 
 ## 3. القوائم المتصلة — Linked Lists
 
@@ -180,56 +184,57 @@ public static void towerOfHanoi(int n, char source, char target, char helper) {
 
 كل عنصر (**Node**) فيه: **بيانات** + **مؤشر** (pointer) للعنصر اللي بعده.
 
+أولا، نعرّف الـ Node — كل عنصر يحمل بيانات ومؤشر للتالي:
+
 ```java
-// تعريف Node
 class Node {
-    int data;       // البيانات
-    Node next;      // مؤشر للعنصر التالي
+    int data;
+    Node next;
 
     public Node(int data) {
         this.data = data;
         this.next = null;
     }
 }
+```
 
-// تعريف القائمة المتصلة
+الآن نبني القائمة المتصلة. **الإضافة في البداية** O(1) — نربط العنصر الجديد بالـ head:
+
+```java
 class LinkedList {
-    Node head; // رأس القائمة — أول عنصر
+    Node head;
 
-    // إضافة عنصر في البداية — O(1)
     public void addFirst(int data) {
-        Node newNode = new Node(data);
-        newNode.next = head;
-        head = newNode;
+        Node n = new Node(data);
+        n.next = head;
+        head = n;
     }
+```
 
-    // إضافة عنصر في النهاية — O(n)
+**الإضافة في النهاية** O(n) — نمشي للآخر ثم نربط:
+
+```java
     public void addLast(int data) {
-        Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
-            return;
-        }
-        Node current = head;
-        while (current.next != null) { // وصل لآخر عنصر
-            current = current.next;
-        }
-        current.next = newNode;
+        Node n = new Node(data);
+        if (head == null) { head = n; return; }
+        Node cur = head;
+        while (cur.next != null) cur = cur.next;
+        cur.next = n;
     }
+```
 
-    // حذف أول عنصر — O(1)
+**الحذف من البداية** O(1) و**طباعة القائمة** O(n):
+
+```java
     public void removeFirst() {
-        if (head != null) {
-            head = head.next;
-        }
+        if (head != null) head = head.next;
     }
 
-    // طباعة القائمة — O(n)
     public void display() {
-        Node current = head;
-        while (current != null) {
-            System.out.print(current.data + " -> ");
-            current = current.next;
+        Node cur = head;
+        while (cur != null) {
+            System.out.print(cur.data + " -> ");
+            cur = cur.next;
         }
         System.out.println("null");
     }
@@ -243,13 +248,10 @@ class LinkedList {
 ```java
 class DNode {
     int data;
-    DNode next;     // المؤشر التالي
-    DNode prev;     // المؤشر السابق
+    DNode next, prev;
 
     public DNode(int data) {
         this.data = data;
-        this.next = null;
-        this.prev = null;
     }
 }
 ```
@@ -268,46 +270,43 @@ class DNode {
 *مع ArrayList في جافا، الإضافة في النهاية O(1) amortized
 </Callout>
 
+<CTABox title="واجب Linked List يلخبطك مع الـ Pointers؟" description="عمليات الإضافة والحذف في القوائم المتصلة من أكثر الواجبات اللي يطلب فيها الطلاب مساعدة. أرسل لنا السؤال ونحله لك مع شرح كامل." buttonText="تواصل معنا عبر واتساب" buttonUrl="https://wa.me/201557703662?text=مرحبا، أحتاج مساعدة في واجب Linked List - CPCS 204" />
+
 ## 4. المكدسات — Stacks
 
 المكدس يشتغل بمبدأ **LIFO** — Last In, First Out. آخر عنصر يدخل هو أول عنصر يطلع. تخيّل كومة صحون: آخر صحن تحطه هو أول صحن تاخذه.
 
 ### العمليات الأساسية
 
+نبني المكدس باستخدام مصفوفة. المتغير `top` يشير لآخر عنصر (-1 يعني فاضي):
+
 ```java
 class Stack {
     private int[] arr;
-    private int top;     // فهرس آخر عنصر
-    private int capacity;
+    private int top = -1;
 
     public Stack(int capacity) {
-        this.capacity = capacity;
         arr = new int[capacity];
-        top = -1; // المكدس فاضي
+    }
+```
+
+**push** — إضافة عنصر فوق المكدس، و**pop** — إزالة آخر عنصر:
+
+```java
+    public void push(int val) {
+        arr[++top] = val;           // O(1)
     }
 
-    // إضافة عنصر — O(1)
-    public void push(int value) {
-        if (top == capacity - 1) {
-            System.out.println("المكدس ممتلئ! (Stack Overflow)");
-            return;
-        }
-        arr[++top] = value;
-    }
-
-    // إزالة وإرجاع آخر عنصر — O(1)
     public int pop() {
-        if (top == -1) {
-            System.out.println("المكدس فاضي! (Stack Underflow)");
-            return -1;
-        }
-        return arr[top--];
+        return arr[top--];          // O(1)
     }
+```
 
-    // رؤية آخر عنصر بدون إزالة — O(1)
+**peek** — رؤية بدون إزالة، و**isEmpty** — هل المكدس فاضي:
+
+```java
     public int peek() {
-        if (top == -1) return -1;
-        return arr[top];
+        return arr[top];            // O(1)
     }
 
     public boolean isEmpty() {
@@ -324,27 +323,20 @@ class Stack {
 - **استدعاء الدوال**: الـ call stack في أي لغة برمجة
 
 ```java
-// مثال: التحقق من توازن الأقواس
 public static boolean isBalanced(String expr) {
     Stack stack = new Stack(expr.length());
-
-    for (int i = 0; i < expr.length(); i++) {
-        char ch = expr.charAt(i);
-
-        if (ch == '(' || ch == '[' || ch == '{') {
-            stack.push(ch); // قوس فتح — ادفعه للمكدس
-        } else if (ch == ')' || ch == ']' || ch == '}') {
-            if (stack.isEmpty()) return false; // قوس إغلاق بدون فتح
-
+    for (char ch : expr.toCharArray()) {
+        if (ch == '(' || ch == '[' || ch == '{')
+            stack.push(ch);                      // قوس فتح
+        else if (ch == ')' || ch == ']' || ch == '}') {
+            if (stack.isEmpty()) return false;   // ما في فتح
             char top = (char) stack.pop();
-            if ((ch == ')' && top != '(') ||
-                (ch == ']' && top != '[') ||
-                (ch == '}' && top != '{')) {
-                return false; // القوس ما يتطابق
-            }
+            if (ch == ')' && top != '(') return false;
+            if (ch == ']' && top != '[') return false;
+            if (ch == '}' && top != '{') return false;
         }
     }
-    return stack.isEmpty(); // لازم يكون فاضي في النهاية
+    return stack.isEmpty(); // لازم فاضي
 }
 ```
 
@@ -354,51 +346,45 @@ public static boolean isBalanced(String expr) {
 
 ### العمليات الأساسية
 
+نبني طابور دائري (Circular Queue) باستخدام مصفوفة. نستخدم `% capacity` عشان نرجع للبداية لما نوصل آخر المصفوفة:
+
 ```java
 class Queue {
     private int[] arr;
-    private int front, rear, size, capacity;
+    private int front = 0, rear = -1, size = 0, capacity;
 
     public Queue(int capacity) {
         this.capacity = capacity;
         arr = new int[capacity];
-        front = 0;
-        rear = -1;
-        size = 0;
     }
+```
 
-    // إضافة عنصر في نهاية الطابور — O(1)
-    public void enqueue(int value) {
-        if (size == capacity) {
-            System.out.println("الطابور ممتلئ!");
-            return;
-        }
-        rear = (rear + 1) % capacity; // طابور دائري
-        arr[rear] = value;
-        size++;
+**enqueue** — إضافة في النهاية:
+
+```java
+    public void enqueue(int val) {
+        rear = (rear + 1) % capacity;  // دائري
+        arr[rear] = val;
+        size++;                        // O(1)
     }
+```
 
-    // إزالة عنصر من بداية الطابور — O(1)
+**dequeue** — إزالة من البداية:
+
+```java
     public int dequeue() {
-        if (size == 0) {
-            System.out.println("الطابور فاضي!");
-            return -1;
-        }
-        int value = arr[front];
-        front = (front + 1) % capacity; // طابور دائري
+        int val = arr[front];
+        front = (front + 1) % capacity; // دائري
         size--;
-        return value;
+        return val;                      // O(1)
     }
+```
 
-    // رؤية أول عنصر بدون إزالة
-    public int peek() {
-        if (size == 0) return -1;
-        return arr[front];
-    }
+**peek** و **isEmpty**:
 
-    public boolean isEmpty() {
-        return size == 0;
-    }
+```java
+    public int peek() { return arr[front]; }
+    public boolean isEmpty() { return size == 0; }
 }
 ```
 
@@ -430,6 +416,8 @@ System.out.println(pq.poll()); // 30
 هذا السؤال يجي في كل اختبار تقريبا. احفظه كويس مع أمثلة.
 </Callout>
 
+الأشجار الثنائية وأشجار البحث من أهم المواضيع في المادة وأكثرها تكرارا في الاختبارات. لو تقدر تفهم BST وتتبع الـ Traversals، أنت في وضع ممتاز.
+
 ## 6. الأشجار — Trees
 
 الشجرة هيكل بيانات **هرمي** — كل عنصر (Node) عنده أب واحد وممكن يكون عنده أبناء.
@@ -438,6 +426,8 @@ System.out.println(pq.poll()); // 30
 
 القاعدة: لكل Node، كل القيم في الشجرة اليسرى **أصغر** منه، وكل القيم في الشجرة اليمنى **أكبر** منه.
 
+أولا، نعرّف الـ Node:
+
 ```java
 class BSTNode {
     int data;
@@ -445,32 +435,32 @@ class BSTNode {
 
     public BSTNode(int data) {
         this.data = data;
-        left = right = null;
     }
 }
+```
 
+**الإدخال** — O(log n) في المتوسط. أصغر يروح يسار، أكبر يروح يمين:
+
+```java
 class BST {
     BSTNode root;
 
-    // إدخال عنصر — O(log n) في المتوسط
-    public BSTNode insert(BSTNode node, int value) {
-        if (node == null) {
-            return new BSTNode(value);
-        }
-        if (value < node.data) {
-            node.left = insert(node.left, value);  // أصغر — روح يسار
-        } else if (value > node.data) {
-            node.right = insert(node.right, value); // أكبر — روح يمين
-        }
+    public BSTNode insert(BSTNode node, int val) {
+        if (node == null) return new BSTNode(val);
+        if (val < node.data)  node.left = insert(node.left, val);
+        else if (val > node.data) node.right = insert(node.right, val);
         return node;
     }
+```
 
-    // البحث عن عنصر — O(log n) في المتوسط
-    public boolean search(BSTNode node, int value) {
-        if (node == null) return false;              // ما لقيناه
-        if (value == node.data) return true;         // لقيناه!
-        if (value < node.data) return search(node.left, value);  // يسار
-        return search(node.right, value);            // يمين
+**البحث** — O(log n) في المتوسط. نفس المنطق: أصغر يسار، أكبر يمين:
+
+```java
+    public boolean search(BSTNode node, int val) {
+        if (node == null) return false;
+        if (val == node.data) return true;
+        if (val < node.data) return search(node.left, val);
+        return search(node.right, val);
     }
 }
 ```
@@ -479,38 +469,44 @@ class BST {
 
 ثلاث طرق لزيارة كل عناصر الشجرة — وهي من **أهم** مواضيع الاختبار:
 
+**Inorder** (يسار، جذر، يمين) — يعطي الأرقام **مرتبة تصاعديا** في BST:
+
 ```java
-// Inorder: يسار → الجذر → يمين (يعطي الأرقام مرتبة!)
 public void inorder(BSTNode node) {
-    if (node != null) {
-        inorder(node.left);
-        System.out.print(node.data + " ");
-        inorder(node.right);
-    }
+    if (node == null) return;
+    inorder(node.left);
+    System.out.print(node.data + " ");
+    inorder(node.right);
 }
+```
 
-// Preorder: الجذر → يسار → يمين
+**Preorder** (جذر، يسار، يمين):
+
+```java
 public void preorder(BSTNode node) {
-    if (node != null) {
-        System.out.print(node.data + " ");
-        preorder(node.left);
-        preorder(node.right);
-    }
+    if (node == null) return;
+    System.out.print(node.data + " ");
+    preorder(node.left);
+    preorder(node.right);
 }
+```
 
-// Postorder: يسار → يمين → الجذر
+**Postorder** (يسار، يمين، جذر):
+
+```java
 public void postorder(BSTNode node) {
-    if (node != null) {
-        postorder(node.left);
-        postorder(node.right);
-        System.out.print(node.data + " ");
-    }
+    if (node == null) return;
+    postorder(node.left);
+    postorder(node.right);
+    System.out.print(node.data + " ");
 }
 ```
 
 <Callout type="warning" title="نصيحة ذهبية للاختبار">
 سؤال "ارسم الشجرة من هذي الأرقام واكتب الـ Inorder/Preorder/Postorder" يجي في **كل اختبار**. تمرّن عليه كثير. الحيلة: Inorder في BST يعطيك الأرقام مرتبة تصاعديا — استخدم هذا للتحقق من إجابتك.
 </Callout>
+
+<CTABox title="رسم الـ BST وتتبع الـ Traversals صعب عليك؟" description="أسئلة الأشجار تجي في كل اختبار. لو تبي مساعدة في واجب أو تحضير للاختبار، فريقنا متخصص في هياكل البيانات." buttonText="اطلب مساعدة الآن" buttonUrl="https://wa.me/201557703662?text=مرحبا، أحتاج مساعدة في واجب Trees - CPCS 204" />
 
 ## 7. خوارزميات الترتيب — Sorting Algorithms
 
@@ -519,19 +515,13 @@ public void postorder(BSTNode node) {
 الفكرة: قارن كل عنصرين متجاورين وبدّل مكانهم لو مو مرتبين. كرّر حتى ما يصير تبديل.
 
 ```java
-// Bubble Sort — O(n²)
-public static void bubbleSort(int[] arr) {
+public static void bubbleSort(int[] arr) {  // O(n²)
     int n = arr.length;
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
+    for (int i = 0; i < n - 1; i++)
+        for (int j = 0; j < n - i - 1; j++)
             if (arr[j] > arr[j + 1]) {
-                // تبديل
-                int temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
+                int tmp = arr[j]; arr[j] = arr[j+1]; arr[j+1] = tmp;
             }
-        }
-    }
 }
 ```
 
@@ -540,20 +530,13 @@ public static void bubbleSort(int[] arr) {
 الفكرة: في كل دورة، لاقي **أصغر** عنصر وحطه في مكانه الصحيح.
 
 ```java
-// Selection Sort — O(n²)
-public static void selectionSort(int[] arr) {
+public static void selectionSort(int[] arr) {  // O(n²)
     int n = arr.length;
     for (int i = 0; i < n - 1; i++) {
-        int minIndex = i;
-        for (int j = i + 1; j < n; j++) {
-            if (arr[j] < arr[minIndex]) {
-                minIndex = j;
-            }
-        }
-        // تبديل
-        int temp = arr[i];
-        arr[i] = arr[minIndex];
-        arr[minIndex] = temp;
+        int min = i;
+        for (int j = i + 1; j < n; j++)
+            if (arr[j] < arr[min]) min = j;
+        int tmp = arr[i]; arr[i] = arr[min]; arr[min] = tmp;
     }
 }
 ```
@@ -563,16 +546,12 @@ public static void selectionSort(int[] arr) {
 الفكرة: مثل ترتيب أوراق اللعب في يدك — تاخذ كل ورقة وتحطها في مكانها الصحيح.
 
 ```java
-// Insertion Sort — O(n²) أسوأ حالة، O(n) أفضل حالة
-public static void insertionSort(int[] arr) {
+public static void insertionSort(int[] arr) {  // O(n²) أسوأ، O(n) أفضل
     for (int i = 1; i < arr.length; i++) {
-        int key = arr[i];
-        int j = i - 1;
-        while (j >= 0 && arr[j] > key) {
-            arr[j + 1] = arr[j]; // انقل العنصر خطوة لليمين
-            j--;
-        }
-        arr[j + 1] = key; // حط العنصر في مكانه الصحيح
+        int key = arr[i], j = i - 1;
+        while (j >= 0 && arr[j] > key)
+            arr[j + 1] = arr[j--];     // انقل لليمين
+        arr[j + 1] = key;              // مكانه الصحيح
     }
 }
 ```
@@ -581,33 +560,29 @@ public static void insertionSort(int[] arr) {
 
 الفكرة: **قسّم** المصفوفة لنصفين، رتّب كل نصف، ثم **ادمجهم**.
 
+الدالة الرئيسية تقسّم المصفوفة نصفين وتستدعي نفسها ثم تدمج — O(n log n) دائما:
+
 ```java
-// Merge Sort — O(n log n) دائما
 public static void mergeSort(int[] arr, int left, int right) {
-    if (left < right) {
-        int mid = (left + right) / 2;
-        mergeSort(arr, left, mid);       // رتّب النصف الأيسر
-        mergeSort(arr, mid + 1, right);  // رتّب النصف الأيمن
-        merge(arr, left, mid, right);    // ادمج النصفين
-    }
+    if (left >= right) return;
+    int mid = (left + right) / 2;
+    mergeSort(arr, left, mid);        // رتّب اليسار
+    mergeSort(arr, mid + 1, right);   // رتّب اليمين
+    merge(arr, left, mid, right);     // ادمج
 }
+```
 
-private static void merge(int[] arr, int left, int mid, int right) {
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
-    int[] L = new int[n1];
-    int[] R = new int[n2];
+دالة **الدمج** تنسخ النصفين ثم تدمجهم بترتيب:
 
-    for (int i = 0; i < n1; i++) L[i] = arr[left + i];
-    for (int j = 0; j < n2; j++) R[j] = arr[mid + 1 + j];
-
-    int i = 0, j = 0, k = left;
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) arr[k++] = L[i++];
-        else arr[k++] = R[j++];
-    }
-    while (i < n1) arr[k++] = L[i++];
-    while (j < n2) arr[k++] = R[j++];
+```java
+private static void merge(int[] arr, int l, int mid, int r) {
+    int[] L = Arrays.copyOfRange(arr, l, mid + 1);
+    int[] R = Arrays.copyOfRange(arr, mid + 1, r + 1);
+    int i = 0, j = 0, k = l;
+    while (i < L.length && j < R.length)
+        arr[k++] = (L[i] <= R[j]) ? L[i++] : R[j++];
+    while (i < L.length) arr[k++] = L[i++];
+    while (j < R.length) arr[k++] = R[j++];
 }
 ```
 
@@ -615,31 +590,30 @@ private static void merge(int[] arr, int left, int mid, int right) {
 
 الفكرة: اختر عنصر **محوري (pivot)**، ضع كل العناصر الأصغر منه على يساره والأكبر على يمينه، ثم رتّب كل جهة.
 
+الدالة الرئيسية — O(n log n) متوسط، O(n²) أسوأ حالة:
+
 ```java
-// Quick Sort — O(n log n) متوسط، O(n²) أسوأ حالة
 public static void quickSort(int[] arr, int low, int high) {
-    if (low < high) {
-        int pivotIndex = partition(arr, low, high);
-        quickSort(arr, low, pivotIndex - 1);   // رتّب اليسار
-        quickSort(arr, pivotIndex + 1, high);   // رتّب اليمين
-    }
+    if (low >= high) return;
+    int p = partition(arr, low, high);
+    quickSort(arr, low, p - 1);    // رتّب اليسار
+    quickSort(arr, p + 1, high);   // رتّب اليمين
 }
+```
 
+دالة **التقسيم** تختار آخر عنصر كمحور وتضع الأصغر يسارا والأكبر يمينا:
+
+```java
 private static int partition(int[] arr, int low, int high) {
-    int pivot = arr[high]; // نختار آخر عنصر كمحور
+    int pivot = arr[high];  // المحور
     int i = low - 1;
-
     for (int j = low; j < high; j++) {
         if (arr[j] <= pivot) {
             i++;
-            int temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
+            int tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
         }
     }
-    int temp = arr[i + 1];
-    arr[i + 1] = arr[high];
-    arr[high] = temp;
+    int tmp = arr[i+1]; arr[i+1] = arr[high]; arr[high] = tmp;
     return i + 1;
 }
 ```
@@ -659,12 +633,10 @@ private static int partition(int[] arr, int low, int high) {
 ### البحث الخطي (Linear Search)
 
 ```java
-// O(n) — يمر على كل العناصر
-public static int linearSearch(int[] arr, int target) {
-    for (int i = 0; i < arr.length; i++) {
-        if (arr[i] == target) return i; // لقيناه!
-    }
-    return -1; // ما لقيناه
+public static int linearSearch(int[] arr, int target) {  // O(n)
+    for (int i = 0; i < arr.length; i++)
+        if (arr[i] == target) return i;
+    return -1;
 }
 ```
 
@@ -673,22 +645,16 @@ public static int linearSearch(int[] arr, int target) {
 يشتغل **بس** على مصفوفة مرتبة. ينصّ البيانات كل خطوة.
 
 ```java
-// O(log n) — لازم المصفوفة تكون مرتبة!
+// O(log n) — لازم مرتبة!
 public static int binarySearch(int[] arr, int target) {
     int low = 0, high = arr.length - 1;
-
     while (low <= high) {
         int mid = (low + high) / 2;
-
-        if (arr[mid] == target) {
-            return mid;           // لقيناه!
-        } else if (arr[mid] < target) {
-            low = mid + 1;        // الهدف في النصف الأيمن
-        } else {
-            high = mid - 1;       // الهدف في النصف الأيسر
-        }
+        if (arr[mid] == target) return mid;
+        else if (arr[mid] < target) low = mid + 1;  // يمين
+        else high = mid - 1;                         // يسار
     }
-    return -1; // ما لقيناه
+    return -1;
 }
 ```
 
@@ -752,4 +718,4 @@ public static int binarySearch(int[] arr, int target) {
 
 ركّز على **الفهم** مو الحفظ. لما تفهم ليش Stack يستخدم LIFO وليش BST أسرع من البحث الخطي، الكود يجي طبيعي.
 
-<CTABox title="تحتاج مساعدة في واجبات CPCS 204؟" description="فريق زدني يساعدك في حل الواجبات والمشاريع البرمجية. تواصل معنا." buttonText="اطلب المساعدة الآن" buttonUrl="https://wa.me/201557703662" />
+<CTABox title="الديدلاين قريب وواجب CPCS 204 ما خلص؟" description="Recursion, Linked Lists, أو Trees — وش اللي واقفك؟ أرسل لنا الواجب على واتساب وراح نرد عليك بعرض سعر خلال ساعة. فريقنا متخصص في هياكل البيانات بجافا." buttonText="أرسل الواجب الآن" buttonUrl="https://wa.me/201557703662?text=مرحبا، أحتاج مساعدة في واجب CPCS 204 هياكل البيانات" />

@@ -60,48 +60,34 @@ draft: false
 **Object** = النسخة الفعلية (مثل البيت نفسه)
 
 ```java
-// تعريف كلاس لطالب جامعي
 public class Student {
-    // الخصائص (Attributes)
     String name;
     int id;
     double gpa;
 
-    // المُنشئ (Constructor)
     public Student(String name, int id, double gpa) {
-        this.name = name;   // this تشير للكائن الحالي
+        this.name = name; // this = الكائن الحالي
         this.id = id;
         this.gpa = gpa;
     }
 
-    // دالة تعرض بيانات الطالب
     public void displayInfo() {
-        System.out.println("الاسم: " + name);
-        System.out.println("الرقم: " + id);
-        System.out.println("المعدل: " + gpa);
+        System.out.println(name + " | " + id + " | GPA: " + gpa);
     }
 
-    // دالة تتحقق هل الطالب متفوق
-    public boolean isHonors() {
-        return gpa >= 4.5;
-    }
+    public boolean isHonors() { return gpa >= 4.5; }
 }
 ```
 
+الكلاس فيه: خصائص (attributes)، منشئ (constructor)، ودوال (methods). الحين ننشئ كائنات منه:
+
 ```java
-// إنشاء كائنات (Objects) من الكلاس
-public class Main {
-    public static void main(String[] args) {
-        Student s1 = new Student("أحمد", 1234567, 4.8);
-        Student s2 = new Student("سارة", 7654321, 3.9);
+Student s1 = new Student("أحمد", 1234567, 4.8);
+Student s2 = new Student("سارة", 7654321, 3.9);
 
-        s1.displayInfo();
-        System.out.println("متفوق؟ " + s1.isHonors()); // true
-
-        s2.displayInfo();
-        System.out.println("متفوق؟ " + s2.isHonors()); // false
-    }
-}
+s1.displayInfo();              // أحمد | 1234567 | GPA: 4.8
+System.out.println(s1.isHonors()); // true
+System.out.println(s2.isHonors()); // false
 ```
 
 ### الكلمة المفتاحية this
@@ -127,49 +113,43 @@ public Student(String name, int id) {
 
 ```java
 public class Student {
-    private String name;     // private — ما يقدر أحد يوصل لها مباشرة
-    private int id;
+    private String name; // private = لا وصول مباشر
     private double gpa;
 
-    public Student(String name, int id, double gpa) {
+    public Student(String name, double gpa) {
         this.name = name;
-        this.id = id;
-        setGpa(gpa); // نستخدم الـ setter عشان التحقق
+        setGpa(gpa); // نستخدم setter للتحقق
     }
 
-    // Getter — للقراءة فقط
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }       // getter
+    public double getGpa() { return gpa; }         // getter
+```
 
-    // Getter
-    public double getGpa() {
-        return gpa;
-    }
+الـ Setter هو المكان اللي نتحكم فيه بالقيم. مثلا نمنع أي معدل خارج 0-5:
 
-    // Setter — مع تحقق من القيمة
+```java
     public void setGpa(double gpa) {
-        if (gpa >= 0 && gpa <= 5.0) {
+        if (gpa >= 0 && gpa <= 5.0)
             this.gpa = gpa;
-        } else {
-            System.out.println("خطأ: المعدل لازم يكون بين 0 و 5");
-        }
+        else
+            System.out.println("خطأ: المعدل لازم بين 0 و 5");
     }
 }
 ```
 
 ```java
-// الاستخدام
-Student s = new Student("محمد", 111, 4.2);
-System.out.println(s.getName());     // محمد
-s.setGpa(6.0);                       // خطأ: المعدل لازم يكون بين 0 و 5
-s.setGpa(4.5);                       // تمام — القيمة اتغيرت
-// s.name = "علي";                   // خطأ! name هي private
+Student s = new Student("محمد", 4.2);
+System.out.println(s.getName()); // محمد
+s.setGpa(6.0);  // خطأ: المعدل لازم بين 0 و 5
+s.setGpa(4.5);  // تمام
+// s.name = "علي"; // خطأ! name هي private
 ```
 
 <Callout type="warning" title="خطأ شائع في الاختبار">
 كثير من الطلاب ينسون يخلون المتغيرات `private` ويكتبون getters/setters لمتغيرات `public` — هذا ما يعتبر تغليف حقيقي. التغليف = **private attributes + public getters/setters**.
 </Callout>
+
+الوراثة من أكثر المواضيع اللي الطلاب يحتاجون وقت عشان يفهمونها صح — خذ وقتك وركّز على الأمثلة العملية.
 
 ## 3. الوراثة — Inheritance
 
@@ -178,7 +158,6 @@ s.setGpa(4.5);                       // تمام — القيمة اتغيرت
 الفكرة: كلاس **ابن (subclass)** يرث خصائص ودوال كلاس **أب (superclass)**.
 
 ```java
-// الكلاس الأب
 public class Person {
     protected String name;
     protected int age;
@@ -194,42 +173,40 @@ public class Person {
 }
 ```
 
+الكلاس `Student` يرث من `Person` باستخدام `extends`، ويضيف خصائصه الخاصة:
+
 ```java
-// كلاس الطالب يرث من Person
 public class Student extends Person {
     private int studentId;
-    private double gpa;
 
-    public Student(String name, int age, int studentId, double gpa) {
-        super(name, age);     // استدعاء منشئ الكلاس الأب
+    public Student(String name, int age, int studentId) {
+        super(name, age); // استدعاء منشئ الأب
         this.studentId = studentId;
-        this.gpa = gpa;
     }
 
-    // Method Overriding — إعادة تعريف الدالة
     @Override
     public void introduce() {
-        super.introduce();    // نستدعي النسخة الأصلية أولا
+        super.introduce(); // النسخة الأصلية أولا
         System.out.println("رقمي الجامعي: " + studentId);
-        System.out.println("معدلي: " + gpa);
     }
 }
 ```
 
-```java
-// كلاس الموظف يرث من Person أيضا
-public class Employee extends Person {
-    private String department;
+نفس الفكرة مع كلاس الموظف:
 
-    public Employee(String name, int age, String department) {
+```java
+public class Employee extends Person {
+    private String dept;
+
+    public Employee(String name, int age, String dept) {
         super(name, age);
-        this.department = department;
+        this.dept = dept;
     }
 
     @Override
     public void introduce() {
         super.introduce();
-        System.out.println("قسم: " + department);
+        System.out.println("قسم: " + dept);
     }
 }
 ```
@@ -241,6 +218,8 @@ public class Employee extends Person {
 - **@Override**: علامة تقول "أنا أعيد تعريف دالة موجودة في الأب"
 - **is-a relationship**: الطالب "هو" شخص — `Student is a Person`
 - **جافا تدعم وراثة واحدة فقط**: كلاس يرث من كلاس واحد بس (مو مثل C++)
+
+تعدد الأشكال هو الموضوع اللي يفصل بين "أفهم OOP سطحيا" و"أفهم OOP فعلا". لو حسيت إنه معقد، هذا طبيعي — ركّز على الأمثلة وجرّبها بنفسك.
 
 ## 4. تعدد الأشكال — Polymorphism
 
@@ -263,29 +242,29 @@ public class Calculator {
 هنا القوة الحقيقية — نفس الدالة تتصرف مختلف حسب نوع الكائن الفعلي:
 
 ```java
-public class Main {
-    public static void main(String[] args) {
-        // متغير من نوع الأب يشير لكائن من نوع الابن
-        Person p1 = new Student("أحمد", 20, 123, 4.5);
-        Person p2 = new Employee("خالد", 35, "تقنية المعلومات");
+// متغير نوعه الأب، لكن الكائن من الابن
+Person p1 = new Student("أحمد", 20, 123);
+Person p2 = new Employee("خالد", 35, "تقنية المعلومات");
 
-        // كل كائن يستدعي النسخة الخاصة فيه من introduce()
-        p1.introduce(); // تطبع بيانات الطالب
-        p2.introduce(); // تطبع بيانات الموظف
+p1.introduce(); // تستدعي نسخة Student
+p2.introduce(); // تستدعي نسخة Employee
+```
 
-        // مصفوفة من نوع الأب تحوي كائنات مختلفة
-        Person[] people = {p1, p2};
-        for (Person p : people) {
-            p.introduce(); // كل كائن يستدعي نسخته الخاصة
-            System.out.println("---");
-        }
-    }
+نقدر نحطهم في مصفوفة من نوع الأب ونتعامل معهم بشكل موحّد:
+
+```java
+Person[] people = {p1, p2};
+for (Person p : people) {
+    p.introduce(); // كل كائن يستدعي نسخته
+    System.out.println("---");
 }
 ```
 
 <Callout type="info" title="ليش تعدد الأشكال مهم؟">
 تخيّل عندك نظام فيه 20 نوع شكل هندسي (مربع، دائرة، مثلث...). بدل ما تكتب دالة لحساب المساحة لكل نوع، تكتب دالة واحدة `calculateArea()` في الكلاس الأب وكل شكل يعرّفها بطريقته. **كود أقل، مرونة أكبر**.
 </Callout>
+
+<CTABox title="واجب Polymorphism محيّرك؟" description="كثير من طلاب CPCS 203 يواجهون صعوبة في تعدد الأشكال وتتبع الكود. أرسل لنا الواجب على واتساب ونساعدك تفهمه وتحله خطوة بخطوة." buttonText="أرسل واجبك على واتساب" buttonUrl="https://wa.me/201557703662?text=مرحبا، أحتاج مساعدة في واجب Polymorphism - CPCS 203" />
 
 ## 5. التجريد والواجهات — Abstract Classes & Interfaces
 
@@ -294,24 +273,22 @@ public class Main {
 كلاس ما تقدر تنشئ منه كائن مباشرة — هو بس قالب للكلاسات اللي ترث منه:
 
 ```java
-// كلاس مجرّد — لا يمكن إنشاء كائن منه مباشرة
 public abstract class Shape {
     String color;
 
-    public Shape(String color) {
-        this.color = color;
-    }
+    public Shape(String color) { this.color = color; }
 
-    // دالة مجرّدة — لازم الكلاسات الأبناء تعرّفها
-    public abstract double getArea();
+    public abstract double getArea(); // الأبناء يعرّفونها
 
-    // دالة عادية — الأبناء يرثونها كما هي
     public void display() {
-        System.out.println("اللون: " + color);
-        System.out.println("المساحة: " + getArea());
+        System.out.println("اللون: " + color + " المساحة: " + getArea());
     }
 }
+```
 
+لاحظ إن `getArea()` ما لها جسم — كل كلاس ابن لازم يكتب تعريفه الخاص. هذا هو التجريد: نحدد **ماذا** بدون **كيف**.
+
+```java
 public class Circle extends Shape {
     double radius;
 
@@ -321,24 +298,24 @@ public class Circle extends Shape {
     }
 
     @Override
-    public double getArea() {
-        return Math.PI * radius * radius;
-    }
+    public double getArea() { return Math.PI * radius * radius; }
 }
+```
 
+نفس الفكرة مع المستطيل — يرث من `Shape` ويعرّف `getArea()` بطريقته:
+
+```java
 public class Rectangle extends Shape {
     double width, height;
 
-    public Rectangle(String color, double width, double height) {
+    public Rectangle(String color, double w, double h) {
         super(color);
-        this.width = width;
-        this.height = height;
+        this.width = w;
+        this.height = h;
     }
 
     @Override
-    public double getArea() {
-        return width * height;
-    }
+    public double getArea() { return width * height; }
 }
 ```
 
@@ -347,32 +324,28 @@ public class Rectangle extends Shape {
 الواجهة (Interface) تحدد **ماذا** يجب أن يفعل الكلاس بدون أن تحدد **كيف**:
 
 ```java
-// واجهة — عقد يلتزم فيه الكلاس
 public interface Printable {
-    void print(); // دالة بدون تعريف — الكلاس يعرّفها
+    void print(); // عقد بدون تعريف
 }
 
 public interface Saveable {
     void save(String filename);
 }
+```
 
-// كلاس ينفّذ واجهتين
+الكلاس اللي ينفّذ الواجهة لازم يعرّف **كل** الدوال الموجودة فيها. ويقدر ينفّذ أكثر من واجهة:
+
+```java
 public class Report implements Printable, Saveable {
     String content;
 
-    public Report(String content) {
-        this.content = content;
-    }
+    public Report(String content) { this.content = content; }
 
     @Override
-    public void print() {
-        System.out.println("طباعة التقرير: " + content);
-    }
+    public void print() { System.out.println("طباعة: " + content); }
 
     @Override
-    public void save(String filename) {
-        System.out.println("حفظ التقرير في: " + filename);
-    }
+    public void save(String filename) { System.out.println("حفظ في: " + filename); }
 }
 ```
 
@@ -382,42 +355,29 @@ public class Report implements Printable, Saveable {
 - القاعدة البسيطة: استخدم abstract class لما فيه كود مشترك، واستخدم interface لما تبي تحدد "عقد" فقط.
 </Callout>
 
+<CTABox title="مشروعك يحتاج Abstract و Interface وما تدري تبدأ من وين؟" description="فريقنا ساعد عشرات الطلاب في تصميم مشاريع OOP. أرسل لنا متطلبات مشروعك واحصل على عرض سعر مجاني خلال ساعة." buttonText="أرسل متطلبات مشروعك" buttonUrl="https://wa.me/201557703662?text=مرحبا، أحتاج مساعدة في مشروع CPCS 203 - OOP" />
+
 ## 6. معالجة الاستثناءات — Exception Handling
 
 البرنامج ممكن يواجه أخطاء وقت التشغيل (مثل: قسمة على صفر، ملف مو موجود، مدخل خاطئ). بدل ما البرنامج يتوقف، تتعامل مع الخطأ بشكل ذكي.
 
 ```java
-import java.util.Scanner;
-import java.util.InputMismatchException;
+Scanner input = new Scanner(System.in);
 
-public class ExceptionDemo {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+try {
+    System.out.print("أدخل البسط: ");
+    int num = input.nextInt();
+    System.out.print("أدخل المقام: ");
+    int den = input.nextInt();
+    System.out.println("الناتج: " + num / den);
 
-        try {
-            System.out.print("أدخل البسط: ");
-            int numerator = input.nextInt();
-
-            System.out.print("أدخل المقام: ");
-            int denominator = input.nextInt();
-
-            int result = numerator / denominator;
-            System.out.println("الناتج: " + result);
-
-        } catch (ArithmeticException e) {
-            // القسمة على صفر
-            System.out.println("خطأ: لا يمكن القسمة على صفر!");
-
-        } catch (InputMismatchException e) {
-            // المستخدم أدخل نص بدل رقم
-            System.out.println("خطأ: أدخل أرقام فقط!");
-
-        } finally {
-            // هذا الجزء يتنفذ دائما — سواء صار خطأ أو لا
-            System.out.println("شكرا لاستخدام البرنامج");
-            input.close();
-        }
-    }
+} catch (ArithmeticException e) {
+    System.out.println("خطأ: القسمة على صفر!");
+} catch (InputMismatchException e) {
+    System.out.println("خطأ: أدخل أرقام فقط!");
+} finally {
+    System.out.println("شكرا لاستخدام البرنامج");
+    input.close();
 }
 ```
 
@@ -438,58 +398,34 @@ public class ExceptionDemo {
 ### الكتابة في ملف
 
 ```java
-import java.io.PrintWriter;
-import java.io.FileNotFoundException;
-
-public class WriteFile {
-    public static void main(String[] args) {
-        try {
-            PrintWriter writer = new PrintWriter("students.txt");
-
-            writer.println("أحمد,1234,4.5");
-            writer.println("سارة,5678,3.8");
-            writer.println("خالد,9012,4.2");
-
-            writer.close(); // مهم جدا! بدون close البيانات ما تتحفظ
-            System.out.println("تم حفظ البيانات بنجاح");
-
-        } catch (FileNotFoundException e) {
-            System.out.println("خطأ في إنشاء الملف");
-        }
-    }
+try {
+    PrintWriter writer = new PrintWriter("students.txt");
+    writer.println("أحمد,1234,4.5");
+    writer.println("سارة,5678,3.8");
+    writer.println("خالد,9012,4.2");
+    writer.close(); // مهم! بدون close ما تتحفظ
+    System.out.println("تم الحفظ بنجاح");
+} catch (FileNotFoundException e) {
+    System.out.println("خطأ في إنشاء الملف");
 }
 ```
 
 ### القراءة من ملف
 
 ```java
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+try {
+    Scanner reader = new Scanner(new File("students.txt"));
 
-public class ReadFile {
-    public static void main(String[] args) {
-        try {
-            File file = new File("students.txt");
-            Scanner reader = new Scanner(file);
-
-            while (reader.hasNextLine()) {
-                String line = reader.nextLine();
-                String[] parts = line.split(","); // تقسيم السطر بالفاصلة
-
-                String name = parts[0];
-                int id = Integer.parseInt(parts[1]);
-                double gpa = Double.parseDouble(parts[2]);
-
-                System.out.println(name + " — معدل: " + gpa);
-            }
-
-            reader.close();
-
-        } catch (FileNotFoundException e) {
-            System.out.println("الملف غير موجود!");
-        }
+    while (reader.hasNextLine()) {
+        String[] parts = reader.nextLine().split(","); // تقسيم بالفاصلة
+        String name = parts[0];
+        double gpa = Double.parseDouble(parts[2]);
+        System.out.println(name + " — معدل: " + gpa);
     }
+    reader.close();
+
+} catch (FileNotFoundException e) {
+    System.out.println("الملف غير موجود!");
 }
 ```
 
@@ -502,24 +438,21 @@ public class ReadFile {
 في الحياة الحقيقية، عادة عندك مجموعة كائنات (قائمة طلاب، قائمة منتجات). هنا تتعلم كيف تتعامل معها:
 
 ```java
-public class Main {
-    public static void main(String[] args) {
-        // مصفوفة من كائنات Student
-        Student[] students = new Student[3];
-        students[0] = new Student("أحمد", 101, 4.5);
-        students[1] = new Student("سارة", 102, 3.8);
-        students[2] = new Student("خالد", 103, 4.2);
+Student[] students = new Student[3];
+students[0] = new Student("أحمد", 101, 4.5);
+students[1] = new Student("سارة", 102, 3.8);
+students[2] = new Student("خالد", 103, 4.2);
+```
 
-        // إيجاد الطالب صاحب أعلى معدل
-        Student topStudent = students[0];
-        for (int i = 1; i < students.length; i++) {
-            if (students[i].getGpa() > topStudent.getGpa()) {
-                topStudent = students[i];
-            }
-        }
-        System.out.println("أعلى معدل: " + topStudent.getName());
-    }
+مثال عملي: إيجاد الطالب صاحب أعلى معدل بالمرور على المصفوفة:
+
+```java
+Student top = students[0];
+for (int i = 1; i < students.length; i++) {
+    if (students[i].getGpa() > top.getGpa())
+        top = students[i];
 }
+System.out.println("أعلى معدل: " + top.getName());
 ```
 
 ## أنواع أسئلة الاختبارات في CPCS 203
@@ -551,6 +484,8 @@ public class Main {
 نظام إدارة مكتبة: كلاس `Book` وكلاس `Member` وكلاس `Library`. فيه وراثة (أنواع مختلفة من الكتب أو الأعضاء)، تغليف، ملفات لحفظ البيانات، و exception handling للتعامل مع الأخطاء. هذا النوع من المشاريع يغطي كل شيء درسته.
 </Callout>
 
+<CTABox title="مشروع CPCS 203 موعد تسليمه قرب؟" description="من تحليل المتطلبات إلى التوثيق النهائي — فريقنا متخصص في مشاريع OOP بجافا. كود نظيف، توثيق كامل، وشرح لكل جزء عشان تقدر تناقشه بثقة. عرض السعر مجاني." buttonText="أرسل تفاصيل مشروعك" buttonUrl="https://wa.me/201557703662?text=مرحبا، أحتاج مساعدة في مشروع CPCS 203 النهائي" />
+
 ## نصائح للاب العملي
 
 - **حاول تحل بنفسك أولا** — حتى لو ما قدرت تخلص، المحاولة تعلّمك أكثر من نسخ الحل
@@ -577,4 +512,4 @@ public class Main {
 
 كل ما تحاول تفهم مفهوم وما يركز معك؟ جرّب تكتبه بكود بسيط. OOP تُفهم بالممارسة مو بالقراءة. افتح الـ IDE وجرّب كل مثال في هذا المقال — وبعدين عدّله وشوف وش يصير.
 
-<CTABox title="مشروع CPCS 203 يضغط عليك؟" description="فريق زدني يساعدك في مشاريع البرمجة كائنية التوجه. تواصل معنا الآن." buttonText="اطلب المساعدة الآن" buttonUrl="https://wa.me/201557703662" />
+<CTABox title="واجبات، مشاريع، أو تحضير اختبار CPCS 203؟" description="فريق زدني متخصص في مواد كلية الحاسبات بجامعة الملك عبدالعزيز. أرسل لنا تفاصيل اللي تحتاجه وراح نرد عليك خلال ساعة." buttonText="تواصل معنا عبر واتساب" buttonUrl="https://wa.me/201557703662?text=مرحبا، أحتاج مساعدة في CPCS 203 البرمجة كائنية التوجه" />
