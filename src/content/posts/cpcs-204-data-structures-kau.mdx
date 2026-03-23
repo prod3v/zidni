@@ -1,0 +1,755 @@
+---
+title: "شرح مادة CPCS 204 — هياكل البيانات 1 | جامعة الملك عبدالعزيز"
+meta_title: "شرح CPCS 204 هياكل البيانات 1 جامعة الملك عبدالعزيز"
+description: "شرح شامل لمادة CPCS 204 هياكل البيانات 1 بجامعة الملك عبدالعزيز: تحليل الخوارزميات، التكرار، القوائم المتصلة، المكدسات، الطوابير، الأشجار، الترتيب والبحث بلغة جافا."
+date: 2026-03-23T20:00:00Z
+image: "/images/posts/04.jpg"
+categories: ["دليل المواد"]
+authors: ["فريق زدني"]
+tags: ["CPCS 204", "هياكل بيانات", "Data Structures", "Java", "جامعة الملك عبدالعزيز"]
+draft: false
+---
+
+
+مادة CPCS 204 — هياكل البيانات 1 (Data Structures I) — هي الجسر بين "أعرف أكتب كود" و"أعرف أكتب كود **فعال**". في خطة قسم علوم الحاسب بجامعة الملك عبدالعزيز، هذه المادة تُعتبر من أهم المواد اللي تبني عليها بقية مسارك الأكاديمي والمهني. أسئلة المقابلات الوظيفية في شركات التقنية الكبرى تدور بشكل كبير حول مواضيع هذه المادة.
+
+المادة تبني على كل شيء تعلمته في CPCS 202 (أساسيات جافا) و CPCS 203 (البرمجة كائنية التوجه). لو أساسياتك في جافا و OOP قوية، CPCS 204 تصير ممتعة وليست مجرد مادة صعبة.
+
+<QuickSummary>
+- **رمز المادة:** CPCS 204 — هياكل البيانات 1 (Data Structures I)
+- **الساعات المعتمدة:** 3 ساعات (3 نظري + 1 لاب عملي)
+- **المتطلب السابق:** CPCS 203 (البرمجة 2 — البرمجة كائنية التوجه)
+- **اللغة المستخدمة:** Java
+- **المواضيع الرئيسية:** تحليل التعقيد (Big-O)، التكرار (Recursion)، القوائم المتصلة، المكدسات، الطوابير، الأشجار الثنائية، خوارزميات الترتيب والبحث
+- **اللابات:** تطبيق عملي أسبوعي على كل هيكل بيانات بلغة جافا
+- **يقود إلى:** مواد الخوارزميات المتقدمة، قواعد البيانات، وأنظمة التشغيل
+</QuickSummary>
+
+## ليش مادة CPCS 204 مهمة جدا؟
+
+- **المقابلات الوظيفية:** الجزء الأكبر من أسئلة المقابلات التقنية في الشركات الكبرى يدور حول هياكل البيانات — Linked Lists, Stacks, Queues, Trees
+- **أساس لمواد متقدمة:** قواعد البيانات تستخدم أشجار B-Tree، أنظمة التشغيل تستخدم الطوابير، الشبكات تستخدم المكدسات
+- **كتابة كود فعال:** تتعلم الفرق بين حل يشتغل في ثانية وحل يشتغل في ساعة — نفس المشكلة!
+- **التفكير التحليلي:** المادة تعلّمك تحلل أي مشكلة وتختار هيكل البيانات المناسب
+
+## نظرة عامة على مادة CPCS 204
+
+| الأسابيع | الموضوع | المفاهيم الرئيسية |
+|-----------|---------|-------------------|
+| 1-2 | تحليل الخوارزميات (Algorithm Analysis) | Big-O, Big-Omega, Big-Theta |
+| 3-4 | التكرار (Recursion) | حالة الأساس، الحالة التكرارية، أمثلة |
+| 5-6 | القوائم المتصلة (Linked Lists) | Singly, Doubly — إضافة، حذف، تمرير |
+| 7-8 | المكدسات (Stacks) | LIFO, push, pop, تطبيقات |
+| 9-10 | الطوابير (Queues) | FIFO, enqueue, dequeue, circular queue |
+| 11-13 | الأشجار (Trees) | Binary Tree, BST, traversals |
+| 14 | خوارزميات الترتيب والبحث | Bubble, Selection, Insertion, Merge, Quick Sort |
+| 15 | مراجعة شاملة | — |
+
+<Callout type="info" title="ملاحظة عن طبيعة المادة">
+هذه المادة تركّز على **هياكل البيانات** وكيف تبنيها وتستخدمها بكفاءة. هي **ليست** مادة تصميم خوارزميات متقدمة — لن تدرس هنا الخوارزميات الجشعة (Greedy) أو البرمجة الديناميكية (Dynamic Programming) أو خوارزميات الرسوم البيانية (Graphs). هذي مواضيع مواد لاحقة.
+</Callout>
+
+## 1. تحليل الخوارزميات — Algorithm Analysis & Big-O
+
+قبل ما تتعلم هياكل البيانات، لازم تفهم كيف تقيس **كفاءة** الكود. نفس المشكلة ممكن تحلها بأكثر من طريقة — بس أي طريقة أسرع؟
+
+### Big-O Notation
+
+Big-O يقيس **أسوأ حالة** — كم عملية يحتاج الكود مع زيادة حجم البيانات.
+
+```java
+// O(1) — وقت ثابت: ما يتغير مع حجم البيانات
+public static int getFirst(int[] arr) {
+    return arr[0]; // عملية واحدة دائما
+}
+
+// O(n) — خطي: يزيد بشكل طردي مع حجم البيانات
+public static int sum(int[] arr) {
+    int total = 0;
+    for (int i = 0; i < arr.length; i++) { // n مرة
+        total += arr[i];
+    }
+    return total;
+}
+
+// O(n²) — تربيعي: حلقتين متداخلتين
+public static void printPairs(int[] arr) {
+    for (int i = 0; i < arr.length; i++) {        // n مرة
+        for (int j = 0; j < arr.length; j++) {    // n مرة لكل i
+            System.out.println(arr[i] + ", " + arr[j]);
+        }
+    }
+}
+
+// O(log n) — لوغاريتمي: ينص البيانات كل خطوة
+public static int binarySearch(int[] arr, int target) {
+    int low = 0, high = arr.length - 1;
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (arr[mid] == target) return mid;
+        else if (arr[mid] < target) low = mid + 1;
+        else high = mid - 1;
+    }
+    return -1;
+}
+```
+
+### مقارنة التعقيدات الشائعة
+
+| التعقيد | الاسم | مثال | n=1000 |
+|---------|-------|------|--------|
+| O(1) | ثابت | الوصول لعنصر بالفهرس | 1 |
+| O(log n) | لوغاريتمي | البحث الثنائي | ~10 |
+| O(n) | خطي | البحث الخطي | 1,000 |
+| O(n log n) | خطي لوغاريتمي | Merge Sort | ~10,000 |
+| O(n²) | تربيعي | Bubble Sort | 1,000,000 |
+
+<Callout type="tip" title="نصيحة لتحليل التعقيد">
+- حلقة واحدة من 0 إلى n = **O(n)**
+- حلقتين متداخلتين = **O(n²)**
+- حلقة تنصّ البيانات كل مرة (مثل /2) = **O(log n)**
+- لو عندك حلقتين متتاليتين (مو متداخلتين) = **O(n) + O(n) = O(n)**
+
+في الاختبار، غالبا يعطيك كود ويسألك عن التعقيد — تمرّن على هذا النوع كثير.
+</Callout>
+
+## 2. التكرار — Recursion
+
+كل ما تحاول تفهم الـ Recursion يضيع تركيزك؟ التكرار ببساطة: **دالة تستدعي نفسها** حتى توصل لحالة أساس (base case) وتتوقف.
+
+### المكونات الأساسية
+
+كل دالة تكرارية لازم فيها:
+1. **Base Case** (حالة الأساس): الحالة اللي تتوقف فيها الدالة عن استدعاء نفسها
+2. **Recursive Case** (الحالة التكرارية): الحالة اللي تستدعي فيها الدالة نفسها مع مدخل أصغر
+
+```java
+// حساب المضروب (Factorial): n! = n × (n-1) × ... × 1
+public static int factorial(int n) {
+    // حالة الأساس
+    if (n == 0 || n == 1) {
+        return 1;
+    }
+    // الحالة التكرارية
+    return n * factorial(n - 1);
+}
+
+// factorial(4) = 4 * factorial(3)
+//              = 4 * 3 * factorial(2)
+//              = 4 * 3 * 2 * factorial(1)
+//              = 4 * 3 * 2 * 1
+//              = 24
+```
+
+### متتالية فيبوناتشي
+
+```java
+// Fibonacci: 0, 1, 1, 2, 3, 5, 8, 13, ...
+// كل رقم = مجموع الرقمين اللي قبله
+public static int fibonacci(int n) {
+    if (n == 0) return 0;       // حالة أساس
+    if (n == 1) return 1;       // حالة أساس
+    return fibonacci(n - 1) + fibonacci(n - 2); // حالة تكرارية
+}
+```
+
+### برج هانوي (Tower of Hanoi)
+
+```java
+// نقل n أقراص من عمود المصدر إلى عمود الهدف باستخدام عمود مساعد
+public static void towerOfHanoi(int n, char source, char target, char helper) {
+    if (n == 1) {
+        System.out.println("انقل القرص 1 من " + source + " إلى " + target);
+        return;
+    }
+    towerOfHanoi(n - 1, source, helper, target); // انقل n-1 أقراص للمساعد
+    System.out.println("انقل القرص " + n + " من " + source + " إلى " + target);
+    towerOfHanoi(n - 1, helper, target, source); // انقل n-1 أقراص من المساعد للهدف
+}
+```
+
+<Callout type="warning" title="أهم خطأ في Recursion">
+لو نسيت حالة الأساس (Base Case) أو كتبتها غلط، الدالة تستدعي نفسها للأبد ويطلع لك **StackOverflowError**. دائما اكتب حالة الأساس أول شيء قبل الحالة التكرارية.
+</Callout>
+
+## 3. القوائم المتصلة — Linked Lists
+
+المصفوفة حجمها ثابت — لو تبي تضيف عنصر لازم تنشئ مصفوفة جديدة. القائمة المتصلة تحل هذي المشكلة: حجمها **ديناميكي** ويتغير حسب الحاجة.
+
+### القائمة المتصلة الأحادية (Singly Linked List)
+
+كل عنصر (**Node**) فيه: **بيانات** + **مؤشر** (pointer) للعنصر اللي بعده.
+
+```java
+// تعريف Node
+class Node {
+    int data;       // البيانات
+    Node next;      // مؤشر للعنصر التالي
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+// تعريف القائمة المتصلة
+class LinkedList {
+    Node head; // رأس القائمة — أول عنصر
+
+    // إضافة عنصر في البداية — O(1)
+    public void addFirst(int data) {
+        Node newNode = new Node(data);
+        newNode.next = head;
+        head = newNode;
+    }
+
+    // إضافة عنصر في النهاية — O(n)
+    public void addLast(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+        Node current = head;
+        while (current.next != null) { // وصل لآخر عنصر
+            current = current.next;
+        }
+        current.next = newNode;
+    }
+
+    // حذف أول عنصر — O(1)
+    public void removeFirst() {
+        if (head != null) {
+            head = head.next;
+        }
+    }
+
+    // طباعة القائمة — O(n)
+    public void display() {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " -> ");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
+}
+```
+
+### القائمة المتصلة الثنائية (Doubly Linked List)
+
+كل Node فيه مؤشرين: واحد للعنصر **التالي** وواحد للعنصر **السابق**.
+
+```java
+class DNode {
+    int data;
+    DNode next;     // المؤشر التالي
+    DNode prev;     // المؤشر السابق
+
+    public DNode(int data) {
+        this.data = data;
+        this.next = null;
+        this.prev = null;
+    }
+}
+```
+
+<Callout type="info" title="متى تستخدم Linked List بدل Array؟">
+- **Linked List**: لما تحتاج إضافة وحذف كثير (خصوصا من البداية)
+- **Array**: لما تحتاج وصول سريع بالفهرس (random access)
+
+| العملية | Array | Linked List |
+|---------|-------|-------------|
+| الوصول بالفهرس | O(1) | O(n) |
+| إضافة في البداية | O(n) | O(1) |
+| إضافة في النهاية | O(1)* | O(n) |
+| حذف من البداية | O(n) | O(1) |
+
+*مع ArrayList في جافا، الإضافة في النهاية O(1) amortized
+</Callout>
+
+## 4. المكدسات — Stacks
+
+المكدس يشتغل بمبدأ **LIFO** — Last In, First Out. آخر عنصر يدخل هو أول عنصر يطلع. تخيّل كومة صحون: آخر صحن تحطه هو أول صحن تاخذه.
+
+### العمليات الأساسية
+
+```java
+class Stack {
+    private int[] arr;
+    private int top;     // فهرس آخر عنصر
+    private int capacity;
+
+    public Stack(int capacity) {
+        this.capacity = capacity;
+        arr = new int[capacity];
+        top = -1; // المكدس فاضي
+    }
+
+    // إضافة عنصر — O(1)
+    public void push(int value) {
+        if (top == capacity - 1) {
+            System.out.println("المكدس ممتلئ! (Stack Overflow)");
+            return;
+        }
+        arr[++top] = value;
+    }
+
+    // إزالة وإرجاع آخر عنصر — O(1)
+    public int pop() {
+        if (top == -1) {
+            System.out.println("المكدس فاضي! (Stack Underflow)");
+            return -1;
+        }
+        return arr[top--];
+    }
+
+    // رؤية آخر عنصر بدون إزالة — O(1)
+    public int peek() {
+        if (top == -1) return -1;
+        return arr[top];
+    }
+
+    public boolean isEmpty() {
+        return top == -1;
+    }
+}
+```
+
+### تطبيقات المكدس
+
+- **التحقق من توازن الأقواس**: `{[()]}` متوازنة، `{[(])}` غير متوازنة
+- **تحويل التعابير الحسابية**: Infix to Postfix
+- **Undo في البرامج**: كل عملية تتخزن في stack وآخر عملية تتراجع أولا
+- **استدعاء الدوال**: الـ call stack في أي لغة برمجة
+
+```java
+// مثال: التحقق من توازن الأقواس
+public static boolean isBalanced(String expr) {
+    Stack stack = new Stack(expr.length());
+
+    for (int i = 0; i < expr.length(); i++) {
+        char ch = expr.charAt(i);
+
+        if (ch == '(' || ch == '[' || ch == '{') {
+            stack.push(ch); // قوس فتح — ادفعه للمكدس
+        } else if (ch == ')' || ch == ']' || ch == '}') {
+            if (stack.isEmpty()) return false; // قوس إغلاق بدون فتح
+
+            char top = (char) stack.pop();
+            if ((ch == ')' && top != '(') ||
+                (ch == ']' && top != '[') ||
+                (ch == '}' && top != '{')) {
+                return false; // القوس ما يتطابق
+            }
+        }
+    }
+    return stack.isEmpty(); // لازم يكون فاضي في النهاية
+}
+```
+
+## 5. الطوابير — Queues
+
+الطابور يشتغل بمبدأ **FIFO** — First In, First Out. أول عنصر يدخل هو أول عنصر يطلع. مثل طابور الكاشير: أول شخص يوصل هو أول شخص يُخدم.
+
+### العمليات الأساسية
+
+```java
+class Queue {
+    private int[] arr;
+    private int front, rear, size, capacity;
+
+    public Queue(int capacity) {
+        this.capacity = capacity;
+        arr = new int[capacity];
+        front = 0;
+        rear = -1;
+        size = 0;
+    }
+
+    // إضافة عنصر في نهاية الطابور — O(1)
+    public void enqueue(int value) {
+        if (size == capacity) {
+            System.out.println("الطابور ممتلئ!");
+            return;
+        }
+        rear = (rear + 1) % capacity; // طابور دائري
+        arr[rear] = value;
+        size++;
+    }
+
+    // إزالة عنصر من بداية الطابور — O(1)
+    public int dequeue() {
+        if (size == 0) {
+            System.out.println("الطابور فاضي!");
+            return -1;
+        }
+        int value = arr[front];
+        front = (front + 1) % capacity; // طابور دائري
+        size--;
+        return value;
+    }
+
+    // رؤية أول عنصر بدون إزالة
+    public int peek() {
+        if (size == 0) return -1;
+        return arr[front];
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+}
+```
+
+### الطابور الدائري (Circular Queue)
+
+لاحظ في الكود أعلاه استخدمنا `% capacity` — هذا يخلي الطابور "دائري" بحيث لما نوصل لنهاية المصفوفة نرجع للبداية. بدون هذا، الطابور يضيّع مساحة كثيرة.
+
+### طابور الأولويات (Priority Queue) — مقدمة
+
+في طابور الأولويات، العنصر اللي يطلع أولا هو العنصر ذو **الأولوية الأعلى** وليس بالضرورة اللي دخل أولا. جافا توفّر `PriorityQueue` جاهزة:
+
+```java
+import java.util.PriorityQueue;
+
+PriorityQueue<Integer> pq = new PriorityQueue<>();
+pq.add(30);
+pq.add(10);
+pq.add(20);
+
+System.out.println(pq.poll()); // 10 — الأصغر يطلع أول (Min-Heap)
+System.out.println(pq.poll()); // 20
+System.out.println(pq.poll()); // 30
+```
+
+<Callout type="tip" title="الفرق بين Stack و Queue">
+- **Stack (LIFO)**: آخر واحد يدخل أول واحد يطلع — مثل كومة صحون
+- **Queue (FIFO)**: أول واحد يدخل أول واحد يطلع — مثل طابور بنك
+
+هذا السؤال يجي في كل اختبار تقريبا. احفظه كويس مع أمثلة.
+</Callout>
+
+## 6. الأشجار — Trees
+
+الشجرة هيكل بيانات **هرمي** — كل عنصر (Node) عنده أب واحد وممكن يكون عنده أبناء.
+
+### شجرة البحث الثنائية (Binary Search Tree — BST)
+
+القاعدة: لكل Node، كل القيم في الشجرة اليسرى **أصغر** منه، وكل القيم في الشجرة اليمنى **أكبر** منه.
+
+```java
+class BSTNode {
+    int data;
+    BSTNode left, right;
+
+    public BSTNode(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+
+class BST {
+    BSTNode root;
+
+    // إدخال عنصر — O(log n) في المتوسط
+    public BSTNode insert(BSTNode node, int value) {
+        if (node == null) {
+            return new BSTNode(value);
+        }
+        if (value < node.data) {
+            node.left = insert(node.left, value);  // أصغر — روح يسار
+        } else if (value > node.data) {
+            node.right = insert(node.right, value); // أكبر — روح يمين
+        }
+        return node;
+    }
+
+    // البحث عن عنصر — O(log n) في المتوسط
+    public boolean search(BSTNode node, int value) {
+        if (node == null) return false;              // ما لقيناه
+        if (value == node.data) return true;         // لقيناه!
+        if (value < node.data) return search(node.left, value);  // يسار
+        return search(node.right, value);            // يمين
+    }
+}
+```
+
+### أنواع التمرير (Traversals)
+
+ثلاث طرق لزيارة كل عناصر الشجرة — وهي من **أهم** مواضيع الاختبار:
+
+```java
+// Inorder: يسار → الجذر → يمين (يعطي الأرقام مرتبة!)
+public void inorder(BSTNode node) {
+    if (node != null) {
+        inorder(node.left);
+        System.out.print(node.data + " ");
+        inorder(node.right);
+    }
+}
+
+// Preorder: الجذر → يسار → يمين
+public void preorder(BSTNode node) {
+    if (node != null) {
+        System.out.print(node.data + " ");
+        preorder(node.left);
+        preorder(node.right);
+    }
+}
+
+// Postorder: يسار → يمين → الجذر
+public void postorder(BSTNode node) {
+    if (node != null) {
+        postorder(node.left);
+        postorder(node.right);
+        System.out.print(node.data + " ");
+    }
+}
+```
+
+<Callout type="warning" title="نصيحة ذهبية للاختبار">
+سؤال "ارسم الشجرة من هذي الأرقام واكتب الـ Inorder/Preorder/Postorder" يجي في **كل اختبار**. تمرّن عليه كثير. الحيلة: Inorder في BST يعطيك الأرقام مرتبة تصاعديا — استخدم هذا للتحقق من إجابتك.
+</Callout>
+
+## 7. خوارزميات الترتيب — Sorting Algorithms
+
+### Bubble Sort — ترتيب الفقاعات
+
+الفكرة: قارن كل عنصرين متجاورين وبدّل مكانهم لو مو مرتبين. كرّر حتى ما يصير تبديل.
+
+```java
+// Bubble Sort — O(n²)
+public static void bubbleSort(int[] arr) {
+    int n = arr.length;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // تبديل
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+```
+
+### Selection Sort — ترتيب الاختيار
+
+الفكرة: في كل دورة، لاقي **أصغر** عنصر وحطه في مكانه الصحيح.
+
+```java
+// Selection Sort — O(n²)
+public static void selectionSort(int[] arr) {
+    int n = arr.length;
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        // تبديل
+        int temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+    }
+}
+```
+
+### Insertion Sort — ترتيب الإدراج
+
+الفكرة: مثل ترتيب أوراق اللعب في يدك — تاخذ كل ورقة وتحطها في مكانها الصحيح.
+
+```java
+// Insertion Sort — O(n²) أسوأ حالة، O(n) أفضل حالة
+public static void insertionSort(int[] arr) {
+    for (int i = 1; i < arr.length; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j]; // انقل العنصر خطوة لليمين
+            j--;
+        }
+        arr[j + 1] = key; // حط العنصر في مكانه الصحيح
+    }
+}
+```
+
+### Merge Sort — ترتيب الدمج
+
+الفكرة: **قسّم** المصفوفة لنصفين، رتّب كل نصف، ثم **ادمجهم**.
+
+```java
+// Merge Sort — O(n log n) دائما
+public static void mergeSort(int[] arr, int left, int right) {
+    if (left < right) {
+        int mid = (left + right) / 2;
+        mergeSort(arr, left, mid);       // رتّب النصف الأيسر
+        mergeSort(arr, mid + 1, right);  // رتّب النصف الأيمن
+        merge(arr, left, mid, right);    // ادمج النصفين
+    }
+}
+
+private static void merge(int[] arr, int left, int mid, int right) {
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+    int[] L = new int[n1];
+    int[] R = new int[n2];
+
+    for (int i = 0; i < n1; i++) L[i] = arr[left + i];
+    for (int j = 0; j < n2; j++) R[j] = arr[mid + 1 + j];
+
+    int i = 0, j = 0, k = left;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) arr[k++] = L[i++];
+        else arr[k++] = R[j++];
+    }
+    while (i < n1) arr[k++] = L[i++];
+    while (j < n2) arr[k++] = R[j++];
+}
+```
+
+### Quick Sort — الترتيب السريع
+
+الفكرة: اختر عنصر **محوري (pivot)**، ضع كل العناصر الأصغر منه على يساره والأكبر على يمينه، ثم رتّب كل جهة.
+
+```java
+// Quick Sort — O(n log n) متوسط، O(n²) أسوأ حالة
+public static void quickSort(int[] arr, int low, int high) {
+    if (low < high) {
+        int pivotIndex = partition(arr, low, high);
+        quickSort(arr, low, pivotIndex - 1);   // رتّب اليسار
+        quickSort(arr, pivotIndex + 1, high);   // رتّب اليمين
+    }
+}
+
+private static int partition(int[] arr, int low, int high) {
+    int pivot = arr[high]; // نختار آخر عنصر كمحور
+    int i = low - 1;
+
+    for (int j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    int temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+    return i + 1;
+}
+```
+
+### مقارنة خوارزميات الترتيب
+
+| الخوارزمية | أفضل حالة | متوسط | أسوأ حالة | مستقرة؟ |
+|------------|-----------|-------|-----------|---------|
+| Bubble Sort | O(n) | O(n²) | O(n²) | نعم |
+| Selection Sort | O(n²) | O(n²) | O(n²) | لا |
+| Insertion Sort | O(n) | O(n²) | O(n²) | نعم |
+| Merge Sort | O(n log n) | O(n log n) | O(n log n) | نعم |
+| Quick Sort | O(n log n) | O(n log n) | O(n²) | لا |
+
+## 8. خوارزميات البحث — Searching
+
+### البحث الخطي (Linear Search)
+
+```java
+// O(n) — يمر على كل العناصر
+public static int linearSearch(int[] arr, int target) {
+    for (int i = 0; i < arr.length; i++) {
+        if (arr[i] == target) return i; // لقيناه!
+    }
+    return -1; // ما لقيناه
+}
+```
+
+### البحث الثنائي (Binary Search)
+
+يشتغل **بس** على مصفوفة مرتبة. ينصّ البيانات كل خطوة.
+
+```java
+// O(log n) — لازم المصفوفة تكون مرتبة!
+public static int binarySearch(int[] arr, int target) {
+    int low = 0, high = arr.length - 1;
+
+    while (low <= high) {
+        int mid = (low + high) / 2;
+
+        if (arr[mid] == target) {
+            return mid;           // لقيناه!
+        } else if (arr[mid] < target) {
+            low = mid + 1;        // الهدف في النصف الأيمن
+        } else {
+            high = mid - 1;       // الهدف في النصف الأيسر
+        }
+    }
+    return -1; // ما لقيناه
+}
+```
+
+<Callout type="tip" title="Binary Search في الاختبار">
+غالبا يعطيك مصفوفة مرتبة ويسألك تتبع خطوات Binary Search. ارسم جدول فيه: low, high, mid, والقيمة اللي عند mid. خطوة بخطوة حتى تلاقي الهدف أو يصير low > high.
+</Callout>
+
+## أنواع أسئلة الاختبارات في CPCS 204
+
+<StepList title="أنواع الأسئلة المتوقعة">
+1. **حلل التعقيد**: يعطيك كود ويسألك عن الـ Big-O
+2. **تتبع Recursion**: يعطيك دالة تكرارية ويسألك عن المخرجات
+3. **ارسم Linked List**: بعد سلسلة عمليات insert و delete، ارسم شكل القائمة
+4. **Stack/Queue trace**: يعطيك سلسلة push/pop أو enqueue/dequeue ويسألك عن الحالة النهائية
+5. **ارسم BST**: أدخل هذي الأرقام بالترتيب وارسم الشجرة الناتجة
+6. **Tree Traversals**: اكتب ناتج Inorder / Preorder / Postorder لشجرة معطاة
+7. **تتبع Sorting**: نفّذ Bubble Sort أو Insertion Sort على مصفوفة واكتب حالة المصفوفة بعد كل دورة
+8. **اكتب كود**: اكتب دالة تحذف عنصر من Linked List أو تبحث في BST
+</StepList>
+
+## نصائح للاب العملي
+
+- **ابني هياكل البيانات بنفسك** — لا تعتمد على المكتبات الجاهزة. في اللاب والاختبار، المطلوب تبني Node و LinkedList و Stack من الصفر
+- **ارسم قبل ما تكتب** — ارسم القائمة المتصلة أو الشجرة على ورقة وتتبع العمليات يدويا، بعدين حوّلها لكود
+- **اختبر الحالات الخاصة** — القائمة فاضية، عنصر واحد فقط، الإضافة في البداية vs النهاية
+
+## نصائح المذاكرة
+
+<StepList title="خطة مذاكرة فعالة لـ CPCS 204">
+1. **افهم الفكرة قبل الكود** — لا تحفظ كود Merge Sort بدون ما تفهم فكرة "قسّم وادمج"
+2. **ارسم كثير** — هياكل البيانات تُفهم بالرسم. ارسم القوائم المتصلة، الأشجار، حركة العناصر في Stack و Queue
+3. **قارن هياكل البيانات** — اعمل جدول مقارنة: متى تستخدم كل واحد ووش تعقيد كل عملية
+4. **حل اختبارات سابقة** — هذا أفضل استعداد. أنماط الأسئلة تتكرر كثير
+5. **تمرّن على التتبع اليدوي** — في الاختبار لازم تتبع الكود بيدك على ورق
+6. **استخدم visualizations** — مواقع مثل VisuAlgo تعرض لك هياكل البيانات بشكل مرئي متحرك
+</StepList>
+
+## ربط المادة بمسارك الأكاديمي
+
+بعد CPCS 204، راح تستخدم هياكل البيانات في كل مكان:
+- **قواعد البيانات**: تستخدم أشجار B-Tree للفهرسة
+- **أنظمة التشغيل**: تستخدم الطوابير لجدولة العمليات
+- **الشبكات**: تستخدم المكدسات في بروتوكولات الشبكة
+- **الخوارزميات المتقدمة**: تبني على هياكل البيانات اللي تعلمتها هنا
+
+لو تبي تراجع أساسيات جافا، ارجع لـ [شرح مادة CPCS 202 البرمجة 1](/blog/cpcs-202-programming-1-kau). ولو تبي تراجع مفاهيم OOP، اقرأ [شرح مادة CPCS 203 البرمجة 2](/blog/cpcs-203-oop-programming-kau). ولمراجعة شاملة لهياكل البيانات، اقرأ [دليلنا الشامل لهياكل البيانات](/blog/data-structures-algorithms-guide).
+
+هياكل البيانات هي أساس أسئلة المقابلات التقنية — لو تبي تبدأ تجهّز نفسك لسوق العمل، اقرأ [دليلنا للاستعداد للمقابلات التقنية](/blog/technical-interview-preparation).
+
+## خلاصة
+
+مادة CPCS 204 من أمتع مواد علوم الحاسب لما تفهمها صح. المفاتيح:
+
+- **Big-O**: تعلّمك تقيّم كفاءة الكود — ضروري لكل مبرمج
+- **Recursion**: تفكير مختلف — الدالة تحل جزء وتستدعي نفسها للباقي
+- **Linked Lists**: بيانات ديناميكية — إضافة وحذف بدون قيود الحجم
+- **Stacks (LIFO)**: آخر داخل أول طالع — Undo، الأقواس، استدعاء الدوال
+- **Queues (FIFO)**: أول داخل أول طالع — جدولة العمليات، الطوابير
+- **Trees (BST)**: بحث وإدخال سريع — O(log n) في المتوسط
+- **Sorting**: اعرف الفرق بين O(n²) و O(n log n) ومتى تستخدم كل واحد
+
+ركّز على **الفهم** مو الحفظ. لما تفهم ليش Stack يستخدم LIFO وليش BST أسرع من البحث الخطي، الكود يجي طبيعي.
+
+<CTABox title="تحتاج مساعدة في واجبات CPCS 204؟" description="فريق زدني يساعدك في حل الواجبات والمشاريع البرمجية. تواصل معنا." buttonText="اطلب المساعدة الآن" buttonUrl="https://wa.me/201557703662" />

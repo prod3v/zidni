@@ -1,0 +1,580 @@
+---
+title: "شرح مادة CPCS 203 — البرمجة 2 والبرمجة كائنية التوجه | جامعة الملك عبدالعزيز"
+meta_title: "شرح CPCS 203 البرمجة كائنية التوجه جامعة الملك عبدالعزيز"
+description: "شرح شامل لمادة CPCS 203 البرمجة 2 بجامعة الملك عبدالعزيز: الكلاسات، الكائنات، التغليف، الوراثة، تعدد الأشكال، معالجة الاستثناءات، والتعامل مع الملفات بلغة جافا."
+date: 2026-03-23T19:00:00Z
+image: "/images/posts/01.jpg"
+categories: ["دليل المواد"]
+authors: ["فريق زدني"]
+tags: ["CPCS 203", "OOP", "برمجة كائنية", "Java", "جامعة الملك عبدالعزيز", "برمجة 2"]
+draft: false
+---
+
+
+مادة CPCS 203 — البرمجة 2 / البرمجة كائنية التوجه (Object-Oriented Programming) — هي المادة اللي تنقلك من مرحلة "أكتب كود يشتغل" إلى مرحلة "أصمم برنامج منظم وقابل للتطوير". في خطة قسم علوم الحاسب بجامعة الملك عبدالعزيز، هذه المادة تبني على ما تعلمته في CPCS 202 (البرمجة 1) وتجهّزك لمواد مثل هياكل البيانات، هندسة البرمجيات، وقواعد البيانات.
+
+كثير من الطلاب يحسون إن OOP مجرد "كلاسات وأوبجكتات" — لكن الحقيقة إنها **طريقة تفكير كاملة** في تصميم البرامج. كل مشروع حقيقي في سوق العمل — تطبيقات الجوال، المواقع، الأنظمة — مبني على مبادئ OOP. لو فهمتها صح، راح تقدر تقرأ وتكتب أي كود بثقة.
+
+<QuickSummary>
+- **رمز المادة:** CPCS 203 — البرمجة 2 / البرمجة كائنية التوجه (Programming II / OOP)
+- **الساعات المعتمدة:** 3 ساعات (3 نظري + 1 لاب عملي)
+- **المتطلب السابق:** CPCS 202 (البرمجة 1)
+- **اللغة المستخدمة:** Java
+- **الكتاب المقرر:** "Introduction to Java Programming, Comprehensive" — Y. Daniel Liang (الفصول المتقدمة)
+- **المشروع:** غالبا مشروع نهائي يطبّق كل مفاهيم OOP
+- **يقود إلى:** CPCS 204 (هياكل البيانات 1) ومواد هندسة البرمجيات وقواعد البيانات
+</QuickSummary>
+
+## ليش مادة CPCS 203 مهمة؟
+
+- **كل شيء بعدها مبني على OOP:** هياكل البيانات، هندسة البرمجيات، تطوير الويب — كلها تفترض إنك تفهم OOP
+- **المشاريع الكبيرة مستحيلة بدونها:** تخيّل تكتب نظام إدارة مستشفى كله في `main` واحد — مستحيل. OOP تعلّمك تقسّم المشكلة
+- **المقابلات الوظيفية:** شركات كثيرة تسأل عن مبادئ OOP في المقابلات
+- **أساس التصميم الجيد:** مبادئ مثل SOLID مبنية على OOP
+
+## نظرة عامة على مادة CPCS 203
+
+المادة تتوزع على 15 أسبوع تقريبا:
+
+| الأسابيع | الموضوع | المفاهيم الرئيسية |
+|-----------|---------|-------------------|
+| 1-2 | مراجعة أساسيات + مقدمة في الكلاسات | class, object, constructor |
+| 3-4 | الكلاسات والكائنات بالتفصيل | attributes, methods, this keyword |
+| 5-6 | التغليف (Encapsulation) | private/public, getters/setters |
+| 7-8 | الوراثة (Inheritance) | extends, super, method overriding |
+| 9-10 | تعدد الأشكال (Polymorphism) | overloading, overriding, dynamic binding |
+| 11 | التجريد والواجهات | abstract classes, interfaces |
+| 12-13 | معالجة الاستثناءات + ملفات I/O | try/catch, File, Scanner, PrintWriter |
+| 14 | مصفوفات الكائنات | ArrayList, arrays of objects |
+| 15 | مراجعة + تسليم المشروع | — |
+
+<Callout type="info" title="عن الكتاب المقرر">
+المادة تستخدم نفس كتاب Liang من CPCS 202 لكن الفصول المتقدمة (عادة من Chapter 9 وما بعده). لو عندك الكتاب من المادة السابقة، ما تحتاج تشتري كتاب جديد.
+</Callout>
+
+## 1. الكلاسات والكائنات — Classes & Objects
+
+هذا الأساس. كل شيء في OOP يدور حوله.
+
+**Class** = القالب (مثل مخطط بيت)
+**Object** = النسخة الفعلية (مثل البيت نفسه)
+
+```java
+// تعريف كلاس لطالب جامعي
+public class Student {
+    // الخصائص (Attributes)
+    String name;
+    int id;
+    double gpa;
+
+    // المُنشئ (Constructor)
+    public Student(String name, int id, double gpa) {
+        this.name = name;   // this تشير للكائن الحالي
+        this.id = id;
+        this.gpa = gpa;
+    }
+
+    // دالة تعرض بيانات الطالب
+    public void displayInfo() {
+        System.out.println("الاسم: " + name);
+        System.out.println("الرقم: " + id);
+        System.out.println("المعدل: " + gpa);
+    }
+
+    // دالة تتحقق هل الطالب متفوق
+    public boolean isHonors() {
+        return gpa >= 4.5;
+    }
+}
+```
+
+```java
+// إنشاء كائنات (Objects) من الكلاس
+public class Main {
+    public static void main(String[] args) {
+        Student s1 = new Student("أحمد", 1234567, 4.8);
+        Student s2 = new Student("سارة", 7654321, 3.9);
+
+        s1.displayInfo();
+        System.out.println("متفوق؟ " + s1.isHonors()); // true
+
+        s2.displayInfo();
+        System.out.println("متفوق؟ " + s2.isHonors()); // false
+    }
+}
+```
+
+### الكلمة المفتاحية this
+
+`this` تشير للكائن الحالي. تستخدمها عادة لما اسم الـ parameter نفس اسم الـ attribute:
+
+```java
+public Student(String name, int id) {
+    this.name = name;  // this.name = attribute الكلاس، name = parameter المنشئ
+    this.id = id;
+}
+```
+
+<Callout type="tip" title="نصيحة مهمة">
+دائما سمّي متغيرات الكلاس بأسماء واضحة ومعبرة. `name` أفضل من `n`، و `studentGpa` أفضل من `g`. الكود الواضح يسهّل عليك المراجعة ويعطيك درجات أفضل في المشاريع.
+</Callout>
+
+## 2. التغليف — Encapsulation
+
+التغليف يعني إنك **تحمي بيانات الكائن** من الوصول المباشر. تخلي المتغيرات `private` وتوفّر دوال `getter` و `setter` للوصول لها.
+
+ليش؟ عشان تتحكم في القيم وتمنع الأخطاء. مثلا: المعدل لازم يكون بين 0 و 5 — بدون تغليف أي شخص يقدر يحط قيمة خاطئة.
+
+```java
+public class Student {
+    private String name;     // private — ما يقدر أحد يوصل لها مباشرة
+    private int id;
+    private double gpa;
+
+    public Student(String name, int id, double gpa) {
+        this.name = name;
+        this.id = id;
+        setGpa(gpa); // نستخدم الـ setter عشان التحقق
+    }
+
+    // Getter — للقراءة فقط
+    public String getName() {
+        return name;
+    }
+
+    // Getter
+    public double getGpa() {
+        return gpa;
+    }
+
+    // Setter — مع تحقق من القيمة
+    public void setGpa(double gpa) {
+        if (gpa >= 0 && gpa <= 5.0) {
+            this.gpa = gpa;
+        } else {
+            System.out.println("خطأ: المعدل لازم يكون بين 0 و 5");
+        }
+    }
+}
+```
+
+```java
+// الاستخدام
+Student s = new Student("محمد", 111, 4.2);
+System.out.println(s.getName());     // محمد
+s.setGpa(6.0);                       // خطأ: المعدل لازم يكون بين 0 و 5
+s.setGpa(4.5);                       // تمام — القيمة اتغيرت
+// s.name = "علي";                   // خطأ! name هي private
+```
+
+<Callout type="warning" title="خطأ شائع في الاختبار">
+كثير من الطلاب ينسون يخلون المتغيرات `private` ويكتبون getters/setters لمتغيرات `public` — هذا ما يعتبر تغليف حقيقي. التغليف = **private attributes + public getters/setters**.
+</Callout>
+
+## 3. الوراثة — Inheritance
+
+عندك كلاس فيه خصائص مشتركة مع كلاس ثاني؟ بدل ما تكرر الكود، تستخدم الوراثة.
+
+الفكرة: كلاس **ابن (subclass)** يرث خصائص ودوال كلاس **أب (superclass)**.
+
+```java
+// الكلاس الأب
+public class Person {
+    protected String name;
+    protected int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void introduce() {
+        System.out.println("اسمي " + name + " وعمري " + age);
+    }
+}
+```
+
+```java
+// كلاس الطالب يرث من Person
+public class Student extends Person {
+    private int studentId;
+    private double gpa;
+
+    public Student(String name, int age, int studentId, double gpa) {
+        super(name, age);     // استدعاء منشئ الكلاس الأب
+        this.studentId = studentId;
+        this.gpa = gpa;
+    }
+
+    // Method Overriding — إعادة تعريف الدالة
+    @Override
+    public void introduce() {
+        super.introduce();    // نستدعي النسخة الأصلية أولا
+        System.out.println("رقمي الجامعي: " + studentId);
+        System.out.println("معدلي: " + gpa);
+    }
+}
+```
+
+```java
+// كلاس الموظف يرث من Person أيضا
+public class Employee extends Person {
+    private String department;
+
+    public Employee(String name, int age, String department) {
+        super(name, age);
+        this.department = department;
+    }
+
+    @Override
+    public void introduce() {
+        super.introduce();
+        System.out.println("قسم: " + department);
+    }
+}
+```
+
+### مفاهيم مهمة في الوراثة
+
+- **extends**: الكلمة المفتاحية للوراثة
+- **super()**: لاستدعاء منشئ الكلاس الأب — لازم يكون **أول سطر** في المنشئ
+- **@Override**: علامة تقول "أنا أعيد تعريف دالة موجودة في الأب"
+- **is-a relationship**: الطالب "هو" شخص — `Student is a Person`
+- **جافا تدعم وراثة واحدة فقط**: كلاس يرث من كلاس واحد بس (مو مثل C++)
+
+## 4. تعدد الأشكال — Polymorphism
+
+تعدد الأشكال يعني إن نفس العملية تتصرف بشكل مختلف حسب نوع الكائن. فيه نوعين:
+
+### Compile-time Polymorphism (Method Overloading)
+
+نفس اسم الدالة بس بارامترات مختلفة — هذا تعلمته في CPCS 202:
+
+```java
+public class Calculator {
+    public int add(int a, int b) { return a + b; }
+    public double add(double a, double b) { return a + b; }
+    public int add(int a, int b, int c) { return a + b + c; }
+}
+```
+
+### Runtime Polymorphism (Method Overriding + Dynamic Binding)
+
+هنا القوة الحقيقية — نفس الدالة تتصرف مختلف حسب نوع الكائن الفعلي:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        // متغير من نوع الأب يشير لكائن من نوع الابن
+        Person p1 = new Student("أحمد", 20, 123, 4.5);
+        Person p2 = new Employee("خالد", 35, "تقنية المعلومات");
+
+        // كل كائن يستدعي النسخة الخاصة فيه من introduce()
+        p1.introduce(); // تطبع بيانات الطالب
+        p2.introduce(); // تطبع بيانات الموظف
+
+        // مصفوفة من نوع الأب تحوي كائنات مختلفة
+        Person[] people = {p1, p2};
+        for (Person p : people) {
+            p.introduce(); // كل كائن يستدعي نسخته الخاصة
+            System.out.println("---");
+        }
+    }
+}
+```
+
+<Callout type="info" title="ليش تعدد الأشكال مهم؟">
+تخيّل عندك نظام فيه 20 نوع شكل هندسي (مربع، دائرة، مثلث...). بدل ما تكتب دالة لحساب المساحة لكل نوع، تكتب دالة واحدة `calculateArea()` في الكلاس الأب وكل شكل يعرّفها بطريقته. **كود أقل، مرونة أكبر**.
+</Callout>
+
+## 5. التجريد والواجهات — Abstract Classes & Interfaces
+
+### Abstract Class
+
+كلاس ما تقدر تنشئ منه كائن مباشرة — هو بس قالب للكلاسات اللي ترث منه:
+
+```java
+// كلاس مجرّد — لا يمكن إنشاء كائن منه مباشرة
+public abstract class Shape {
+    String color;
+
+    public Shape(String color) {
+        this.color = color;
+    }
+
+    // دالة مجرّدة — لازم الكلاسات الأبناء تعرّفها
+    public abstract double getArea();
+
+    // دالة عادية — الأبناء يرثونها كما هي
+    public void display() {
+        System.out.println("اللون: " + color);
+        System.out.println("المساحة: " + getArea());
+    }
+}
+
+public class Circle extends Shape {
+    double radius;
+
+    public Circle(String color, double radius) {
+        super(color);
+        this.radius = radius;
+    }
+
+    @Override
+    public double getArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+public class Rectangle extends Shape {
+    double width, height;
+
+    public Rectangle(String color, double width, double height) {
+        super(color);
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public double getArea() {
+        return width * height;
+    }
+}
+```
+
+### Interface
+
+الواجهة (Interface) تحدد **ماذا** يجب أن يفعل الكلاس بدون أن تحدد **كيف**:
+
+```java
+// واجهة — عقد يلتزم فيه الكلاس
+public interface Printable {
+    void print(); // دالة بدون تعريف — الكلاس يعرّفها
+}
+
+public interface Saveable {
+    void save(String filename);
+}
+
+// كلاس ينفّذ واجهتين
+public class Report implements Printable, Saveable {
+    String content;
+
+    public Report(String content) {
+        this.content = content;
+    }
+
+    @Override
+    public void print() {
+        System.out.println("طباعة التقرير: " + content);
+    }
+
+    @Override
+    public void save(String filename) {
+        System.out.println("حفظ التقرير في: " + filename);
+    }
+}
+```
+
+<Callout type="tip" title="الفرق بين Abstract Class و Interface">
+- **Abstract Class**: يقدر يحتوي دوال معرّفة + دوال مجرّدة + متغيرات. الكلاس يرث من abstract class واحد فقط.
+- **Interface**: بشكل عام دوال بدون تعريف فقط. الكلاس يقدر ينفّذ **أكثر من interface**.
+- القاعدة البسيطة: استخدم abstract class لما فيه كود مشترك، واستخدم interface لما تبي تحدد "عقد" فقط.
+</Callout>
+
+## 6. معالجة الاستثناءات — Exception Handling
+
+البرنامج ممكن يواجه أخطاء وقت التشغيل (مثل: قسمة على صفر، ملف مو موجود، مدخل خاطئ). بدل ما البرنامج يتوقف، تتعامل مع الخطأ بشكل ذكي.
+
+```java
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
+public class ExceptionDemo {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        try {
+            System.out.print("أدخل البسط: ");
+            int numerator = input.nextInt();
+
+            System.out.print("أدخل المقام: ");
+            int denominator = input.nextInt();
+
+            int result = numerator / denominator;
+            System.out.println("الناتج: " + result);
+
+        } catch (ArithmeticException e) {
+            // القسمة على صفر
+            System.out.println("خطأ: لا يمكن القسمة على صفر!");
+
+        } catch (InputMismatchException e) {
+            // المستخدم أدخل نص بدل رقم
+            System.out.println("خطأ: أدخل أرقام فقط!");
+
+        } finally {
+            // هذا الجزء يتنفذ دائما — سواء صار خطأ أو لا
+            System.out.println("شكرا لاستخدام البرنامج");
+            input.close();
+        }
+    }
+}
+```
+
+### أنواع الاستثناءات المهمة
+
+| الاستثناء | السبب |
+|-----------|-------|
+| `ArithmeticException` | القسمة على صفر |
+| `ArrayIndexOutOfBoundsException` | فهرس خارج حدود المصفوفة |
+| `NullPointerException` | محاولة استخدام كائن قيمته null |
+| `InputMismatchException` | مدخل بنوع خاطئ |
+| `FileNotFoundException` | ملف مو موجود |
+
+## 7. التعامل مع الملفات — File I/O
+
+تبي برنامجك يقرأ بيانات من ملف أو يحفظ نتائج في ملف؟ هذا الموضوع يعلمك كيف.
+
+### الكتابة في ملف
+
+```java
+import java.io.PrintWriter;
+import java.io.FileNotFoundException;
+
+public class WriteFile {
+    public static void main(String[] args) {
+        try {
+            PrintWriter writer = new PrintWriter("students.txt");
+
+            writer.println("أحمد,1234,4.5");
+            writer.println("سارة,5678,3.8");
+            writer.println("خالد,9012,4.2");
+
+            writer.close(); // مهم جدا! بدون close البيانات ما تتحفظ
+            System.out.println("تم حفظ البيانات بنجاح");
+
+        } catch (FileNotFoundException e) {
+            System.out.println("خطأ في إنشاء الملف");
+        }
+    }
+}
+```
+
+### القراءة من ملف
+
+```java
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class ReadFile {
+    public static void main(String[] args) {
+        try {
+            File file = new File("students.txt");
+            Scanner reader = new Scanner(file);
+
+            while (reader.hasNextLine()) {
+                String line = reader.nextLine();
+                String[] parts = line.split(","); // تقسيم السطر بالفاصلة
+
+                String name = parts[0];
+                int id = Integer.parseInt(parts[1]);
+                double gpa = Double.parseDouble(parts[2]);
+
+                System.out.println(name + " — معدل: " + gpa);
+            }
+
+            reader.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("الملف غير موجود!");
+        }
+    }
+}
+```
+
+<Callout type="warning" title="لا تنسى close()!">
+لما تفتح ملف للكتابة، لازم تسوي `close()` عشان البيانات تتحفظ فعلا. نسيان close() من أكثر الأخطاء اللي تخسّر درجات في اللاب والاختبار.
+</Callout>
+
+## 8. مصفوفات الكائنات — Arrays of Objects
+
+في الحياة الحقيقية، عادة عندك مجموعة كائنات (قائمة طلاب، قائمة منتجات). هنا تتعلم كيف تتعامل معها:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        // مصفوفة من كائنات Student
+        Student[] students = new Student[3];
+        students[0] = new Student("أحمد", 101, 4.5);
+        students[1] = new Student("سارة", 102, 3.8);
+        students[2] = new Student("خالد", 103, 4.2);
+
+        // إيجاد الطالب صاحب أعلى معدل
+        Student topStudent = students[0];
+        for (int i = 1; i < students.length; i++) {
+            if (students[i].getGpa() > topStudent.getGpa()) {
+                topStudent = students[i];
+            }
+        }
+        System.out.println("أعلى معدل: " + topStudent.getName());
+    }
+}
+```
+
+## أنواع أسئلة الاختبارات في CPCS 203
+
+<StepList title="أنواع الأسئلة المتوقعة">
+1. **تتبع الكود (Trace)**: يعطيك كود فيه وراثة أو polymorphism ويسألك عن المخرجات — لازم تعرف أي نسخة من الدالة تنستدعي
+2. **اكتب كلاس**: يعطيك وصف ويطلب منك تكتب كلاس كامل مع constructors, getters/setters, ودوال
+3. **أكمل الكود**: يعطيك كود ناقص وتكمّله
+4. **اشرح المفهوم**: "ما الفرق بين overloading و overriding؟" أو "اشرح التغليف مع مثال"
+5. **اكتشاف الأخطاء**: كود فيه أخطاء في OOP وتصلحها
+6. **UML**: أحيانا يطلبون ترسم أو تقرأ class diagram بسيط
+</StepList>
+
+## نصائح للمشروع النهائي
+
+المشروع عادة يطلب منك تبني نظام متكامل يطبّق كل مفاهيم OOP. إليك نصائح:
+
+<StepList title="خطوات النجاح في المشروع">
+1. **ابدأ بالتخطيط**: ارسم الكلاسات وعلاقاتها قبل ما تكتب أي كود
+2. **طبّق التغليف**: كل المتغيرات `private` مع getters/setters
+3. **استخدم الوراثة بذكاء**: لو عندك كلاسات مشتركة في خصائص، اعمل كلاس أب
+4. **لا تضع كل شيء في Main**: وزّع الكود على كلاسات مختلفة
+5. **اكتب توثيق (Comments)**: شرح بسيط لكل كلاس ودالة — يزيد درجتك
+6. **اختبر كل جزء لحاله**: لا تنتظر تخلص كل شيء عشان تجرب
+7. **سلّم بدري**: لا تنتظر آخر لحظة — دائما فيه مشاكل ما توقعتها
+</StepList>
+
+<Callout type="tip" title="فكرة مشروع تطبّق كل المفاهيم">
+نظام إدارة مكتبة: كلاس `Book` وكلاس `Member` وكلاس `Library`. فيه وراثة (أنواع مختلفة من الكتب أو الأعضاء)، تغليف، ملفات لحفظ البيانات، و exception handling للتعامل مع الأخطاء. هذا النوع من المشاريع يغطي كل شيء درسته.
+</Callout>
+
+## نصائح للاب العملي
+
+- **حاول تحل بنفسك أولا** — حتى لو ما قدرت تخلص، المحاولة تعلّمك أكثر من نسخ الحل
+- **اقرأ الأخطاء بعناية** — رسائل أخطاء جافا في OOP واضحة: `NullPointerException` يعني كائن قيمته null، `cannot access private member` يعني فيه مشكلة تغليف
+- **ارسم العلاقات** — قبل ما تكتب كود، ارسم على ورقة: أي كلاس يرث من أي كلاس، أي كلاس يحوي أي كلاس
+
+## ربط المادة بمسارك الأكاديمي
+
+بعد CPCS 203، المادة التالية في مسار البرمجة هي **CPCS 204 — هياكل البيانات 1**. في CPCS 204 راح تستخدم كل مفاهيم OOP اللي تعلمتها هنا لبناء هياكل بيانات مثل القوائم المتصلة والأشجار والمكدسات.
+
+لو تبي شرح أعمق لأساسيات جافا، اقرأ [دليلنا الشامل لتعلم جافا](/blog/java-beginners-guide). ولو تبي تقرأ عن المادة اللي بعدها، اقرأ [شرح مادة CPCS 204 هياكل البيانات 1](/blog/cpcs-204-data-structures-kau).
+
+## خلاصة
+
+مادة CPCS 203 تغيّر طريقة تفكيرك في البرمجة. بدل ما تكتب كود "يمشي الحال"، تتعلم تصمم برامج منظمة وقابلة للتطوير. المفاهيم الأساسية اللي لازم تتقنها:
+
+- **Classes & Objects**: القالب والنسخة — أساس كل شيء
+- **Encapsulation**: حماية البيانات — private + getters/setters
+- **Inheritance**: إعادة استخدام الكود — extends + super
+- **Polymorphism**: مرونة التعامل — overriding + dynamic binding
+- **Abstract & Interfaces**: التصميم المرن — العقود والقوالب
+- **Exception Handling**: التعامل مع الأخطاء بذكاء
+- **File I/O**: حفظ وقراءة البيانات
+
+كل ما تحاول تفهم مفهوم وما يركز معك؟ جرّب تكتبه بكود بسيط. OOP تُفهم بالممارسة مو بالقراءة. افتح الـ IDE وجرّب كل مثال في هذا المقال — وبعدين عدّله وشوف وش يصير.
+
+<CTABox title="مشروع CPCS 203 يضغط عليك؟" description="فريق زدني يساعدك في مشاريع البرمجة كائنية التوجه. تواصل معنا الآن." buttonText="اطلب المساعدة الآن" buttonUrl="https://wa.me/201557703662" />
