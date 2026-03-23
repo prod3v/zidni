@@ -25,15 +25,16 @@ module.exports = plugin.withOptions(() => {
           display: "flex",
           flexWrap: "wrap",
           marginTop: "calc(var(--bs-gutter-y) * -1)",
-          marginRight: "calc(var(--bs-gutter-x) / -2)",
-          marginLeft: "calc(var(--bs-gutter-x) / -2)",
+          marginInlineEnd: "calc(var(--bs-gutter-x) / -2)",
+          marginInlineStart: "calc(var(--bs-gutter-x) / -2)",
           "& > *": {
             boxSizing: "border-box",
             flexShrink: 0,
+            minWidth: 0,
             width: "100%",
             maxWidth: "100%",
-            paddingRight: "calc(var(--bs-gutter-x) / 2)",
-            paddingLeft: "calc(var(--bs-gutter-x) / 2)",
+            paddingInlineEnd: "calc(var(--bs-gutter-x) / 2)",
+            paddingInlineStart: "calc(var(--bs-gutter-x) / 2)",
             marginTop: "var(--bs-gutter-y)",
           },
         },
@@ -67,7 +68,7 @@ module.exports = plugin.withOptions(() => {
     // offset
     addComponents(
       [0, ...columns.slice(0, -1)].map((num) => ({
-        [`.offset-${num}`]: { marginLeft: `${(100 / gridColumns) * num}%` },
+        [`.offset-${num}`]: { marginInlineStart: `${(100 / gridColumns) * num}%` },
       })),
       { respectImportant },
     );

@@ -37,7 +37,7 @@
 
 /* social icon style */
 .social-icons {
-  @apply space-x-4;
+  @apply flex flex-wrap gap-4;
   li {
     @apply inline-block;
     a {
@@ -50,7 +50,7 @@
 }
 
 .social-icons-simple {
-  @apply space-x-2;
+  @apply flex flex-wrap gap-2;
   li {
     @apply inline-block;
     a {
@@ -63,7 +63,7 @@
 }
 
 .social-share {
-  @apply space-x-1;
+  @apply flex flex-wrap gap-1;
   li {
     @apply inline-block;
     a {
@@ -107,7 +107,7 @@
   }
 
   /* tables */
-  @apply prose-table:relative prose-table:overflow-hidden prose-table:rounded-xl;
+  @apply prose-table:relative prose-table:overflow-x-auto prose-table:rounded-xl;
   @apply prose-table:before:absolute prose-table:before:start-0 prose-table:before:top-0 prose-table:before:h-full prose-table:before:w-full prose-table:before:rounded-[inherit] prose-table:before:border prose-table:before:border-border prose-table:before:content-[""];
   @apply prose-thead:border-border prose-thead:bg-light;
   @apply prose-th:relative prose-th:z-10 prose-th:px-4 prose-th:py-[18px] prose-th:text-text-dark;
