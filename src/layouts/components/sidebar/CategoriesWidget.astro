@@ -17,7 +17,7 @@ const { categories } = Astro.props;
       <li>
         <a
           href={`/categories/${slugify(cat.name)}`}
-          class="flex items-center justify-between text-sm text-body hover:text-primary transition duration-200"
+          class="flex items-center justify-between text-sm text-text hover:text-primary transition duration-200"
         >
           <span>{humanize(cat.name)}</span>
           <span class="bg-[#f0f0f0] text-[#888] text-xs px-2 py-0.5 rounded-full">
