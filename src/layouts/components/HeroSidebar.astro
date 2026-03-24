@@ -10,14 +10,14 @@ type Props = {
 const { featuredPost, posts } = Astro.props;
 ---
 
-<aside class="flex flex-col gap-4">
+<aside class="flex flex-col h-full">
   {/* Featured sidebar card with image */}
   <a
     href={`/blog/${featuredPost.id}`}
     class="block rounded-xl overflow-hidden group"
   >
     {featuredPost.data.image && (
-      <div class="bg-light p-3 rounded-xl">
+      <div class="bg-light p-3 rounded-xl overflow-hidden">
         <img
           src={featuredPost.data.image}
           alt={featuredPost.data.title}
@@ -26,32 +26,24 @@ const { featuredPost, posts } = Astro.props;
         />
       </div>
     )}
-    <div class="mt-3">
-      {featuredPost.data.categories?.[0] && (
-        <span class="text-primary text-xs font-bold uppercase tracking-wider">
-          {humanize(featuredPost.data.categories[0])}
-        </span>
-      )}
-      <h3 class="text-dark font-bold text-sm leading-snug mt-1 group-hover:text-primary transition duration-300">
-        {featuredPost.data.title}
-      </h3>
-    </div>
   </a>
 
-  {/* Article list — category label + title */}
-  {posts.map((post) => (
-    <a
-      href={`/blog/${post.id}`}
-      class="block group border-t border-[#eee] pt-3"
-    >
-      {post.data.categories?.[0] && (
-        <span class="text-primary text-xs font-bold uppercase tracking-wider">
-          {humanize(post.data.categories[0])}
-        </span>
-      )}
-      <h3 class="text-dark font-bold text-sm leading-snug mt-1 group-hover:text-primary transition duration-300">
-        {post.data.title}
-      </h3>
-    </a>
-  ))}
+  {/* Article list — category label + title, fills remaining space */}
+  <div class="flex flex-col flex-1 justify-evenly mt-2">
+    {posts.map((post) => (
+      <a
+        href={`/blog/${post.id}`}
+        class="block group py-3 border-t border-[#eee] first:border-t-0"
+      >
+        {post.data.categories?.[0] && (
+          <span class="text-primary text-xs font-bold uppercase tracking-wider">
+            {humanize(post.data.categories[0])}
+          </span>
+        )}
+        <h3 class="text-dark font-bold text-sm leading-snug mt-1 group-hover:text-primary transition duration-300 line-clamp-2">
+          {post.data.title}
+        </h3>
+      </a>
+    ))}
+  </div>
 </aside>
