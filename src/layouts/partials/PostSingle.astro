@@ -98,7 +98,7 @@ const breadcrumbSchema = {
   <div class="container">
     <!-- Breadcrumb -->
     <nav class="mb-6 text-sm" aria-label="مسار التنقل">
-      <ol class="flex items-center gap-2 text-white/45 font-bold text-xs uppercase tracking-wide">
+      <ol class="flex items-center gap-2 text-white/45 font-bold text-xs sm:text-sm uppercase tracking-wide">
         <li><a href="/" class="underline underline-offset-2 hover:text-white/70 transition">الرئيسية</a></li>
         <li class="select-none">/</li>
         {
@@ -233,7 +233,7 @@ const breadcrumbSchema = {
               )
             }
 
-            <div class="flex items-center justify-between pt-2">
+            <div class="flex items-center justify-between gap-1 sm:gap-2 pt-2">
               <span class="text-sm font-semibold text-dark">شارك المقال</span>
               <Share
                 className="social-share"
