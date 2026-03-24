@@ -1,5 +1,6 @@
 ---
 import HeroPost from "@/components/HeroPost.astro";
+import HeroSidebar from "@/components/HeroSidebar.astro";
 import NewsletterCTA from "@/components/NewsletterCTA.astro";
 import Posts from "@/components/Posts.astro";
 import Sidebar from "@/components/Sidebar.astro";
@@ -14,11 +15,13 @@ import { sortByDate } from "@/lib/utils/sortFunctions";
 const posts = await getSinglePage("posts");
 const sortedPosts = sortByDate(posts);
 
-// Slice posts for each section (spec: 1 hero + 3 grid + 6 more + 4 sidebar)
+// Slice posts for each section
 const heroPost = sortedPosts[0];
-const gridPosts = sortedPosts.slice(1, 4);
-const morePosts = sortedPosts.slice(4, 10);
-const sidebarRecentPosts = sortedPosts.slice(10, 14);
+const heroSidebarFeatured = sortedPosts[1];       // image card next to hero
+const heroSidebarPosts = sortedPosts.slice(2, 6);  // 4 category+title items next to hero
+const gridPosts = sortedPosts.slice(6, 9);
+const morePosts = sortedPosts.slice(9, 15);
+const sidebarRecentPosts = sortedPosts.slice(15, 19);
 
 // Build category counts from all posts
 const categoryMap = new Map<string, number>();
@@ -70,8 +73,21 @@ const webSiteSchema = {
   <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} />
 
-  {/* Section 1: Hero — Featured Post */}
-  {heroPost && <HeroPost post={heroPost} />}
+  {/* Section 1: Hero + Sidebar Articles */}
+  <section class="container py-6 px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {/* Hero (2/3) */}
+      <div class="lg:col-span-2">
+        {heroPost && <HeroPost post={heroPost} />}
+      </div>
+      {/* Sidebar articles (1/3) — hidden on mobile */}
+      <div class="hidden lg:block">
+        {heroSidebarFeatured && (
+          <HeroSidebar featuredPost={heroSidebarFeatured} posts={heroSidebarPosts} />
+        )}
+      </div>
+    </div>
+  </section>
 
   {/* Section 2: Latest Posts Grid */}
   {gridPosts.length > 0 && (
