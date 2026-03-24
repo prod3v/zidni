@@ -1,0 +1,19 @@
+---
+import CategoriesWidget from "./sidebar/CategoriesWidget.astro";
+import RecentPostsWidget from "./sidebar/RecentPostsWidget.astro";
+import ServicesCTA from "./sidebar/ServicesCTA.astro";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  categories: { name: string; count: number }[];
+  recentPosts: CollectionEntry<"posts">[];
+};
+
+const { categories, recentPosts } = Astro.props;
+---
+
+<aside class="lg:sticky lg:top-20 space-y-6">
+  <CategoriesWidget categories={categories} />
+  {recentPosts.length > 0 && <RecentPostsWidget posts={recentPosts} />}
+  <ServicesCTA />
+</aside>

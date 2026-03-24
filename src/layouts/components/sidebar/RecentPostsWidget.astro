@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  posts: CollectionEntry<"posts">[];
+};
+
+const { posts } = Astro.props;
+---
+
+<div class="bg-white rounded-xl border border-[#eee] p-5">
+  <h3 class="text-base font-bold text-dark mb-4 pb-2 border-b-2 border-primary inline-block">
+    أحدث المقالات
+  </h3>
+  <ul class="space-y-4">
+    {posts.map((post) => (
+      <li>
+        <a
+          href={`/blog/${post.id}`}
+          class="flex items-center gap-3 group"
+        >
+          {post.data.image && (
+            <img
+              src={post.data.image}
+              alt={post.data.title}
+              class="w-10 h-10 rounded-lg object-contain bg-light flex-shrink-0"
+              loading="lazy"
+            />
+          )}
+          <span class="text-sm text-body leading-snug group-hover:text-primary transition duration-200 line-clamp-2">
+            {post.data.title}
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>

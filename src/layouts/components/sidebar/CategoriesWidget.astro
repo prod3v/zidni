@@ -1,0 +1,30 @@
+---
+import { humanize, slugify } from "@/lib/utils/textConverter";
+
+type Props = {
+  categories: { name: string; count: number }[];
+};
+
+const { categories } = Astro.props;
+---
+
+<div class="bg-white rounded-xl border border-[#eee] p-5">
+  <h3 class="text-base font-bold text-dark mb-4 pb-2 border-b-2 border-primary inline-block">
+    التصنيفات
+  </h3>
+  <ul class="space-y-3">
+    {categories.map((cat) => (
+      <li>
+        <a
+          href={`/categories/${slugify(cat.name)}`}
+          class="flex items-center justify-between text-sm text-body hover:text-primary transition duration-200"
+        >
+          <span>{humanize(cat.name)}</span>
+          <span class="bg-[#f0f0f0] text-[#888] text-xs px-2 py-0.5 rounded-full">
+            {cat.count}
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
