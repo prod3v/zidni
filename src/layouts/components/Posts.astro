@@ -39,7 +39,7 @@ const { className, posts, fluid } = Astro.props;
             {/* Category badge overlay */}
             <div class="absolute top-3 start-3 flex gap-2">
               {post.data.categories.map((category: string) => (
-                <span class="bg-white/90 backdrop-blur-sm text-dark text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+                <span class="bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
                   {humanize(category)}
                 </span>
               ))}
