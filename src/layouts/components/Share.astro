@@ -14,7 +14,7 @@ const { title, description, slug, className } = Astro.props;
 <ul class={`${className}`}>
   <li class="inline-block">
     <a
-      aria-label="facebook share button"
+      aria-label="مشاركة عبر فيسبوك"
       href={`https://facebook.com/sharer/sharer.php?u=${base_url}/${slug}`}
       target="_blank"
       rel="noreferrer noopener"
@@ -24,7 +24,7 @@ const { title, description, slug, className } = Astro.props;
   </li>
   <li class="inline-block">
     <a
-      aria-label="twitter share button"
+      aria-label="مشاركة عبر تويتر"
       href={`https://twitter.com/intent/tweet/?text=${title}&amp;url=${base_url}/${slug}`}
       target="_blank"
       rel="noreferrer noopener"
@@ -34,7 +34,7 @@ const { title, description, slug, className } = Astro.props;
   </li>
   <li class="inline-block">
     <a
-      aria-label="linkedin share button"
+      aria-label="مشاركة عبر لينكدإن"
       href={`https://www.linkedin.com/shareArticle?mini=true&url=${base_url}/${slug}&title=${title}&summary=${description}&source=${base_url}`}
       target="_blank"
       rel="noreferrer noopener"
@@ -44,7 +44,7 @@ const { title, description, slug, className } = Astro.props;
   </li>
   <li class="inline-block">
     <a
-      aria-label="pinterest share button"
+      aria-label="مشاركة عبر بينتريست"
       href={`https://pinterest.com/pin/create/button/?url=${base_url}/${slug}&media=&description=${description}`}
       target="_blank"
       rel="noreferrer noopener"

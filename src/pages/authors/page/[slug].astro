@@ -32,10 +32,10 @@ const indexOfFirstPost = indexOfLastPost - config.settings.pagination;
 const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
 ---
 
-<Base title={"Authors"}>
+<Base title={"الكتّاب"}>
   <section class="section">
     <div class="container text-center">
-      <h1 set:text={markdownify("Authors")} class="page-heading h2" />
+      <h1 set:text={markdownify("الكتّاب")} class="page-heading h2" />
       <Authors authors={currentPosts} />
       <Pagination
         section={"authors"}

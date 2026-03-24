@@ -1,7 +1,7 @@
 ---
 title: فريق زدني
 meta_title: "فريق زدني"
-image: /images/authors/zidni-team.jpg
+image: /images/authors/zidni-team.svg
 description: "فريق زدني — نساعد الطلاب الجامعيين في مشوارهم الأكاديمي من خلال محتوى عملي ومبسّط، وخدمات أكاديمية احترافية."
 social:
   email: smart4cademy@gmail.com

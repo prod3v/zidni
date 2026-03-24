@@ -3,6 +3,7 @@ import Base from "@/layouts/Base.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import { render } from "astro:content";
+import { FaWhatsapp } from "react-icons/fa";
 
 export async function getStaticPaths() {
   const pages = await getSinglePage("pages");
@@ -17,8 +18,13 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props;
-const { title, meta_title, description, image } = page.data;
+const { title, meta_title, description, image, illustration, whatsapp_text } = page.data as any;
 const { Content } = await render(page);
+
+const isServicePage = !!illustration;
+const whatsappUrl = whatsapp_text
+  ? `https://wa.me/201557703662?text=${encodeURIComponent(whatsapp_text)}`
+  : "https://wa.me/201557703662";
 ---
 
 <Base
@@ -27,12 +33,130 @@ const { Content } = await render(page);
   description={description}
   image={image}
 >
-  <section class="section">
-    <div class="container">
-      <h1 set:html={markdownify(title)} class="h2 page-heading" />
-      <div class="content">
-        <Content />
+  {isServicePage ? (
+    <!-- Service Page Layout -->
+    <Fragment>
+      <!-- Hero Section -->
+      <section class="relative overflow-hidden bg-gradient-to-b from-darkmode-body to-body dark:from-darkmode-body dark:to-darkmode-body border-b border-border">
+        <div class="container">
+          <div class="flex flex-col md:flex-row items-center gap-8 py-12 md:py-16">
+            <!-- Text -->
+            <div class="w-full md:w-3/5 text-center md:text-right">
+              <h1 class="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+                {title}
+              </h1>
+              <p class="text-lg text-gray-300 mb-8 max-w-xl md:max-w-none mx-auto">
+                {description}
+              </p>
+              <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center gap-2 rounded-lg bg-green-600 px-6 py-3 text-white font-medium hover:bg-green-700 transition text-lg"
+                >
+                  <FaWhatsapp className="h-5 w-5" />
+                  تواصل عبر واتساب
+                </a>
+                <a
+                  href="/contact"
+                  class="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-500 px-6 py-3 text-gray-200 font-medium hover:bg-white/10 transition"
+                >
+                  أو عبر نموذج التواصل
+                </a>
+              </div>
+            </div>
+            <!-- Illustration -->
+            <div class="w-full md:w-2/5 flex-shrink-0">
+              <img
+                src={illustration}
+                alt={title}
+                class="w-full max-w-[320px] mx-auto h-auto"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Content Body -->
+      <section class="section">
+        <div class="container">
+          <div class="max-w-3xl mx-auto">
+            <div class="content service-content">
+              <Content />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom CTA -->
+      <section class="pb-16">
+        <div class="container">
+          <div class="max-w-2xl mx-auto text-center rounded-2xl border border-primary/30 bg-primary/5 dark:bg-primary/10 p-8 md:p-10">
+            <h2 class="h3 text-dark dark:text-darkmode-dark mb-3">جاهز تبدأ؟</h2>
+            <p class="text-light mb-6">تواصل معنا الآن واحصل على استشارة مجانية</p>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 rounded-lg bg-green-600 px-8 py-3 text-white font-medium hover:bg-green-700 transition text-lg"
+            >
+              <FaWhatsapp className="h-5 w-5" />
+              أرسل رسالة واتساب
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mobile Sticky WhatsApp Bar -->
+      <div class="fixed bottom-0 inset-x-0 z-50 md:hidden bg-darkmode-body/95 backdrop-blur-sm border-t border-border p-3">
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center gap-2 rounded-lg bg-green-600 w-full py-3 text-white font-medium hover:bg-green-700 transition"
+        >
+          <FaWhatsapp className="h-5 w-5" />
+          تواصل عبر واتساب
+        </a>
       </div>
-    </div>
-  </section>
+    </Fragment>
+  ) : (
+    <!-- Regular Page Layout (privacy policy, etc.) -->
+    <section class="section">
+      <div class="container">
+        <h1 set:html={markdownify(title)} class="h2 page-heading" />
+        <div class="content">
+          <Content />
+        </div>
+      </div>
+    </section>
+  )}
 </Base>
+
+<style is:global>
+  .service-content h2 {
+    border-right: 4px solid var(--color-primary, #01ad9f);
+    padding-right: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .service-content h3 {
+    margin-top: 1.5rem;
+  }
+
+  .service-content hr {
+    margin: 2.5rem 0;
+    border-color: var(--color-border, #374151);
+  }
+
+  .service-content > h2:first-child,
+  .service-content > h2:first-child + p {
+    display: none;
+  }
+
+  .service-content > h2:first-child ~ hr:first-of-type {
+    display: none;
+  }
+</style>

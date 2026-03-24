@@ -1,6 +1,14 @@
 import { humanize } from "@/lib/utils/textConverter";
 import React from "react";
 
+const typeLabels: Record<string, string> = {
+  tip: "نصيحة",
+  info: "معلومة",
+  warning: "تحذير",
+  note: "ملاحظة",
+  important: "مهم",
+};
+
 function Notice({
   type,
   children,
@@ -75,7 +83,7 @@ function Notice({
             />
           </svg>
         )}
-        <p className="my-0 ms-1.5">{humanize(type)}</p>
+        <p className="my-0 ms-1.5">{typeLabels[type] || humanize(type)}</p>
       </div>
       <div className="notice-body">{children}</div>
     </div>

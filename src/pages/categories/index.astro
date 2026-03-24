@@ -1,32 +1,124 @@
 ---
 import Base from "@/layouts/Base.astro";
-import { getTaxonomy } from "@/lib/taxonomyParser.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import taxonomyFilter from "@/lib/utils/taxonomyFilter";
+import { sortByDate } from "@/lib/utils/sortFunctions";
 import { humanize } from "@/lib/utils/textConverter";
 
-const categories = await getTaxonomy("posts", "categories");
+const posts = await getSinglePage("posts");
 
-import { BiCategoryAlt } from "react-icons/bi";
+const categoryData = [
+  {
+    slug: "دليل-المواد",
+    name: "دليل المواد",
+    description: "شروحات مبسطة لمواد البرمجة والحاسب الجامعية",
+    illustration: "/images/posts/hand-coding.svg",
+  },
+  {
+    slug: "مشاريع-التخرج",
+    name: "مشاريع التخرج",
+    description: "أفكار ودليل تنفيذ مشاريع التخرج خطوة بخطوة",
+    illustration: "/images/posts/graduation.svg",
+  },
+  {
+    slug: "مهارات-الدراسة",
+    name: "مهارات الدراسة",
+    description: "نصائح للمذاكرة والامتحانات وتنظيم الوقت",
+    illustration: "/images/posts/exams.svg",
+  },
+  {
+    slug: "الترجمة-الأكاديمية",
+    name: "الترجمة الأكاديمية",
+    description: "ترجمة المصطلحات والأبحاث الأكاديمية",
+    illustration: "/images/posts/learning-languages.svg",
+  },
+  {
+    slug: "الحياة-الجامعية",
+    name: "الحياة الجامعية",
+    description: "السيرة الذاتية والتدريب والشهادات التقنية",
+    illustration: "/images/posts/course-app.svg",
+  },
+];
+
+const categoriesWithPosts = categoryData.map((cat) => {
+  const filtered = taxonomyFilter(posts, "categories", cat.slug);
+  const sorted = sortByDate(filtered);
+  return {
+    ...cat,
+    count: filtered.length,
+    latestPosts: sorted.slice(0, 3),
+  };
+});
 ---
 
-<Base title={"Categories"}>
+<Base title={"التصنيفات"}>
   <section class="section">
-    <div class="container text-center">
-      <h1 class="h2 page-heading">Categories</h1>
-      <ul class="flex flex-wrap gap-4 justify-center">
-        {
-          categories.map((category) => (
-            <li class="inline-block">
-              <a
-                href={`/categories/${category}`}
-                class="rounded-lg bg-light px-4 py-2 text-dark transition hover:bg-primary hover:text-white flex items-center group"
-              >
-                <BiCategoryAlt className="me-1 text-primary group-hover:text-white transition h-6 w-6 scale-75" />
-                {humanize(category || "")}
+    <div class="container">
+      <div class="text-center mb-12">
+        <h1 class="h2 page-heading mb-4">التصنيفات</h1>
+        <p class="text-light max-w-xl mx-auto">
+          تصفّح مقالاتنا حسب التصنيف واختر المجال اللي يهمك
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {categoriesWithPosts.map((cat) => (
+          <div class="rounded-2xl border border-border bg-theme-light dark:bg-darkmode-theme-light p-6 flex flex-col group hover:border-primary/50 transition">
+            {/* Illustration */}
+            <a href={`/categories/${cat.slug}`} class="block mb-4">
+              <img
+                src={cat.illustration}
+                alt={cat.name}
+                class="w-full h-44 object-contain mx-auto"
+                loading="lazy"
+              />
+            </a>
+
+            {/* Header */}
+            <div class="flex items-center gap-3 mb-2">
+              <a href={`/categories/${cat.slug}`}>
+                <h2 class="h4 text-dark dark:text-darkmode-dark hover:text-primary transition">
+                  {cat.name}
+                </h2>
               </a>
-            </li>
-          ))
-        }
-      </ul>
+              <span class="inline-flex items-center rounded-full bg-primary/10 text-primary px-2.5 py-0.5 text-xs font-medium">
+                {cat.count} مقال
+              </span>
+            </div>
+
+            <p class="text-light text-sm mb-4">
+              {cat.description}
+            </p>
+
+            {/* Latest articles */}
+            {cat.latestPosts.length > 0 && (
+              <ul class="space-y-1.5 mb-5 flex-grow">
+                {cat.latestPosts.map((post: any) => (
+                  <li>
+                    <a
+                      href={`/blog/${post.id}`}
+                      class="flex items-center gap-2 text-sm text-dark dark:text-darkmode-dark hover:text-primary transition group/link"
+                    >
+                      <span class="text-primary text-sm leading-none">←</span>
+                      <span class="group-hover/link:underline underline-offset-4 line-clamp-1">
+                        {post.data.title}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <a
+              href={`/categories/${cat.slug}`}
+              class="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-white text-sm font-medium hover:bg-primary/90 transition mt-auto"
+            >
+              عرض الكل
+              <span>←</span>
+            </a>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 </Base>
