@@ -1,31 +1,71 @@
 ---
 import Social from "@/components/Social.astro";
 import config from "@/config/config.json";
-import menu from "@/config/menu.json";
 import social from "@/config/social.json";
-import { markdownify } from "@/lib/utils/textConverter";
 ---
 
-<footer class="section bg-dark">
-  <div class="container text-center">
-    {/* footer menu */}
-    <ul class="mb-8 flex flex-wrap gap-4 justify-center">
-      {
-        menu.footer.map((menu) => (
-          <li class="inline-block">
-            <a
-              href={menu.url}
-              class="p-4 text-white/75 hover:text-white transition-all"
-            >
-              {menu.name}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-    {/* social icons */}
-    <Social source={social.main} className="social-icons mb-8" />
-    {/* copyright */}
-    <p set:html={markdownify(config.params.copyright)} class="text-white/75" />
+<footer>
+  {/* Main Footer */}
+  <div class="bg-dark py-12 px-4">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr] gap-8 md:gap-12">
+        {/* About Column */}
+        <div>
+          <div class="text-primary text-xl font-bold mb-3">
+            {config.site.logo_text || "زدني"}
+          </div>
+          <p class="text-white/60 text-sm leading-relaxed">
+            مدونة تعليمية للطلاب الجامعيين تقدم نصائح دراسية، دروس في البرمجة، وأدلة أكاديمية شاملة لمساعدتك على التفوق
+          </p>
+        </div>
+
+        {/* Quick Links Column */}
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-4">روابط سريعة</h4>
+          <ul class="space-y-2">
+            <li>
+              <a href="/categories" class="text-white/60 text-sm hover:text-white transition duration-200">المقالات</a>
+            </li>
+            <li>
+              <a href="/about" class="text-white/60 text-sm hover:text-white transition duration-200">عن زدني</a>
+            </li>
+            <li>
+              <a href="/contact" class="text-white/60 text-sm hover:text-white transition duration-200">تواصل معنا</a>
+            </li>
+            <li>
+              <a href="/privacy-policy" class="text-white/60 text-sm hover:text-white transition duration-200">سياسة الخصوصية</a>
+            </li>
+          </ul>
+        </div>
+
+        {/* Services Column */}
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-4">خدماتنا</h4>
+          <ul class="space-y-2">
+            <li>
+              <a href="/graduation-projects-service" class="text-white/60 text-sm hover:text-white transition duration-200">مشاريع التخرج</a>
+            </li>
+            <li>
+              <a href="/university-assignments" class="text-white/60 text-sm hover:text-white transition duration-200">الواجبات الجامعية</a>
+            </li>
+            <li>
+              <a href="/academic-translation-service" class="text-white/60 text-sm hover:text-white transition duration-200">الترجمة الأكاديمية</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Social icons */}
+      <div class="mt-8 pt-6 border-t border-white/10 text-white/60">
+        <Social source={social.main} className="social-icons justify-center" />
+      </div>
+    </div>
+  </div>
+
+  {/* Copyright Bar */}
+  <div class="bg-[#0e1726] py-4 px-4">
+    <div class="container text-center">
+      <p class="text-white/50 text-sm">{config.params.copyright}</p>
+    </div>
   </div>
 </footer>
