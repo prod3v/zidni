@@ -1,22 +1,153 @@
 ---
+import HeroPost from "@/components/HeroPost.astro";
+import NewsletterCTA from "@/components/NewsletterCTA.astro";
 import Posts from "@/components/Posts.astro";
+import Sidebar from "@/components/Sidebar.astro";
 import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
-import Pagination from "@/layouts/components/Pagination.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
+import dateFormat from "@/lib/utils/dateFormat";
+import { humanize } from "@/lib/utils/textConverter";
 import { sortByDate } from "@/lib/utils/sortFunctions";
 
+// Fetch and sort all posts
 const posts = await getSinglePage("posts");
 const sortedPosts = sortByDate(posts);
-const totalPages = Math.ceil(posts.length / config.settings.pagination);
-const currentPosts = sortedPosts.slice(0, config.settings.pagination);
+
+// Slice posts for each section (spec: 1 hero + 3 grid + 6 more + 4 sidebar)
+const heroPost = sortedPosts[0];
+const gridPosts = sortedPosts.slice(1, 4);
+const morePosts = sortedPosts.slice(4, 10);
+const sidebarRecentPosts = sortedPosts.slice(10, 14);
+
+// Build category counts from all posts
+const categoryMap = new Map<string, number>();
+for (const post of posts) {
+  for (const cat of post.data.categories) {
+    categoryMap.set(cat, (categoryMap.get(cat) || 0) + 1);
+  }
+}
+const categories = Array.from(categoryMap.entries())
+  .map(([name, count]) => ({ name, count }))
+  .sort((a, b) => b.count - a.count);
+
+// JSON-LD schemas (preserved from original)
+const baseUrl = config.site.base_url;
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "زدني",
+  url: baseUrl,
+  logo: `${baseUrl}${config.site.logo}`,
+  description: config.metadata.meta_description,
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: config.contactinfo.email,
+    contactType: "customer service",
+    availableLanguage: "Arabic",
+  },
+  sameAs: [],
+};
+
+const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "زدني",
+  alternateName: "Zidni",
+  url: baseUrl,
+  description: config.metadata.meta_description,
+  inLanguage: "ar",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${baseUrl}/search?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
+};
 ---
 
 <Base>
-  <section class="section">
+  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} />
+
+  {/* Section 1: Hero — Featured Post */}
+  {heroPost && <HeroPost post={heroPost} />}
+
+  {/* Section 2: Latest Posts Grid */}
+  {gridPosts.length > 0 && (
+    <section class="bg-[#f8f9fa] py-12 px-4">
+      <div class="container">
+        <h2 class="text-xl font-bold text-dark mb-8">أحدث المقالات</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {gridPosts.map((post) => (
+            <article class="bg-white rounded-xl overflow-hidden border border-[#eee] group">
+              {post.data.image && (
+                <a href={`/blog/${post.id}`} class="block overflow-hidden relative">
+                  <div class="bg-light p-4">
+                    <img
+                      src={post.data.image}
+                      alt={post.data.title}
+                      class="w-full aspect-[16/10] object-contain group-hover:scale-[1.03] transition duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  {post.data.categories?.[0] && (
+                    <span class="absolute top-3 start-3 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
+                      {humanize(post.data.categories[0])}
+                    </span>
+                  )}
+                </a>
+              )}
+              <div class="p-4">
+                <h3 class="font-bold text-dark leading-snug mb-2">
+                  <a href={`/blog/${post.id}`} class="hover:text-primary transition duration-300">
+                    {post.data.title}
+                  </a>
+                </h3>
+                <div class="flex items-center gap-2 text-[#999] text-xs">
+                  {post.data.authors?.[0] && <span>{post.data.authors[0]}</span>}
+                  {post.data.date && (
+                    <>
+                      <span>·</span>
+                      <span>{dateFormat(post.data.date)}</span>
+                    </>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {/* Section 3: More Posts + Sidebar */}
+  <section class="py-12 px-4">
     <div class="container">
-      <Posts posts={currentPosts} className="mb-16" />
-      <Pagination currentPage={1} totalPages={totalPages} />
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Main column (2/3) */}
+        <div class="lg:col-span-2">
+          <h2 class="text-xl font-bold text-dark mb-8">المزيد من المقالات</h2>
+          {morePosts.length > 0 && (
+            <Posts posts={morePosts} fluid={false} />
+          )}
+          {/* View All Posts link */}
+          <div class="mt-10 text-center">
+            <a
+              href="/page/2"
+              class="inline-block bg-primary text-white font-semibold text-sm px-8 py-3 rounded-full hover:shadow-lg transition duration-300"
+            >
+              عرض جميع المقالات ←
+            </a>
+          </div>
+        </div>
+
+        {/* Sidebar (1/3) */}
+        <Sidebar categories={categories} recentPosts={sidebarRecentPosts} />
+      </div>
     </div>
   </section>
+
+  {/* Section 4: Newsletter CTA */}
+  <NewsletterCTA />
 </Base>
