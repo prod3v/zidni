@@ -12,11 +12,20 @@
 }
 
 .nav-item {
-  @apply mx-1;
+  @apply mx-2;
 }
 
 .nav-link {
-  @apply p-3 text-lg font-semibold text-dark transition hover:text-primary md:p-4;
+  @apply p-3 text-base font-semibold text-dark transition hover:text-primary md:px-4 md:py-3;
+}
+
+/* sticky header states */
+.header-sticky {
+  @apply fixed top-0 start-0 end-0 bg-white/95 backdrop-blur-sm shadow-sm py-2;
+}
+
+.header-hidden {
+  transform: translateY(-100%);
 }
 
 .nav-dropdown-list {
