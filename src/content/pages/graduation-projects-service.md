@@ -2,9 +2,12 @@
 title: "خدمة دعم مشاريع التخرج"
 meta_title: "خدمة دعم مشاريع التخرج | إرشاد أكاديمي وتقني - زدني"
 description: "نرشدك خطوة بخطوة في مشروع تخرجك — من اختيار الفكرة إلى التحضير للمناقشة. دعم تقني، مراجعة كود، وتوجيه أكاديمي."
-illustration: "/images/posts/graduation.svg"
+illustration: "/images/posts/thesis-amico.svg"
 whatsapp_text: "مرحبا، أحتاج مساعدة في مشروع التخرج"
 draft: false
+
+feature_illustration: "/images/posts/project-management-amico.svg"
+advantages_illustration: "/images/posts/code-review-amico.svg"
 
 feature_heading: "مشروع تخرجك بإيدك — ونحن نرشدك خطوة بخطوة"
 

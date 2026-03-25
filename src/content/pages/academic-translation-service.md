@@ -2,9 +2,12 @@
 title: "خدمة الترجمة الأكاديمية"
 meta_title: "خدمة ترجمة أكاديمية احترافية | ترجمة أبحاث ورسائل جامعية - زدني"
 description: "ترجمة أكاديمية دقيقة من وإلى العربية والإنجليزية. أبحاث، رسائل ماجستير، ملخصات، ومشاريع تخرج. مترجمون متخصصون وتسليم في الموعد."
-illustration: "/images/posts/learning-languages.svg"
+illustration: "/images/posts/translator-amico.svg"
 whatsapp_text: "مرحبا، أحتاج خدمة ترجمة أكاديمية"
 draft: false
+
+feature_illustration: "/images/posts/agreement-amico.svg"
+advantages_illustration: "/images/posts/proofreading-amico.svg"
 
 feature_heading: "ترجمة أكاديمية تفهم تخصصك وتحترم موعدك"
 

@@ -87,6 +87,8 @@ const pagesCollection = defineCollection({
     // Structured service page fields
     feature_heading: z.string().optional(),
     feature_text: z.string().optional(),
+    feature_illustration: z.string().optional(),
+    advantages_illustration: z.string().optional(),
     process_steps: z.array(z.object({
       title: z.string(),
       description: z.string(),

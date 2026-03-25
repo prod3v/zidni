@@ -2,9 +2,12 @@
 title: "خدمة الدعم الأكاديمي والمساعدة في الواجبات"
 meta_title: "دعم أكاديمي ومساعدة في الواجبات الجامعية | تعلّم مع زدني"
 description: "نساعدك تفهم مادتك وتحل واجباتك بنفسك. شرح خصوصي، مراجعة حلول، وتوجيه أكاديمي في البرمجة والرياضيات والمواد الجامعية."
-illustration: "/images/posts/pair-programming.svg"
+illustration: "/images/posts/online-learning-amico.svg"
 whatsapp_text: "مرحبا، أحتاج مساعدة في واجباتي الجامعية"
 draft: false
+
+feature_illustration: "/images/posts/exams-amico.svg"
+advantages_illustration: "/images/posts/studying-amico.svg"
 
 feature_heading: "افهم مادتك وحل واجباتك بثقة — نحن نرشدك"
 

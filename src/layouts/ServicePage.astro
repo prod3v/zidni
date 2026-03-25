@@ -13,6 +13,8 @@ type Props = {
   whatsapp_text?: string;
   feature_heading?: string;
   feature_text?: string;
+  feature_illustration?: string;
+  advantages_illustration?: string;
   process_steps?: { title: string; description: string }[];
   advantages?: { title: string; description: string }[];
   faq?: { question: string; answer: string }[];
@@ -25,6 +27,8 @@ const {
   whatsapp_text,
   feature_heading,
   feature_text,
+  feature_illustration,
+  advantages_illustration,
   process_steps,
   advantages,
   faq,
@@ -46,7 +50,7 @@ const whatsappUrl = `https://wa.me/201557703662?text=${encodeURIComponent(whatsa
   <ServiceFeature
     heading={feature_heading}
     text={feature_text}
-    illustration={illustration}
+    illustration={feature_illustration || illustration}
   />
 )}
 
@@ -57,7 +61,7 @@ const whatsappUrl = `https://wa.me/201557703662?text=${encodeURIComponent(whatsa
 
 {/* Section 4: Advantages */}
 {advantages && advantages.length > 0 && (
-  <ServiceAdvantages advantages={advantages} illustration={illustration} />
+  <ServiceAdvantages advantages={advantages} illustration={advantages_illustration || illustration} />
 )}
 
 {/* Section 5: FAQ */}
