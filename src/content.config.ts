@@ -84,6 +84,21 @@ const pagesCollection = defineCollection({
     whatsapp_text: z.string().optional(),
     layout: z.string().optional(),
     draft: z.boolean().optional(),
+    // Structured service page fields
+    feature_heading: z.string().optional(),
+    feature_text: z.string().optional(),
+    process_steps: z.array(z.object({
+      title: z.string(),
+      description: z.string(),
+    })).optional(),
+    advantages: z.array(z.object({
+      title: z.string(),
+      description: z.string(),
+    })).optional(),
+    faq: z.array(z.object({
+      question: z.string(),
+      answer: z.string(),
+    })).optional(),
   }),
 });
 

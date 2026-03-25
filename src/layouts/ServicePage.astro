@@ -1,0 +1,69 @@
+---
+import ServiceHero from "@/components/service/ServiceHero.astro";
+import ServiceFeature from "@/components/service/ServiceFeature.astro";
+import ServiceProcess from "@/components/service/ServiceProcess.astro";
+import ServiceAdvantages from "@/components/service/ServiceAdvantages.astro";
+import ServiceFAQ from "@/components/service/ServiceFAQ.astro";
+import ServiceCTA from "@/components/service/ServiceCTA.astro";
+
+type Props = {
+  title: string;
+  description: string;
+  illustration?: string;
+  whatsapp_text?: string;
+  feature_heading?: string;
+  feature_text?: string;
+  process_steps?: { title: string; description: string }[];
+  advantages?: { title: string; description: string }[];
+  faq?: { question: string; answer: string }[];
+};
+
+const {
+  title,
+  description,
+  illustration,
+  whatsapp_text,
+  feature_heading,
+  feature_text,
+  process_steps,
+  advantages,
+  faq,
+} = Astro.props;
+
+const whatsappUrl = `https://wa.me/201557703662?text=${encodeURIComponent(whatsapp_text || "مرحبا، أحتاج مساعدة")}`;
+---
+
+{/* Section 1: Hero */}
+<ServiceHero
+  title={title}
+  description={description || ""}
+  illustration={illustration}
+  whatsappUrl={whatsappUrl}
+/>
+
+{/* Section 2: Feature/Value Proposition */}
+{feature_heading && feature_text && (
+  <ServiceFeature
+    heading={feature_heading}
+    text={feature_text}
+    illustration={illustration}
+  />
+)}
+
+{/* Section 3: Process Steps */}
+{process_steps && process_steps.length > 0 && (
+  <ServiceProcess steps={process_steps} />
+)}
+
+{/* Section 4: Advantages */}
+{advantages && advantages.length > 0 && (
+  <ServiceAdvantages advantages={advantages} illustration={illustration} />
+)}
+
+{/* Section 5: FAQ */}
+{faq && faq.length > 0 && (
+  <ServiceFAQ items={faq} />
+)}
+
+{/* Section 6: Bottom CTA */}
+<ServiceCTA whatsappUrl={whatsappUrl} />
