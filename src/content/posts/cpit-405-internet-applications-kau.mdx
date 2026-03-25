@@ -1,0 +1,545 @@
+---
+title: "شرح مادة CPIT 405، تطبيقات الإنترنت | جامعة الملك عبدالعزيز"
+meta_title: "شرح CPIT 405 تطبيقات الإنترنت جامعة الملك عبدالعزيز FCIT"
+description: "شرح شامل لمادة CPIT 405 تطبيقات الإنترنت بجامعة الملك عبدالعزيز: HTML5، CSS3، JavaScript، PHP، MySQL، REST APIs، وأمان الويب. دليل عملي بأمثلة كود وخطة مذاكرة أسبوعية."
+date: 2026-03-25T09:00:00Z
+image: "/images/posts/code-typing.svg"
+categories: ["دليل المواد"]
+authors: ["فريق زدني"]
+tags: ["CPIT 405", "تطبيقات الإنترنت", "Web Development", "PHP", "جامعة الملك عبدالعزيز"]
+draft: false
+---
+
+
+مادة CPIT 405، تطبيقات الإنترنت (Internet Applications). هي من أكثر المواد العملية في خطة قسم تقنية المعلومات بكلية الحاسبات وتقنية المعلومات (FCIT) بجامعة الملك عبدالعزيز. تدرسها في المستوى السابع أو الثامن وأنت خلصت الجزء النظري الأكبر من خطتك، وفجأة تلاقي نفسك أمام كومة من التقنيات: HTML وCSS وJavaScript وPHP وMySQL وREST APIs. كل هذا في ترم واحد.
+
+المادة مو صعبة لأن مفاهيمها معقدة بالضرورة، هي صعبة لأن **عدد التقنيات كثير**. الطالب اللي ما مرّ بتجربة تطوير ويب فعلية قبل المادة يحس إنه يبدأ من الصفر مع خمس لغات في نفس الوقت. هذا الدليل يمشيك خطوة خطوة على كل محور في المادة بشكل مبسّط وعملي.
+
+<QuickSummary>
+- **رمز المادة:** CPIT 405، تطبيقات الإنترنت (Internet Applications)
+- **الساعات المعتمدة:** 3 ساعات (نظري + عملي)
+- **المتطلبات السابقة:** CPIT 370 (تطوير البرمجيات) و CPIT 252 (شبكات الحاسب)
+- **القسم:** تقنية المعلومات، كلية الحاسبات وتقنية المعلومات، جامعة الملك عبدالعزيز
+- **المستوى:** السنة الرابعة (المستوى 7-8)
+- **التقنيات المغطاة:** HTML5، CSS3، JavaScript، React (أساسيات)، PHP، MySQL/MariaDB، REST APIs، JSON، Responsive Design، أمان الويب
+- **التقييم:** واجبات أسبوعية + مشروع نصفي + لاب عملي + اختبار نهائي
+- **يقود إلى:** مشروع التخرج في تطوير الويب، التدريب الميداني في شركات التقنية
+</QuickSummary>
+
+## ليش CPIT 405 تعتبر من أصعب مواد تقنية المعلومات؟
+
+كثير من طلاب IT في FCIT يحسون إن المادة "تهجم" عليهم بتقنيات كثيرة في وقت قصير. والسبب واضح:
+
+- **الفرونت إند والباك إند معا:** المادة تغطي واجهة المستخدم (HTML, CSS, JS) والسيرفر (PHP) وقاعدة البيانات (MySQL) في ترم واحد
+- **كل تقنية فيها عمق:** HTML5 وحدها فيها APIs معقدة، CSS وحدها فيها Flexbox وGrid وAnimations، JavaScript وحده لغة برمجة كاملة
+- **الربط بين الطبقات:** تعلم كل تقنية بشكل منفصل أسهل من تعلم كيف "تتكلم" مع بعضها
+- **أساسيات الويب ضعيفة:** كثير من الطلاب ما مارسوا HTML/CSS قبل المادة، فيبدأون من مكان متأخر
+
+<Callout type="info" title="CPIT 405 مو مادة نظرية">
+المادة عملية بامتياز. كل محاضرة فيها كود، وكل أسبوع فيه واجب أو تمرين عملي. الطالب اللي يحضر بدون لابتوب ويكتفي بالاستماع يخسر نصف الفائدة. افتح المحرر وكود مع الدكتور.
+</Callout>
+
+## نظرة عامة على مواضيع CPIT 405 أسبوعيا
+
+| الأسابيع | الموضوع | التقنيات |
+|-----------|---------|----------|
+| 1-2 | أساسيات الويب وHTML5 | HTML5، هيكل الصفحة، الوسوم الدلالية |
+| 3-4 | CSS3 وتصميم الواجهات | CSS3، Flexbox، Grid، Responsive Design |
+| 5-6 | JavaScript الأساسي | المتغيرات، الدوال، DOM Manipulation |
+| 7 | JavaScript المتقدم | Fetch API، Promises، Async/Await |
+| 8 | أساسيات React | Components، Props، State، JSX |
+| 9 | PHP وأساسيات الباك إند | PHP Syntax، Forms، Sessions |
+| 10-11 | قواعد البيانات وMySQL | CREATE، INSERT، SELECT، JOIN |
+| 12 | ربط PHP بـ MySQL | PDO، prepared statements، CRUD |
+| 13 | REST APIs و JSON | GET، POST، PUT، DELETE، JSON format |
+| 14 | أمان تطبيقات الويب | XSS، CSRF، SQL Injection Prevention |
+| 15 | مراجعة وتسليم المشروع | Full-stack mini project |
+
+## مقارنة التقنيات اللي تغطيها المادة
+
+| التقنية | الدور | مكان التنفيذ | صعوبة البداية |
+|---------|-------|--------------|----------------|
+| HTML5 | هيكل الصفحة | المتصفح | سهلة |
+| CSS3 | التصميم والمظهر | المتصفح | متوسطة |
+| JavaScript | التفاعل والمنطق | المتصفح | متوسطة-صعبة |
+| React | واجهة مستخدم ديناميكية | المتصفح (مع Build Tool) | صعبة |
+| PHP | منطق السيرفر | السيرفر | متوسطة |
+| MySQL | تخزين البيانات | قاعدة البيانات | سهلة-متوسطة |
+| REST API | التواصل بين الطبقات | السيرفر | متوسطة |
+| JSON | تنسيق البيانات | أي مكان | سهلة |
+
+## 1. HTML5 وهيكل الصفحة (الأسابيع 1-2)
+
+HTML5 هي اللغة اللي تبني فيها **هيكل** الصفحة. مو مسؤولة عن المظهر (هذا CSS) ولا عن التفاعل (هذا JavaScript). هي بس تحدد المحتوى وكيف منظم.
+
+### الوسوم الدلالية في HTML5
+
+HTML5 أضافت وسوم "دلالية" تعطي معنى للمحتوى بدل `<div>` العشوائية:
+
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>صفحة CPIT 405</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav>روابط التنقل هنا</nav>
+  </header>
+  <main>
+    <article>
+      <h1>عنوان رئيسي</h1>
+      <p>محتوى المقالة هنا.</p>
+    </article>
+    <aside>محتوى جانبي</aside>
+  </main>
+  <footer>تذييل الصفحة</footer>
+</body>
+</html>
+```
+
+الوسوم مثل `<header>` و`<main>` و`<article>` و`<footer>` و`<section>` تساعد محركات البحث ومستخدمي قارئات الشاشة على فهم الصفحة، وهذا يسمى **Semantic HTML**.
+
+<Callout type="tip" title="نصيحة سريعة لـ HTML5">
+تعلم HTML5 Forms بشكل جيد، خصوصا attributes مثل `required`، `type="email"`، `placeholder`. المادة تركز عليها لأنها مرتبطة بالباك إند والتحقق من البيانات.
+</Callout>
+
+لمزيد من التفاصيل عن HTML وCSS من الصفر، راجع [دليل HTML وCSS للمبتدئين](/blog/html-css-beginners-guide).
+
+## 2. CSS3 والتصميم المتجاوب (الأسابيع 3-4)
+
+CSS3 مسؤولة عن كل ما تشوفه في الصفحة: الألوان، الخطوط، التخطيط، والحركة. أهم ما تركز عليه في المادة هو **Flexbox** و**Grid** لأنهما الأساس في بناء تخطيطات حديثة.
+
+### Flexbox في 10 سطور
+
+```css
+/* تخطيط Flexbox أفقي بين ثلاثة عناصر */
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.card {
+  flex: 1 1 250px;
+  background: #f0f4ff;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+```
+
+### التصميم المتجاوب (Responsive Design)
+
+```css
+/* Mobile First: ابدأ بالجوال ثم وسّع للشاشات الأكبر */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+```
+
+التصميم المتجاوب (Responsive Design) يعني إن الصفحة تبدو صح على الجوال والتابلت والكمبيوتر. المادة تركز على هذا لأنه معيار أساسي في سوق العمل اليوم.
+
+## 3. JavaScript ومعالجة DOM (الأسابيع 5-7)
+
+JavaScript هي القلب النابض لأي موقع تفاعلي. في المادة تتعلم ثلاث طبقات من JS:
+
+- **الأساسيات:** متغيرات، شروط، حلقات، دوال
+- **DOM Manipulation:** تغيير محتوى الصفحة برمجيا
+- **Fetch API:** التواصل مع السيرفر بدون إعادة تحميل الصفحة
+
+### مثال DOM Manipulation عملي
+
+```javascript
+// جلب عنصر بالـ ID وتغيير محتواه عند النقر
+const button = document.getElementById('myBtn');
+const display = document.getElementById('display');
+let count = 0;
+
+button.addEventListener('click', function() {
+  count++;
+  display.textContent = 'عدد النقرات: ' + count;
+  display.style.color = count > 5 ? 'red' : 'green';
+});
+```
+
+### Fetch API والتواصل مع السيرفر
+
+```javascript
+// جلب بيانات من API خارجي
+async function getStudentData(id) {
+  try {
+    const response = await fetch(`/api/students/${id}`);
+    if (!response.ok) throw new Error('فشل الطلب');
+    const data = await response.json();
+    console.log('اسم الطالب:', data.name);
+    return data;
+  } catch (error) {
+    console.error('خطأ:', error.message);
+  }
+}
+```
+
+<Callout type="warning" title="JavaScript وعدها للأسبوع الثالث">
+الطلاب اللي يهملون JavaScript في الأسابيع الأولى يعانون كثيرا لما يوصلون لـ React و REST APIs. JavaScript هي اللغة المشتركة بين الفرونت إند والباك إند في المادة. خصّص وقت يومي إضافي لها.
+</Callout>
+
+## 4. أساسيات React (الأسبوع 8)
+
+React مكتبة JavaScript لبناء واجهات مستخدم تفاعلية. في CPIT 405 تتعلم المفاهيم الأساسية فقط، مو كل شيء في React.
+
+### Component و Props و State
+
+```jsx
+// Component بسيط بـ Props و State
+import { useState } from 'react';
+
+function CourseCard({ title, credits }) {
+  const [saved, setSaved] = useState(false);
+
+  return (
+    <div className="card">
+      <h3>{title}</h3>
+      <p>الساعات: {credits}</p>
+      <button onClick={() => setSaved(prev => !prev)}>
+        {saved ? 'تم الحفظ' : 'احفظ المادة'}
+      </button>
+    </div>
+  );
+}
+
+export default CourseCard;
+```
+
+المادة لا تتوقع منك تصبح خبيرا في React، بل تفهم مفهوم الـ Components والـ State وكيف تتعامل مع البيانات الديناميكية.
+
+## 5. PHP وأساسيات الباك إند (الأسبوع 9)
+
+PHP هي لغة السيرفر الأكثر انتشارا في تعليم تطوير الويب. تشتغل على السيرفر وتولّد HTML ترسله للمتصفح.
+
+### أول صفحة PHP
+
+```php
+<?php
+// معالجة النموذج عند الإرسال
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = htmlspecialchars($_POST['name'] ?? '');
+    $email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
+
+    if (empty($name) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = 'الرجاء ملء جميع الحقول بشكل صحيح';
+    } else {
+        $success = "مرحبا $name! تم استلام بياناتك.";
+    }
+}
+?>
+```
+
+### Sessions في PHP
+
+```php
+<?php
+session_start();
+
+// تخزين بيانات المستخدم بعد تسجيل الدخول
+$_SESSION['user_id'] = 42;
+$_SESSION['username'] = 'ahmed';
+$_SESSION['role'] = 'student';
+
+// التحقق من تسجيل الدخول في صفحة محمية
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+
+echo 'مرحبا، ' . $_SESSION['username'];
+?>
+```
+
+## 6. MySQL وقواعد البيانات (الأسابيع 10-11)
+
+MySQL هي قاعدة البيانات العلائقية المستخدمة في المادة. تتعلم كيف تنشئ جداول وتتعامل معها بلغة SQL.
+
+لتعلم أساسيات SQL من الصفر، راجع [دليل SQL وقواعد البيانات للمبتدئين](/blog/sql-database-beginners-guide).
+
+### أوامر SQL الأساسية في المادة
+
+```sql
+-- إنشاء جدول الطلاب
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    gpa DECIMAL(3,2),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- إضافة طالب
+INSERT INTO students (name, email, gpa)
+VALUES ('أحمد محمد', 'ahmed@stu.kau.edu.sa', 4.50);
+
+-- جلب طلاب معدلهم أعلى من 4.0
+SELECT name, email, gpa
+FROM students
+WHERE gpa > 4.0
+ORDER BY gpa DESC;
+```
+
+### JOIN وربط الجداول
+
+```sql
+-- جلب الطلاب مع المواد اللي سجلوها
+SELECT s.name AS student_name,
+       c.title AS course_title,
+       e.grade
+FROM students s
+JOIN enrollments e ON s.id = e.student_id
+JOIN courses c ON e.course_id = c.id
+WHERE s.gpa > 3.5;
+```
+
+## 7. ربط PHP بـ MySQL وبناء تطبيق CRUD (الأسابيع 12)
+
+هنا يصير الربط بين كل ما تعلمته. CRUD تعني Create, Read, Update, Delete، وهي العمليات الأساسية لأي تطبيق ويب.
+
+### PDO وPrepared Statements
+
+```php
+<?php
+// الاتصال بقاعدة البيانات بأمان
+$dsn = 'mysql:host=localhost;dbname=cpit405db;charset=utf8mb4';
+$pdo = new PDO($dsn, 'root', '', [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+]);
+
+// جلب طالب بـ ID (Prepared Statement لمنع SQL Injection)
+$stmt = $pdo->prepare('SELECT * FROM students WHERE id = ?');
+$stmt->execute([$_GET['id']]);
+$student = $stmt->fetch();
+
+if ($student) {
+    echo json_encode($student, JSON_UNESCAPED_UNICODE);
+}
+?>
+```
+
+<CTABox title="مشروع الباك إند أو ربط PHP بـ MySQL صعب عليك؟" description="فريقنا متخصص في مواد FCIT بجامعة الملك عبدالعزيز. سواء واجه أو مشروع أو شرح جزء محدد في المادة، أرسل لنا التفاصيل على واتساب ونرد عليك بعرض خلال ساعة." buttonText="تواصل معنا عبر واتساب" buttonUrl="https://wa.me/201557703662?text=مرحبا، أحتاج مساعدة في مادة CPIT 405" />
+
+## 8. REST APIs و JSON (الأسبوع 13)
+
+REST API هي الطريقة المعيارية اللي تتكلم فيها التطبيقات مع بعضها عبر الإنترنت. في CPIT 405 تتعلم كيف تبني API بسيطة بـ PHP وكيف تستهلكها بـ JavaScript.
+
+### هيكل JSON
+
+```json
+{
+  "status": "success",
+  "data": {
+    "id": 42,
+    "name": "أحمد محمد",
+    "email": "ahmed@stu.kau.edu.sa",
+    "courses": [
+      { "code": "CPIT405", "title": "تطبيقات الإنترنت", "grade": "A" },
+      { "code": "CPIT370", "title": "تطوير البرمجيات", "grade": "B+" }
+    ]
+  },
+  "timestamp": "2026-03-25T09:00:00Z"
+}
+```
+
+### API Endpoint بسيط بـ PHP
+
+```php
+<?php
+header('Content-Type: application/json; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
+
+$method = $_SERVER['REQUEST_METHOD'];
+
+if ($method === 'GET') {
+    $students = [
+        ['id' => 1, 'name' => 'أحمد', 'gpa' => 4.5],
+        ['id' => 2, 'name' => 'سارة', 'gpa' => 4.75]
+    ];
+    echo json_encode(['status' => 'ok', 'data' => $students],
+                     JSON_UNESCAPED_UNICODE);
+} else {
+    http_response_code(405);
+    echo json_encode(['status' => 'error', 'message' => 'Method Not Allowed']);
+}
+?>
+```
+
+<Callout type="info" title="HTTP Methods في REST">
+المادة تركز على أربع HTTP Methods: GET لجلب البيانات، POST لإضافة بيانات جديدة، PUT لتعديل بيانات موجودة، DELETE لحذف بيانات. افهم متى تستخدم كل واحدة وستفهم REST بشكل أعمق.
+</Callout>
+
+## 9. أمان تطبيقات الويب (الأسبوع 14)
+
+الأمان محور مهم في المادة وكثيرا ما يكون في الاختبار النهائي. تتعلم ثلاث هجمات شائعة وكيف تتحاشاها.
+
+### XSS (Cross-Site Scripting)
+
+XSS تحصل لما المهاجم يحشر كود JavaScript خبيث في موقعك يتنفذ على متصفح الضحية.
+
+```php
+<?php
+// خطأ: عرض مدخلات المستخدم مباشرة بدون تنظيف
+echo "<p>" . $_GET['name'] . "</p>"; // خطير
+
+// صح: استخدام htmlspecialchars لتحويل الرموز الخطرة
+echo "<p>" . htmlspecialchars($_GET['name'], ENT_QUOTES, 'UTF-8') . "</p>";
+?>
+```
+
+### SQL Injection
+
+```php
+<?php
+// خطأ: دمج مدخلات المستخدم مباشرة في الاستعلام
+$query = "SELECT * FROM users WHERE name = '" . $_GET['name'] . "'";
+// لو المستخدم أدخل: ' OR '1'='1 يجيب كل المستخدمين
+
+// صح: Prepared Statements تفصل الكود عن البيانات
+$stmt = $pdo->prepare("SELECT * FROM users WHERE name = ?");
+$stmt->execute([$_GET['name']]);
+?>
+```
+
+### CSRF (Cross-Site Request Forgery)
+
+CSRF تحصل لما موقع آخر يخلي متصفح الضحية يرسل طلبا لموقعك بدون علمها. الحل هو CSRF Token:
+
+```php
+<?php
+session_start();
+// توليد Token عشوائي وحفظه في الـ Session
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+// في الفورم HTML:
+// <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+
+// عند معالجة الفورم، تحقق من التوكن
+if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+    die('طلب غير مصرح به');
+}
+?>
+```
+
+<Callout type="warning" title="الأمان مو اختياري">
+في بيئة العمل الحقيقية، ثغرة XSS أو SQL Injection واحدة كافية تدمر تطبيقا بالكامل. افهم هذه المفاهيم فهما حقيقيا، مو بس للاختبار. المادة تشرحها لأنها من أكثر الثغرات شيوعا في الواقع.
+</Callout>
+
+## خطة مذاكرة فعالة لـ CPIT 405
+
+### الاستعداد قبل الترم
+
+<StepList title="خطوات التحضير لـ CPIT 405">
+1. **راجع HTML وCSS الأساسي:** لو ما لمست HTML من قبل، خصص أسبوعا قبل بداية الترم لتعلم أساسياتها من قناة يوتيوب أو موقع مجاني
+2. **نزّل بيئة التطوير مبكرا:** VS Code مع إضافات مثل Live Server وPrettier وPHP Intelephense، نزّلها وتعوّد عليها قبل أول محاضرة
+3. **نزّل XAMPP أو Laragon:** هذه البيئة تشغّل PHP وMySQL على جهازك. أفضل تكون جاهز من قبل محاضرة PHP
+4. **مارس JavaScript لأسبوعين:** حل تمارين صغيرة يوميا على JS، هذا يفرق كثيرا لما توصل للـ Fetch API وReact
+5. **اقرأ مقدمة عن REST APIs:** فيديو 20 دقيقة يشرح مفهوم API يكفي للبداية
+</StepList>
+
+### خطة الأسبوع النموذجي في الترم
+
+<StepList title="كيف تمشي كل أسبوع في CPIT 405">
+1. **اليوم الأول بعد المحاضرة:** شوف المثال اللي قدمه الدكتور واكتبه بيدك من الصفر بدون نسخ
+2. **اليوم الثاني:** حل تمرين إضافي من الكتاب أو الإنترنت على نفس الموضوع
+3. **اليوم الثالث:** ابدأ الواجب الأسبوعي مبكرا، لا تتركه لليلة التسليم
+4. **قبل اللاب بيوم:** اقرأ تعليمات اللاب وجهّز بيئتك، اللاب وقته محدود
+5. **نهاية الأسبوع:** اكتب ملاحظاتك بكلامك أنت، مو نسخ من السلايدات
+</StepList>
+
+## الأخطاء الشائعة في CPIT 405
+
+<Callout type="warning" title="الأخطاء اللي تخسّر الطلاب درجات">
+**1. تداخل HTML وPHP بدون منطق:** كثير من الطلاب يكتبون PHP و HTML متداخلين بشكل فوضوي. حاول تفصل المنطق (PHP) عن العرض (HTML) قدر الإمكان.
+
+**2. نسيان `session_start()` في أول الملف:** PHP Sessions لا تشتغل بدونها، وهذا خطأ شائع جدا في الاختبارات.
+
+**3. تجاهل رسائل الخطأ:** لو الصفحة فارغة أو في خطأ، افتح Error Log أو شغّل `error_reporting(E_ALL)` في بداية الكود.
+
+**4. استخدام `mysql_*` القديم:** هذه الدوال ماتت منذ PHP 7. استخدم PDO أو MySQLi.
+
+**5. عدم اختبار الـ API قبل التسليم:** استخدم Postman أو Thunder Client لاختبار كل endpoint قبل ما تكتب كود الفرونت إند.
+</Callout>
+
+## أدوات تحتاجها في المادة
+
+| الأداة | الاستخدام | رابط |
+|--------|----------|------|
+| VS Code | محرر الكود الرئيسي | مجاني |
+| XAMPP / Laragon | تشغيل PHP وMySQL محليا | مجاني |
+| Postman / Thunder Client | اختبار REST APIs | مجاني |
+| phpMyAdmin | إدارة قواعد البيانات بواجهة مرئية | يأتي مع XAMPP |
+| Chrome DevTools | تصحيح أخطاء الفرونت إند | مدمج في Chrome |
+| Git | إدارة إصدارات المشروع | موصى به |
+
+## كيف يُقيَّم المشروع النهائي في CPIT 405
+
+المشروع النهائي عادة يكون تطبيق ويب كامل (Full-Stack) يجمع كل ما درسته:
+
+- **واجهة أمامية (Frontend):** HTML5 وCSS3 وJavaScript
+- **واجهة خلفية (Backend):** PHP مع REST API
+- **قاعدة البيانات:** MySQL مع عمليات CRUD
+- **الأمان:** تطبيق على الأقل CSRF Protection وXSS Prevention و Prepared Statements
+
+أمثلة مشاريع شائعة في المادة: نظام إدارة طلاب، متجر إلكتروني بسيط، منصة تسجيل مواد، نظام حجز مواعيد.
+
+لأفكار مشاريع تطوير ويب إضافية، راجع [أفكار مشاريع تخرج في تطوير الويب](/blog/web-development-graduation-projects).
+
+## مقارنة ترتيب تعلم التقنيات
+
+كثير من الطلاب يسألون: "من أين أبدأ؟" الإجابة الصح هي أنك تتعلمها بالترتيب اللي تقدمه المادة:
+
+```
+HTML5 --> CSS3 --> JavaScript --> PHP --> MySQL --> REST API --> Security
+  |         |          |
+هيكل     مظهر      تفاعل
+الصفحة   وتصميم   وربط
+```
+
+لا تحاول تتجاوز الترتيب. طالب ما فهم JavaScript ما راح يفهم Fetch API ولا React. وطالب ما يعرف SQL ما راح يفهم CRUD بـ PHP.
+
+## نصائح للاختبار النهائي
+
+- **الاختبار النظري:** يركز على مفاهيم HTTP Methods، الفرق بين GET وPOST، مفاهيم XSS وCSRF وSQL Injection، وهيكل JSON
+- **الاختبار العملي (اللاب):** كتابة كود PHP أو SQL أو JavaScript. الكتابة على الورق في الاختبار أصعب من الكتابة في المحرر. تمرّن على الكتابة اليدوية
+- **مراجع الكتابة اليدوية:** راجع syntax الأوامر الأساسية: كيف تكتب SELECT في SQL، كيف تكتب isset وempty في PHP، كيف تكتب addEventListener في JS
+- **أسئلة كثيرة على المشروع:** الدكتور قد يسأل عن تفاصيل مشروعك، كن جاهزا تشرح كل جزء كتبته
+
+<Callout type="tip" title="سر النجاح في CPIT 405">
+الطالب اللي يبني مشروعا صغيرا من الصفر كل أسبوع يتفوق على الطالب اللي يحفظ النظريات. ابدأ من يوم 1 ببناء صفحة HTML، أضف لها CSS، أضف JavaScript، وهكذا حتى يصير عندك مشروع كامل في نهاية الترم بدون ضغط.
+</Callout>
+
+## خلاصة
+
+مادة CPIT 405 تطبيقات الإنترنت واحدة من أكثر المواد العملية في خطة IT بجامعة الملك عبدالعزيز. صعوبتها مش في عمق المفاهيم بل في **كثرة التقنيات** وحاجتك تربط بينها في مشروع متكامل.
+
+الطالب الناجح في هذه المادة هو اللي يكود كل يوم، يبني مشاريع صغيرة بجانب الواجبات، ويسأل عن أي شيء ما فهمه قبل ما يتراكم. التقنيات في هذه المادة هي نفسها التقنيات اللي تبني عليها مسيرتك المهنية في تطوير الويب، فاستثمارك فيها يتجاوز حدود الترم.
+
+<CTABox title="واجب CPIT 405 أو مشروع تطبيقات الإنترنت ضاغطك؟" description="فريقنا متخصص في مواد كلية الحاسبات وتقنية المعلومات بجامعة الملك عبدالعزيز. HTML، CSS، JavaScript، PHP، MySQL، REST APIs، أي جزء في المادة نقدر نساعدك فيه. أرسل التفاصيل على واتساب ونرد عليك بعرض خلال ساعة." buttonText="أرسل واجبك على واتساب الآن" buttonUrl="https://wa.me/201557703662?text=مرحبا، أحتاج مساعدة في مادة CPIT 405" />
