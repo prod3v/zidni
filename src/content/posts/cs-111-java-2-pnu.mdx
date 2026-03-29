@@ -1,0 +1,527 @@
+---
+title: "شرح مادة CS 111، جافا 2 لغة البرمجة 2 - جامعة الاميرة نورة"
+meta_title: "شرح CS 111 جافا 2 OOP جامعة الاميرة نورة PNU"
+description: "شرح مادة CS 111 جافا 2 بجامعة الاميرة نورة: الكلاسات، الوراثة، تعدد الاشكال، الواجهات، معالجة الاستثناءات، والملفات بلغة جافا مع امثلة عملية."
+date: 2026-03-25T09:00:00Z
+image: "/images/posts/programming.svg"
+categories: ["دليل المواد"]
+authors: ["فريق زدني"]
+tags: ["CS 111", "جافا", "Java", "OOP", "جامعة الاميرة نورة"]
+draft: false
+---
+
+
+مادة CS 111، جافا 2 / لغة البرمجة 2 (Programming Language 2) بجامعة الاميرة نورة بنت عبدالرحمن. هذه المادة هي اللي تنقلك من مرحلة "اكتب كود يشتغل" الى مرحلة "اصمم برنامج بطريقة احترافية". لو كنتي اخذتي CS 110 وتعلمتي الاساسيات مثل المتغيرات والشروط والحلقات، الحين في CS 111 راح تتعلمين البرمجة كائنية التوجه (OOP) وهذه هي الطريقة اللي كل المبرمجين يستخدمونها في المشاريع الحقيقية.
+
+كثير من الطالبات يحسون ان CS 110 كانت مقدور عليها، لكن CS 111 فيها نقلة نوعية. الموضوع مو صعب، بس يحتاج تغيير في طريقة التفكير. بدل ما تكتبين كل شيء في main واحد، راح تتعلمين تقسمين الكود الى كلاسات وكائنات وتبنين برامج منظمة وقابلة للتوسع. هنا تبدأ البرمجة الحقيقية.
+
+<QuickSummary>
+- **رمز المادة:** CS 111 / عال 111، لغة البرمجة 2 (Programming Language 2)
+- **الساعات المعتمدة:** 3 ساعات
+- **المتطلب السابق:** CS 110 (لغة البرمجة 1)
+- **اللغة المستخدمة:** Java
+- **اهم المواضيع:** الكلاسات والكائنات، التغليف، الوراثة، تعدد الاشكال، الواجهات، معالجة الاستثناءات، التعامل مع الملفات
+- **يقود الى:** مواد هياكل البيانات وهندسة البرمجيات
+</QuickSummary>
+
+## ليش CS 111 جافا 2 مادة محورية؟
+
+كل تطبيق تستخدمينه يوميا، من تطبيق الجوال الى نظام الجامعة الى تويتر ونتفلكس، مبني على مبادئ البرمجة كائنية التوجه (OOP). مو مبالغة، OOP هي اللغة اللي يتكلم فيها المبرمجون.
+
+في CS 110 تعلمتي تكتبين كود يحل مشكلة بسيطة. في CS 111 تتعلمين تصممين **نظام كامل**. الفرق كبير. تخيلي الفرق بين انك تطبخين طبق واحد وبين انك تديرين مطبخ مطعم كامل. نفس المهارات الاساسية موجودة، لكن الطريقة والتنظيم مختلفين تماما.
+
+بعد ما تخلصين CS 111، راح تلاقين ان كل مادة بعدها تفترض انك تعرفين OOP. هياكل البيانات (Data Structures) تبني عليها مباشرة. هندسة البرمجيات تستخدم مبادئها. حتى مشروع التخرج يعتمد عليها. يعني لو اتقنتيها، باقي المشوار يصير اسهل بمراحل.
+
+## 1. الكلاسات والكائنات في CS 111، Classes & Objects
+
+هذا اول موضوع واهم موضوع. كل شيء في OOP يدور حوله.
+
+**Class** = القالب او المخطط. مثل فكرة "طالبة" بشكل عام.
+**Object** = النسخة الحقيقية. مثل "نورة" او "سارة"، طالبات فعليات.
+
+الكلاس يحدد الخصائص (attributes) والسلوكيات (methods)، والكائن هو نسخة حية من هذا الكلاس.
+
+```java
+// كلاس يمثل طالبة في جامعة الاميرة نورة
+public class Student {
+    String name;
+    int id;
+    double gpa;
+
+    // المنشئ (Constructor) - ينشئ كائن جديد
+    public Student(String name, int id, double gpa) {
+        this.name = name;
+        this.id = id;
+        this.gpa = gpa;
+    }
+
+    // دالة تعرض بيانات الطالبة
+    public void displayInfo() {
+        System.out.println(name + " | " + id + " | GPA: " + gpa);
+    }
+}
+```
+
+الحين تقدرين تنشئين كائنات (طالبات فعليات) من هذا الكلاس:
+
+```java
+Student s1 = new Student("نورة", 441001234, 4.5);
+Student s2 = new Student("سارة", 441005678, 3.8);
+
+s1.displayInfo(); // نورة | 441001234 | GPA: 4.5
+s2.displayInfo(); // سارة | 441005678 | GPA: 3.8
+```
+
+لاحظي ان `new` هي اللي تنشئ الكائن فعليا، وتستدعي المنشئ (Constructor) اللي كتبتيه. الكلمة `this` تشير للكائن الحالي وتستخدمينها عشان تفرقين بين الـ parameter واسم المتغير في الكلاس.
+
+<Callout type="tip" title="نصيحة عملية">
+لما تكتبين كلاس جديد، فكري فيه كشيء حقيقي. كلاس `Student` يمثل طالبة، كلاس `Course` يمثل مادة، كلاس `Book` يمثل كتاب. هذا يسهل عليك تحديدين الخصائص والدوال اللي يحتاجها.
+</Callout>
+
+## 2. التغليف في جافا 2، Encapsulation
+
+التغليف يعني انك **تحمين بيانات الكائن** من الوصول المباشر. تخلين المتغيرات `private` وتوفرين دوال `getter` و `setter` للوصول لها.
+
+ليش هذا مهم؟ تخيلي عندك متغير المعدل `gpa`، بدون تغليف اي احد يقدر يكتب `s1.gpa = 10.0` وهذي قيمة غير منطقية. مع التغليف، تتحكمين بالقيم المسموحة.
+
+```java
+public class Student {
+    private String name;    // private = ما احد يوصل لها مباشرة
+    private double gpa;
+
+    public Student(String name, double gpa) {
+        this.name = name;
+        setGpa(gpa);        // نستخدم setter للتحقق
+    }
+
+    // Getter - ترجع القيمة
+    public String getName() { return name; }
+    public double getGpa() { return gpa; }
+
+    // Setter - تعدل القيمة مع تحقق
+    public void setGpa(double gpa) {
+        if (gpa >= 0 && gpa <= 5.0)
+            this.gpa = gpa;
+        else
+            System.out.println("خطأ: المعدل لازم بين 0 و 5");
+    }
+}
+```
+
+```java
+Student s = new Student("لمى", 4.2);
+System.out.println(s.getName()); // لمى
+s.setGpa(6.0);  // خطأ: المعدل لازم بين 0 و 5
+s.setGpa(4.8);  // تمام، القيمة تتغير
+// s.name = "هند"; // خطأ! name هي private
+```
+
+<Callout type="warning" title="خطأ شائع في الاختبار">
+بعض الطالبات يكتبون getters/setters لمتغيرات `public`. هذا مو تغليف حقيقي. التغليف الصحيح = **private attributes + public getters/setters**. لو المتغير public، اي احد يقدر يغيره مباشرة والـ setter ما له فايدة.
+</Callout>
+
+<CTABox title="واجب الكلاسات والتغليف محيرك؟" description="كثير من طالبات CS 111 بجامعة الاميرة نورة يواجهون صعوبة في اول واجبات OOP. ارسلي لنا الواجب على واتساب ونساعدك تفهمينه وتحلينه خطوة بخطوة." buttonText="ارسلي واجبك على واتساب" buttonUrl="https://wa.me/201557703662?text=مرحبا، احتاج مساعدة في واجب CS 111 جافا 2 - جامعة الاميرة نورة" />
+
+## 3. الوراثة في جافا، Inheritance
+
+عندك كلاسين يتشابهون في خصائص كثيرة؟ بدل ما تكررين نفس الكود، تستخدمين الوراثة.
+
+الفكرة بسيطة: كلاس **ابن (subclass)** يرث كل خصائص ودوال كلاس **اب (superclass)**، ويقدر يضيف خصائص خاصة فيه.
+
+```java
+// كلاس الاب - شخص بشكل عام
+public class Person {
+    protected String name;
+    protected int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void introduce() {
+        System.out.println("اسمي " + name + " وعمري " + age);
+    }
+}
+```
+
+الحين نكتب كلاس `Student` يرث من `Person` باستخدام `extends`:
+
+```java
+// كلاس الابن - طالبة ترث من شخص
+public class Student extends Person {
+    private int studentId;
+
+    public Student(String name, int age, int studentId) {
+        super(name, age);  // استدعاء منشئ الاب
+        this.studentId = studentId;
+    }
+
+    @Override
+    public void introduce() {
+        super.introduce();  // تنفيذ نسخة الاب اولا
+        System.out.println("رقمي الجامعي: " + studentId);
+    }
+}
+```
+
+ونفس الشيء نقدر نكتب كلاس `Employee` يرث من `Person`:
+
+```java
+public class Employee extends Person {
+    private String department;
+
+    public Employee(String name, int age, String department) {
+        super(name, age);
+        this.department = department;
+    }
+
+    @Override
+    public void introduce() {
+        super.introduce();
+        System.out.println("القسم: " + department);
+    }
+}
+```
+
+### نقاط مهمة في الوراثة
+
+- **extends**: الكلمة المفتاحية للوراثة في جافا
+- **super()**: لاستدعاء منشئ الكلاس الاب، لازم يكون **اول سطر** في المنشئ
+- **@Override**: علامة تقولين فيها "انا اعيد تعريف دالة موجودة في الاب"
+- **protected**: مستوى وصول يسمح للكلاس الابن يوصل للمتغير لكن يمنع الوصول الخارجي
+- جافا تدعم **وراثة واحدة فقط**: كلاس يرث من كلاس واحد بس
+
+<Callout type="info" title="is-a relationship">
+الوراثة تمثل علاقة "هو/هي". الطالبة **هي** شخص (Student is a Person). الموظفة **هي** شخص (Employee is a Person). لو العلاقة ما تنطبق، الوراثة مو الحل المناسب. مثلا: السيارة **مو** شخص، فما ينفع ترث من Person.
+</Callout>
+
+## 4. تعدد الاشكال في جافا 2، Polymorphism
+
+هذا الموضوع اللي يخلي كثير من الطالبات يحسون ان OOP معقدة. لكن لو فهمتيه، راح تحسين ان كل شيء ثاني سهل.
+
+تعدد الاشكال يعني ان **نفس الدالة تتصرف بشكل مختلف** حسب نوع الكائن الفعلي. فيه نوعين:
+
+### النوع الاول: Method Overloading (وقت الترجمة)
+
+نفس اسم الدالة لكن بارامترات مختلفة. هذا تعلمتيه في CS 110:
+
+```java
+public class Calculator {
+    // نفس الاسم، بارامترات مختلفة
+    public int add(int a, int b) { return a + b; }
+    public double add(double a, double b) { return a + b; }
+    public int add(int a, int b, int c) { return a + b + c; }
+}
+```
+
+### النوع الثاني: Method Overriding + Dynamic Binding (وقت التشغيل)
+
+هنا القوة الحقيقية. نفس الدالة تتصرف مختلف حسب الكائن الفعلي:
+
+```java
+// المتغير نوعه الاب، لكن الكائن من الابن
+Person p1 = new Student("نورة", 20, 441001234);
+Person p2 = new Employee("هند", 30, "تقنية المعلومات");
+
+p1.introduce(); // تستدعي نسخة Student
+p2.introduce(); // تستدعي نسخة Employee
+```
+
+لاحظي ان `p1` و `p2` كلهم نوعهم `Person`، لكن جافا في وقت التشغيل تعرف ان `p1` فعليا `Student` و `p2` فعليا `Employee`، فتستدعي النسخة الصحيحة. هذا اسمه **Dynamic Binding**.
+
+الفايدة الحقيقية تظهر لما نحطهم في مصفوفة:
+
+```java
+Person[] people = {p1, p2};
+for (Person p : people) {
+    p.introduce(); // كل كائن يستدعي نسخته الخاصة
+    System.out.println("---");
+}
+```
+
+<Callout type="important" title="كيف تفهمين تعدد الاشكال">
+لما تشوفين سطر مثل `Person p = new Student(...)` اسألي نفسك: ايش نوع المتغير (Person) وايش نوع الكائن الفعلي (Student)؟ الدالة اللي تنستدعي دايما تكون من **نوع الكائن الفعلي** مو نوع المتغير. هذه القاعدة الذهبية.
+</Callout>
+
+كثير من الطالبات يحسون ان تعدد الاشكال موضوع ضبابي ويضيعون في اسئلة تتبع الكود. اذا حسيتي بنفس الشيء، لا تقلقين، هذا طبيعي جدا وكل الطالبات يمرون بنفس المرحلة.
+
+<CTABox title="تعدد الاشكال ضايع عليك؟" description="موضوع Polymorphism من اصعب المواضيع على طالبات CS 111. ارسلي لنا على واتساب ونشرحه لك بامثلة مخصصة تناسب مستواك، خطوة بخطوة لين يوضح تماما." buttonText="اطلبي شرح خاص على واتساب" buttonUrl="https://wa.me/201557703662?text=مرحبا، احتاج شرح خاص لموضوع Polymorphism - CS 111 جامعة الاميرة نورة" />
+
+## 5. التجريد والواجهات، Abstract Classes & Interfaces
+
+### الكلاس المجرد (Abstract Class)
+
+كلاس ما تقدرين تنشئين منه كائن مباشرة. هو بس قالب يحدد الشكل العام والكلاسات اللي ترث منه هي اللي تكمل التفاصيل.
+
+```java
+// كلاس مجرد - ما ينفع ننشئ منه كائن
+public abstract class Shape {
+    String color;
+
+    public Shape(String color) { this.color = color; }
+
+    // دالة مجردة - الابناء لازم يعرفونها
+    public abstract double getArea();
+
+    public void display() {
+        System.out.println("اللون: " + color);
+        System.out.println("المساحة: " + getArea());
+    }
+}
+```
+
+الدالة `getArea()` ما لها جسم. كل كلاس ابن لازم يكتب تعريفه الخاص لها:
+
+```java
+public class Circle extends Shape {
+    double radius;
+
+    public Circle(String color, double radius) {
+        super(color);
+        this.radius = radius;
+    }
+
+    @Override
+    public double getArea() {
+        return Math.PI * radius * radius;
+    }
+}
+```
+
+```java
+public class Rectangle extends Shape {
+    double width, height;
+
+    public Rectangle(String color, double w, double h) {
+        super(color);
+        this.width = w;
+        this.height = h;
+    }
+
+    @Override
+    public double getArea() { return width * height; }
+}
+```
+
+### الواجهة (Interface)
+
+الواجهة مثل "عقد" يقول: اي كلاس ينفذ هذه الواجهة لازم يوفر هذه الدوال. الفرق عن الكلاس المجرد ان الكلاس يقدر ينفذ **اكثر من واجهة**.
+
+```java
+public interface Printable {
+    void print(); // دالة بدون تعريف
+}
+
+public interface Saveable {
+    void save(String filename);
+}
+```
+
+```java
+// كلاس ينفذ واجهتين
+public class Report implements Printable, Saveable {
+    String content;
+
+    public Report(String content) { this.content = content; }
+
+    @Override
+    public void print() {
+        System.out.println("طباعة التقرير: " + content);
+    }
+
+    @Override
+    public void save(String filename) {
+        System.out.println("حفظ في: " + filename);
+    }
+}
+```
+
+<Callout type="tip" title="الفرق بين Abstract Class و Interface">
+**Abstract Class**: يقدر يحتوي دوال معرفة ودوال مجردة ومتغيرات. الكلاس يرث من abstract class واحد فقط.
+**Interface**: في الغالب دوال بدون تعريف. الكلاس يقدر ينفذ **اكثر من interface**.
+القاعدة البسيطة: استخدمي abstract class لما فيه كود مشترك بين الابناء، واستخدمي interface لما تبين تحددين "عقد" بدون تفاصيل.
+</Callout>
+
+## 6. معالجة الاستثناءات في CS 111، Exception Handling
+
+البرنامج ممكن يواجه اخطاء وقت التشغيل: المستخدمة تدخل نص بدل رقم، او تحاول تفتح ملف مو موجود، او تقسم على صفر. بدل ما البرنامج يتوقف فجأة، تتعاملين مع الخطأ بشكل ذكي باستخدام try/catch.
+
+```java
+Scanner input = new Scanner(System.in);
+
+try {
+    System.out.print("ادخلي رقم: ");
+    int num = input.nextInt();
+    System.out.print("ادخلي المقسوم عليه: ");
+    int den = input.nextInt();
+    System.out.println("الناتج: " + (num / den));
+
+} catch (ArithmeticException e) {
+    System.out.println("خطأ: القسمة على صفر!");
+} catch (InputMismatchException e) {
+    System.out.println("خطأ: ادخلي ارقام فقط!");
+} finally {
+    System.out.println("شكرا لاستخدام البرنامج");
+    input.close();
+}
+```
+
+### كيف try/catch/finally تشتغل
+
+- **try**: حطي الكود اللي ممكن يسبب خطأ داخله
+- **catch**: لو صار خطأ معين، الكود هنا ينفذ بدل ما البرنامج يتوقف
+- **finally**: ينفذ **دائما** سواء صار خطأ او لا. مناسب لاغلاق الملفات والموارد
+
+### اهم الاستثناءات في جافا
+
+| الاستثناء | متى يصير |
+|-----------|----------|
+| `ArithmeticException` | القسمة على صفر |
+| `ArrayIndexOutOfBoundsException` | فهرس خارج حدود المصفوفة |
+| `NullPointerException` | استخدام كائن قيمته null |
+| `InputMismatchException` | مدخل بنوع غلط |
+| `FileNotFoundException` | محاولة فتح ملف مو موجود |
+| `NumberFormatException` | تحويل نص مو رقمي الى رقم |
+
+### انشاء استثناء خاص
+
+تقدرين تكتبين استثناء خاص فيك لو تبين:
+
+```java
+// استثناء مخصص لمعدل غير صالح
+public class InvalidGpaException extends Exception {
+    public InvalidGpaException(String message) {
+        super(message);
+    }
+}
+```
+
+```java
+// استخدامه في الكود
+public void setGpa(double gpa) throws InvalidGpaException {
+    if (gpa < 0 || gpa > 5.0)
+        throw new InvalidGpaException("المعدل لازم بين 0 و 5");
+    this.gpa = gpa;
+}
+```
+
+<Callout type="warning" title="لا تمسكين كل شيء بـ Exception عام">
+بعض الطالبات يكتبون `catch (Exception e)` ويمسكون كل الاخطاء بكاتش واحد. هذا مو الطريقة الصحيحة لان ما تعرفين ايش بالضبط الخطأ اللي صار. الافضل تمسكين كل نوع استثناء لحاله عشان تعالجينه بالطريقة المناسبة.
+</Callout>
+
+## 7. التعامل مع الملفات في جافا، File I/O
+
+في CS 111 تتعلمين كيف برنامجك يقرأ بيانات من ملف ويحفظ نتائج في ملف. هذا مهم جدا لان البرامج الحقيقية ما تخزن كل شيء في الذاكرة.
+
+### الكتابة في ملف
+
+```java
+try {
+    PrintWriter writer = new PrintWriter("students.txt");
+    writer.println("نورة,441001234,4.5");
+    writer.println("سارة,441005678,3.8");
+    writer.println("لمى,441009012,4.2");
+    writer.close(); // مهم جدا! بدون close البيانات ما تتحفظ
+    System.out.println("تم الحفظ بنجاح");
+} catch (FileNotFoundException e) {
+    System.out.println("خطأ في انشاء الملف");
+}
+```
+
+### القراءة من ملف
+
+```java
+try {
+    Scanner reader = new Scanner(new File("students.txt"));
+
+    while (reader.hasNextLine()) {
+        String line = reader.nextLine();
+        String[] parts = line.split(","); // تقسيم بالفاصلة
+        String name = parts[0];
+        double gpa = Double.parseDouble(parts[2]);
+        System.out.println(name + " - معدل: " + gpa);
+    }
+    reader.close();
+
+} catch (FileNotFoundException e) {
+    System.out.println("الملف غير موجود!");
+}
+```
+
+<Callout type="warning" title="لا تنسين close()!">
+لما تفتحين ملف للكتابة بـ PrintWriter، لازم تسوين `close()` عشان البيانات تتحفظ فعلا في الملف. هذا من اكثر الاخطاء اللي تخسر درجات في اللاب والاختبار. حطيها في `finally` عشان تتأكدين انها تنفذ دايما.
+</Callout>
+
+## اخطاء شائعة في CS 111
+
+بعد ما درسنا كل المواضيع، خلينا نتكلم عن الاخطاء اللي كثير من طالبات جامعة الاميرة نورة يقعون فيها:
+
+**1. نسيان `super()` في المنشئ**
+لما كلاسك يرث من كلاس ثاني وما تستدعين `super()` في اول سطر من المنشئ، جافا تستدعي المنشئ الفاضي تلقائيا. لو الكلاس الاب ما عنده منشئ فاضي، يطلع لك خطأ ترجمة.
+
+**2. الخلط بين Overloading و Overriding**
+Overloading = نفس الاسم مع بارامترات مختلفة في **نفس الكلاس**.
+Overriding = نفس الاسم ونفس البارامترات في **كلاس الابن** يعيد تعريف دالة من الاب.
+
+**3. محاولة انشاء كائن من Abstract Class**
+`Shape s = new Shape("احمر");` يعطي خطأ ترجمة. الكلاس المجرد ما ينفع تنشئين منه كائن، لازم تنشئين من الكلاس الابن: `Shape s = new Circle("احمر", 5.0);`
+
+**4. نسيان `@Override`**
+لما تبين تعيدين تعريف دالة من الاب، حطي `@Override` قبلها. لو كتبتي اسم الدالة غلط (مثلا `intorduce` بدل `introduce`)، بدون `@Override` جافا تعتبرها دالة جديدة ومو override وما تعطيك خطأ. مع `@Override` تعطيك خطأ فورا.
+
+**5. نسيان close() مع الملفات**
+خصوصا في الكتابة. لو ما سويتي `close()` للـ `PrintWriter`، البيانات ممكن ما تتحفظ في الملف.
+
+**6. الخلط بين == و equals() مع الكائنات**
+`==` تقارن المراجع (هل هم نفس الكائن في الذاكرة)، `equals()` تقارن المحتوى. مع الـ Strings والكائنات استخدمي دايما `equals()`.
+
+## خطة مذاكرة CS 111 اسبوع باسبوع
+
+<StepList title="خطة مذاكرة اسبوعية">
+1. **راجعي المحاضرة في نفس اليوم**: لا تأجلين مراجعة المحاضرة، ارجعي للسلايدات وتأكدي انك فاهمة كل مفهوم جديد
+2. **اكتبي الكود بيدك**: لا تكتفين بقراءة الامثلة، افتحي الـ IDE واكتبي كل مثال بنفسك وشغليه وعدلي عليه
+3. **حلي تمارين اللاب اول بأول**: تمارين اللاب تجي كثير في الاختبار، حليها بنفسك قبل ما تشوفين الحل
+4. **ارسمي العلاقات على ورقة**: قبل ما تكتبين كود فيه وراثة، ارسمي الكلاسات وعلاقاتها على ورقة عشان تشوفين الصورة الكبيرة
+5. **تدربي على تتبع الكود يدويا**: خذي كود فيه polymorphism وتتبعيه سطر بسطر على ورقة، هذا النوع من الاسئلة يجي كثير
+6. **اشتغلي على مشروع صغير خاص فيك**: غير الواجبات، جربي تبنين مشروع بسيط يطبق كل المفاهيم مثل نظام تسجيل مبسط
+7. **راجعي الاخطاء الشائعة قبل الاختبار**: ارجعي لقسم الاخطاء الشائعة فوق وتأكدي انك ما تقعين فيها
+</StepList>
+
+<StepList title="خطة تحضير الاختبار النهائي">
+1. **اجمعي كل الواجبات وتمارين اللاب**: هذه اول مصدر للمراجعة لان الاختبار يشبهها كثير
+2. **ركزي على تتبع الكود**: تدربي على اسئلة Trace خصوصا في الوراثة وتعدد الاشكال
+3. **اكتبي كلاسات كاملة بدون مرجع**: تأكدي تقدرين تكتبين كلاس مع constructor, getters, setters, toString من راسك
+4. **راجعي الفرق بين المفاهيم المتشابهة**: overloading vs overriding، abstract class vs interface، == vs equals()
+5. **حلي اختبارات سابقة لو متوفرة**: اسألي الطالبات اللي سبقوك عن نمط الاسئلة
+</StepList>
+
+## ربط CS 111 بمسارك الاكاديمي
+
+مادة CS 111 جافا 2 مو مادة معزولة، هي حجر اساس في مسارك كطالبة حاسبات في جامعة الاميرة نورة. كل مادة بعدها تعتمد عليها بشكل مباشر او غير مباشر:
+
+**هياكل البيانات (Data Structures)**: راح تبنين هياكل مثل القوائم المتصلة (Linked Lists) والمكدسات (Stacks) والاشجار (Trees) باستخدام كلاسات OOP. لو ما فهمتي الكلاسات والوراثة، هياكل البيانات تصير صعبة جدا. اقرئي [دليلنا لمادة هياكل البيانات والخوارزميات](/blog/data-structures-algorithms-guide) عشان تعرفين ايش ينتظرك.
+
+**هندسة البرمجيات (Software Engineering)**: تعتمد بشكل كامل على مبادئ OOP. مبادئ التصميم مثل SOLID وانماط التصميم (Design Patterns) كلها مبنية على الكلاسات والواجهات والوراثة.
+
+**قواعد البيانات (Databases)**: لما تتعلمين تربطين برنامج جافا بقاعدة بيانات، راح تستخدمين كلاسات لتمثيل الجداول وكائنات لتمثيل الصفوف.
+
+**مشروع التخرج**: اغلب مشاريع التخرج تتطلب برمجة بـ OOP سواء كان تطبيق جوال او نظام ويب او نظام ذكاء اصطناعي. كل شيء يرجع للكلاسات والكائنات.
+
+لو تبين تعمقين اكثر في اساسيات جافا، اقرئي [دليلنا لتعلم جافا من الصفر](/blog/java-beginners-guide). ولو تبين دروس خصوصية في البرمجة مع مدرس متخصص، اطلعي على [خدمة الدروس الخصوصية في البرمجة](/blog/private-programming-tutoring).
+
+## خلاصة
+
+مادة CS 111 جافا 2 هي المادة اللي تحول طريقة تفكيرك البرمجي. بدل كود طويل في main واحد، تتعلمين تصممين برامج منظمة وقابلة للتوسع. المفاهيم الاساسية اللي لازم تتقنينها:
+
+- **Classes & Objects**: القالب والنسخة، اساس كل شيء في OOP
+- **Encapsulation**: حماية البيانات بـ private + getters/setters
+- **Inheritance**: اعادة استخدام الكود بـ extends + super
+- **Polymorphism**: مرونة التعامل مع الكائنات المختلفة
+- **Abstract Classes & Interfaces**: التصميم المرن والعقود
+- **Exception Handling**: التعامل مع الاخطاء بـ try/catch/finally
+- **File I/O**: حفظ وقراءة البيانات من ملفات
+
+كل ما حسيتي ان مفهوم معين ما يركز معك، لا تكتفين بالقراءة. افتحي الـ IDE واكتبي كود بسيط يطبق المفهوم وعدلي عليه وشوفي ايش يصير. OOP تُفهم بالممارسة والتجريب مو بالحفظ. جربي كل مثال في هذا المقال، وبعدين غيري فيه واضيفي عليه عشان تتأكدين انك فاهمة مو بس ناسخة.
+
+<CTABox title="تحتاجين مساعدة في CS 111 بجامعة الاميرة نورة؟" description="سواء واجبات، مشاريع، او تحضير اختبار، فريق زدني عنده خبرة في مواد كليات الحاسب بالجامعات السعودية. ارسلي لنا تفاصيل اللي تحتاجينه وراح نرد عليك خلال ساعة." buttonText="تواصلي معنا عبر واتساب" buttonUrl="https://wa.me/201557703662?text=مرحبا، احتاج مساعدة في CS 111 جافا 2 - جامعة الاميرة نورة" />
