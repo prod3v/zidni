@@ -1,0 +1,121 @@
+<h2>Homepage Layout Style</h2>
+<p class="subtitle">The Astra Tech News theme has several layout zones. Which overall structure do you want for Zidni's homepage?</p>
+
+<div class="cards">
+  <!-- Option A: Full Magazine -->
+  <div class="card" data-choice="full-magazine" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#1a1a2e;padding:12px;border-radius:8px;font-family:sans-serif;font-size:11px;color:#ccc;">
+        <!-- Hero -->
+        <div style="background:linear-gradient(135deg,#805aed,#01AD9F);border-radius:6px;padding:20px;margin-bottom:10px;text-align:center;">
+          <div style="color:#fff;font-size:14px;font-weight:700;">مقال مميز</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:10px;margin-top:4px;">Featured Hero Post</div>
+        </div>
+        <!-- 3-col grid -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px;">
+          <div style="background:#2a2a4a;border-radius:4px;padding:12px 6px;text-align:center;font-size:9px;">مقال</div>
+          <div style="background:#2a2a4a;border-radius:4px;padding:12px 6px;text-align:center;font-size:9px;">مقال</div>
+          <div style="background:#2a2a4a;border-radius:4px;padding:12px 6px;text-align:center;font-size:9px;">مقال</div>
+        </div>
+        <!-- Posts + Sidebar -->
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:8px;margin-bottom:10px;">
+          <div>
+            <div style="background:#2a2a4a;border-radius:4px;padding:10px 6px;margin-bottom:4px;font-size:9px;">مقال مع صورة</div>
+            <div style="background:#2a2a4a;border-radius:4px;padding:10px 6px;margin-bottom:4px;font-size:9px;">مقال مع صورة</div>
+            <div style="background:#2a2a4a;border-radius:4px;padding:10px 6px;font-size:9px;">مقال مع صورة</div>
+          </div>
+          <div style="background:#2a2a4a;border-radius:4px;padding:10px 6px;font-size:9px;text-align:center;">
+            شريط جانبي<br><br>تصنيفات<br>أحدث المقالات<br>نشرة بريدية
+          </div>
+        </div>
+        <!-- CTA -->
+        <div style="background:linear-gradient(135deg,#01AD9F,#805aed);border-radius:4px;padding:10px;text-align:center;font-size:10px;color:#fff;">
+          اشترك في النشرة البريدية
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A: Full Magazine</h3>
+      <p>Hero featured post + 3-col grid + posts with sidebar + newsletter CTA. Closest to the Astra theme — rich, content-heavy homepage.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Featured + Grid -->
+  <div class="card" data-choice="featured-grid" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#1a1a2e;padding:12px;border-radius:8px;font-family:sans-serif;font-size:11px;color:#ccc;">
+        <!-- Hero -->
+        <div style="background:linear-gradient(135deg,#805aed,#01AD9F);border-radius:6px;padding:20px;margin-bottom:10px;text-align:center;">
+          <div style="color:#fff;font-size:14px;font-weight:700;">مقال مميز</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:10px;margin-top:4px;">Featured Hero Post</div>
+        </div>
+        <!-- 3-col grid -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px;">
+          <div style="background:#2a2a4a;border-radius:4px;padding:12px 6px;text-align:center;font-size:9px;">مقال</div>
+          <div style="background:#2a2a4a;border-radius:4px;padding:12px 6px;text-align:center;font-size:9px;">مقال</div>
+          <div style="background:#2a2a4a;border-radius:4px;padding:12px 6px;text-align:center;font-size:9px;">مقال</div>
+        </div>
+        <!-- More posts grid -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px;">
+          <div style="background:#2a2a4a;border-radius:4px;padding:12px 6px;text-align:center;font-size:9px;">مقال</div>
+          <div style="background:#2a2a4a;border-radius:4px;padding:12px 6px;text-align:center;font-size:9px;">مقال</div>
+          <div style="background:#2a2a4a;border-radius:4px;padding:12px 6px;text-align:center;font-size:9px;">مقال</div>
+        </div>
+        <!-- CTA -->
+        <div style="background:linear-gradient(135deg,#01AD9F,#805aed);border-radius:4px;padding:10px;text-align:center;font-size:10px;color:#fff;">
+          عرض جميع المقالات →
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B: Featured + Grid</h3>
+      <p>Hero featured post + clean post grid. No sidebar — full-width cards. Simpler, modern, easier to maintain.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Minimal Enhanced -->
+  <div class="card" data-choice="minimal-enhanced" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#1a1a2e;padding:12px;border-radius:8px;font-family:sans-serif;font-size:11px;color:#ccc;">
+        <!-- Category tabs -->
+        <div style="display:flex;gap:8px;margin-bottom:10px;justify-content:center;">
+          <span style="background:#01AD9F;color:#fff;padding:3px 8px;border-radius:12px;font-size:9px;">الكل</span>
+          <span style="background:#2a2a4a;padding:3px 8px;border-radius:12px;font-size:9px;">برمجة</span>
+          <span style="background:#2a2a4a;padding:3px 8px;border-radius:12px;font-size:9px;">مشاريع</span>
+          <span style="background:#2a2a4a;padding:3px 8px;border-radius:12px;font-size:9px;">دراسة</span>
+        </div>
+        <!-- Posts list -->
+        <div style="background:#2a2a4a;border-radius:4px;padding:10px 8px;margin-bottom:6px;display:flex;gap:8px;align-items:center;">
+          <div style="background:#3a3a5a;border-radius:4px;width:50px;height:35px;flex-shrink:0;"></div>
+          <div style="font-size:9px;">عنوان المقال الأول مع وصف قصير</div>
+        </div>
+        <div style="background:#2a2a4a;border-radius:4px;padding:10px 8px;margin-bottom:6px;display:flex;gap:8px;align-items:center;">
+          <div style="background:#3a3a5a;border-radius:4px;width:50px;height:35px;flex-shrink:0;"></div>
+          <div style="font-size:9px;">عنوان المقال الثاني مع وصف قصير</div>
+        </div>
+        <div style="background:#2a2a4a;border-radius:4px;padding:10px 8px;margin-bottom:6px;display:flex;gap:8px;align-items:center;">
+          <div style="background:#3a3a5a;border-radius:4px;width:50px;height:35px;flex-shrink:0;"></div>
+          <div style="font-size:9px;">عنوان المقال الثالث مع وصف قصير</div>
+        </div>
+        <div style="background:#2a2a4a;border-radius:4px;padding:10px 8px;margin-bottom:6px;display:flex;gap:8px;align-items:center;">
+          <div style="background:#3a3a5a;border-radius:4px;width:50px;height:35px;flex-shrink:0;"></div>
+          <div style="font-size:9px;">عنوان المقال الرابع مع وصف قصير</div>
+        </div>
+        <!-- Pagination -->
+        <div style="text-align:center;font-size:9px;margin-top:8px;">
+          <span style="background:#01AD9F;color:#fff;padding:2px 6px;border-radius:4px;">1</span>
+          <span style="padding:2px 6px;">2</span>
+          <span style="padding:2px 6px;">3</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C: Minimal Enhanced</h3>
+      <p>Keep your current list layout but add category tabs at top. Closest to what you have now — just polished. Fastest to build.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px;">
+  <p class="subtitle" style="text-align:center;font-style:italic;">Click the layout that appeals to you most. We'll refine the details in the next steps.</p>
+</div>

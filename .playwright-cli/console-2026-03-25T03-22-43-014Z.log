@@ -1,0 +1,75 @@
+[    1952ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://storyset.com/favicon.ico:0
+[   40240ms] [ERROR] TypeError: this.$gtag is not a function
+    at f.trackGA4AnalyticsDownload (https://storyset.com/_nuxt/5c50613.js:1:88677)
+    at https://storyset.com/_nuxt/5c50613.js:1:89408
+    at m (https://storyset.com/_nuxt/5c0e2af.js:2:89867)
+    at Generator.<anonymous> (https://storyset.com/_nuxt/5c0e2af.js:2:91204)
+    at Generator.next (https://storyset.com/_nuxt/5c0e2af.js:2:90296)
+    at r (https://storyset.com/_nuxt/5c0e2af.js:2:80283)
+    at l (https://storyset.com/_nuxt/5c0e2af.js:2:80486) @ https://storyset.com/_nuxt/5c0e2af.js:1
+[   55343ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://storyset.com/illustration/project-management/amico:0
+[   64755ms] [ERROR] TypeError: this.$gtag is not a function
+    at f.trackGA4AnalyticsDownload (https://storyset.com/_nuxt/5c50613.js:1:88677)
+    at https://storyset.com/_nuxt/5c50613.js:1:89408
+    at m (https://storyset.com/_nuxt/5c0e2af.js:2:89867)
+    at Generator.<anonymous> (https://storyset.com/_nuxt/5c0e2af.js:2:91204)
+    at Generator.next (https://storyset.com/_nuxt/5c0e2af.js:2:90296)
+    at r (https://storyset.com/_nuxt/5c0e2af.js:2:80283)
+    at l (https://storyset.com/_nuxt/5c0e2af.js:2:80486) @ https://storyset.com/_nuxt/5c0e2af.js:1
+[   67608ms] [ERROR] TypeError: this.$gtag is not a function
+    at f.trackGA4AnalyticsDownload (https://storyset.com/_nuxt/5c50613.js:1:88677)
+    at https://storyset.com/_nuxt/5c50613.js:1:89408
+    at m (https://storyset.com/_nuxt/5c0e2af.js:2:89867)
+    at Generator.<anonymous> (https://storyset.com/_nuxt/5c0e2af.js:2:91204)
+    at Generator.next (https://storyset.com/_nuxt/5c0e2af.js:2:90296)
+    at r (https://storyset.com/_nuxt/5c0e2af.js:2:80283)
+    at l (https://storyset.com/_nuxt/5c0e2af.js:2:80486) @ https://storyset.com/_nuxt/5c0e2af.js:1
+[   69936ms] [ERROR] TypeError: this.$gtag is not a function
+    at f.trackGA4AnalyticsDownload (https://storyset.com/_nuxt/5c50613.js:1:88677)
+    at https://storyset.com/_nuxt/5c50613.js:1:89408
+    at m (https://storyset.com/_nuxt/5c0e2af.js:2:89867)
+    at Generator.<anonymous> (https://storyset.com/_nuxt/5c0e2af.js:2:91204)
+    at Generator.next (https://storyset.com/_nuxt/5c0e2af.js:2:90296)
+    at r (https://storyset.com/_nuxt/5c0e2af.js:2:80283)
+    at l (https://storyset.com/_nuxt/5c0e2af.js:2:80486) @ https://storyset.com/_nuxt/5c0e2af.js:1
+[   71913ms] [ERROR] TypeError: this.$gtag is not a function
+    at f.trackGA4AnalyticsDownload (https://storyset.com/_nuxt/5c50613.js:1:88677)
+    at https://storyset.com/_nuxt/5c50613.js:1:89408
+    at m (https://storyset.com/_nuxt/5c0e2af.js:2:89867)
+    at Generator.<anonymous> (https://storyset.com/_nuxt/5c0e2af.js:2:91204)
+    at Generator.next (https://storyset.com/_nuxt/5c0e2af.js:2:90296)
+    at r (https://storyset.com/_nuxt/5c0e2af.js:2:80283)
+    at l (https://storyset.com/_nuxt/5c0e2af.js:2:80486) @ https://storyset.com/_nuxt/5c0e2af.js:1
+[   74694ms] [ERROR] TypeError: this.$gtag is not a function
+    at f.trackGA4AnalyticsDownload (https://storyset.com/_nuxt/5c50613.js:1:88677)
+    at https://storyset.com/_nuxt/5c50613.js:1:89408
+    at m (https://storyset.com/_nuxt/5c0e2af.js:2:89867)
+    at Generator.<anonymous> (https://storyset.com/_nuxt/5c0e2af.js:2:91204)
+    at Generator.next (https://storyset.com/_nuxt/5c0e2af.js:2:90296)
+    at r (https://storyset.com/_nuxt/5c0e2af.js:2:80283)
+    at l (https://storyset.com/_nuxt/5c0e2af.js:2:80486) @ https://storyset.com/_nuxt/5c0e2af.js:1
+[   77027ms] [ERROR] TypeError: this.$gtag is not a function
+    at f.trackGA4AnalyticsDownload (https://storyset.com/_nuxt/5c50613.js:1:88677)
+    at https://storyset.com/_nuxt/5c50613.js:1:89408
+    at m (https://storyset.com/_nuxt/5c0e2af.js:2:89867)
+    at Generator.<anonymous> (https://storyset.com/_nuxt/5c0e2af.js:2:91204)
+    at Generator.next (https://storyset.com/_nuxt/5c0e2af.js:2:90296)
+    at r (https://storyset.com/_nuxt/5c0e2af.js:2:80283)
+    at l (https://storyset.com/_nuxt/5c0e2af.js:2:80486) @ https://storyset.com/_nuxt/5c0e2af.js:1
+[   77324ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://storyset.com/illustration/proofreading/amico:0
+[   97325ms] [ERROR] TypeError: this.$gtag is not a function
+    at f.trackGA4AnalyticsDownload (https://storyset.com/_nuxt/5c50613.js:1:88677)
+    at https://storyset.com/_nuxt/5c50613.js:1:89408
+    at m (https://storyset.com/_nuxt/5c0e2af.js:2:89867)
+    at Generator.<anonymous> (https://storyset.com/_nuxt/5c0e2af.js:2:91204)
+    at Generator.next (https://storyset.com/_nuxt/5c0e2af.js:2:90296)
+    at r (https://storyset.com/_nuxt/5c0e2af.js:2:80283)
+    at l (https://storyset.com/_nuxt/5c0e2af.js:2:80486) @ https://storyset.com/_nuxt/5c0e2af.js:1
+[   99772ms] [ERROR] TypeError: this.$gtag is not a function
+    at f.trackGA4AnalyticsDownload (https://storyset.com/_nuxt/5c50613.js:1:88677)
+    at https://storyset.com/_nuxt/5c50613.js:1:89408
+    at m (https://storyset.com/_nuxt/5c0e2af.js:2:89867)
+    at Generator.<anonymous> (https://storyset.com/_nuxt/5c0e2af.js:2:91204)
+    at Generator.next (https://storyset.com/_nuxt/5c0e2af.js:2:90296)
+    at r (https://storyset.com/_nuxt/5c0e2af.js:2:80283)
+    at l (https://storyset.com/_nuxt/5c0e2af.js:2:80486) @ https://storyset.com/_nuxt/5c0e2af.js:1
