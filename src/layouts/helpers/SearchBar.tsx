@@ -176,7 +176,7 @@ export default function SearchBar({ searchList }: Props) {
           {searchResults?.map(({ item }) => (
             <a
               key={item.slug}
-              href={`/${item.slug}`}
+              href={`/blog/${item.slug}`}
               className="block rounded-xl border border-border bg-white p-5 hover:border-primary/30 hover:shadow-sm transition-all group"
             >
               <div className="flex gap-4">
