@@ -1,2 +1,0 @@
-[    2779ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://storyset.com/favicon.ico:0
-[   64202ms] [ERROR] Loading the image 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAOklEQVR4AeySuQ0AMAwCkbfw/rvBGM4GpHARiiBdi8RTJMcxFxWW+gZAQAfdDYckOAIiLI+YsMLzCAcAAP//0FHUVgAAAAZJREFUAwBpAlWJoGCVHAAAAABJRU5ErkJggg==' violates the following Content Security Policy directive: "img-src 'self' stories.freepiklabs.com storyset.com blob:". The action has been blocked. @ https://storyset.com/illustration/thesis/amico:0

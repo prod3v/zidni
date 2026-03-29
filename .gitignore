@@ -22,3 +22,8 @@ package-lock.json
 
 # ignore .astro directory
 .astro
+
+# dev tooling artifacts
+.playwright-cli/
+.superpowers/
+responsive-audit-report.md
