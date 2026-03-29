@@ -1,0 +1,644 @@
+---
+title: "شرح مادة CSC 113 برمجة حاسبات 2 OOP - جامعة الملك سعود"
+meta_title: "شرح CSC 113 برمجة 2 OOP جافا جامعة الملك سعود"
+description: "شرح مادة CSC 113 برمجة 2 بجامعة الملك سعود: الكلاسات، الوراثة، تعدد الاشكال، الواجهات، معالجة الاستثناءات، والملفات بلغة جافا مع امثلة عملية."
+date: 2026-03-18T09:00:00Z
+image: "/images/posts/programming.svg"
+categories: ["دليل المواد"]
+authors: ["فريق زدني"]
+tags: ["CSC 113", "عال 113", "جافا", "Java", "OOP", "جامعة الملك سعود"]
+draft: false
+---
+
+import Callout from "@/components/blog/Callout.astro";
+import QuickSummary from "@/components/blog/QuickSummary.astro";
+import StepList from "@/components/blog/StepList.astro";
+import CTABox from "@/components/blog/CTABox.astro";
+
+
+مادة CSC 113، برمجة حاسبات 2 (Computer Programming 2)، هي المادة اللي تنقلك من كتابة كود يشتغل الى تصميم برامج منظمة وقابلة للتطوير. في خطة قسم علوم الحاسب بجامعة الملك سعود، هذي المادة تبني على كل شيء تعلمته في [CSC 111 برمجة حاسبات 1](/blog/csc-111-programming-1-ksu) وتعلمك البرمجة كائنية التوجه (Object-Oriented Programming) بلغة جافا. بدون مبالغة، اغلب المواد اللي بعدها تفترض انك متقن لمفاهيم OOP، من تراكيب البيانات الى هندسة البرمجيات وتطوير التطبيقات.
+
+المادة تستخدم لغة **جافا (Java)** والمرجع المعتمد هو كتاب **"Java How to Program"** لـ **Deitel & Deitel**، وهو من اشهر كتب تعليم جافا في العالم. الكتاب يغطي كل مواضيع المادة مع امثلة عملية وتمارين كثيرة تساعدك تثبّت المعلومة.
+
+لو تبي شرح اعمق لاساسيات الجافا بشكل عام، راجع [دليلنا الشامل لتعلم جافا](/blog/java-beginners-guide) عشان تقوّي الاساس قبل ما تبدا.
+
+<QuickSummary>
+- **رمز المادة:** CSC 113 (عال 113): برمجة حاسبات 2 (Computer Programming 2 / OOP)
+- **الساعات المعتمدة:** 3 ساعات نظري + 1 عملي
+- **المتطلب السابق:** [CSC 111 برمجة حاسبات 1](/blog/csc-111-programming-1-ksu)
+- **اللغة المستخدمة:** Java
+- **الكتاب المرجعي:** Java How to Program, Deitel & Deitel
+- **المواضيع الرئيسية:** الكلاسات والكائنات، التغليف (Encapsulation)، الوراثة (Inheritance)، تعدد الاشكال (Polymorphism)، الكلاسات المجردة والواجهات، معالجة الاستثناءات، التعامل مع الملفات، اساسيات Collections
+- **يقود الى:** CSC 212 تراكيب البيانات (Data Structures)
+</QuickSummary>
+
+## ليش مادة CSC 113 مفصلية في مسارك؟
+
+قبل ما ندخل في التفاصيل، خلنا نوضح ليش هذي المادة مهمة لك كطالب في جامعة الملك سعود:
+
+- **بوابة لكل المواد المتقدمة:** تراكيب البيانات، هندسة البرمجيات، قواعد البيانات، كلها تفترض انك تفهم OOP
+- **كل مشروع حقيقي مبني على OOP:** تطبيقات الجوال، المواقع، الانظمة، ما فيه مشروع تجاري ما يستخدم كلاسات ووراثة وواجهات
+- **المقابلات الوظيفية:** اذا قدمت على شركة تقنية، اول شيء يسالونك عنه هو مبادئ OOP والفرق بين المفاهيم
+- **تغيّر طريقة تفكيرك:** بدل ما تكتب كود طويل في main واحد، تتعلم تقسّم المشكلة لكائنات تتفاعل مع بعض
+- **التدريب التعاوني:** كثير من الشركات تعطيك مهام برمجية في المقابلة، واللي اساسه قوي في OOP يعدّيها بسهولة
+
+<Callout type="info" title="تحتاج تراجع CSC 111 قبل ما تبدا؟">
+لو حاسس ان المتغيرات والحلقات والدوال والمصفوفات مو واضحة عندك 100%، ارجع راجعها قبل ما تبدا CSC 113. المادة تفترض انك متقن لكل شيء في [CSC 111](/blog/csc-111-programming-1-ksu). المراجعة السريعة الحين توفر عليك ساعات من المعاناة لاحقا.
+</Callout>
+
+## نظرة عامة على محتوى CSC 113
+
+المادة تتوزع على 15 اسبوع تقريبا بهذا الترتيب:
+
+| الاسابيع | الموضوع | المفاهيم الرئيسية |
+|-----------|---------|-------------------|
+| 1-2 | مراجعة اساسيات + مقدمة في الكلاسات | class, object, constructor |
+| 3-4 | الكلاسات والكائنات بالتفصيل | attributes, methods, this, static |
+| 5-6 | التغليف (Encapsulation) | private/public, getters/setters, validation |
+| 7-8 | الوراثة (Inheritance) | extends, super, method overriding |
+| 9-10 | تعدد الاشكال (Polymorphism) | overloading, overriding, dynamic binding |
+| 11 | الكلاسات المجردة والواجهات | abstract classes, interfaces, implements |
+| 12-13 | معالجة الاستثناءات + الملفات | try/catch/finally, File I/O |
+| 14 | اساسيات Collections | ArrayList, مصفوفات الكائنات |
+| 15 | مراجعة + تسليم المشروع | تمارين شاملة |
+
+## 1. الكلاسات والكائنات، Classes & Objects
+
+هذا اول موضوع وهو الاساس. كل شيء في OOP يدور حول فكرة بسيطة: انت تصمم **قالب (Class)** وتنشئ منه **نسخ (Objects)**.
+
+تخيّل الكلاس مثل مخطط بيت والكائن هو البيت الفعلي اللي بنيته من المخطط. من نفس المخطط تقدر تبني بيوت كثيرة، كل واحد له تفاصيله الخاصة.
+
+```java
+// كلاس طالب في جامعة الملك سعود
+public class Student {
+    String name;
+    int id;
+    double gpa;
+
+    // المنشئ - يتنفذ لما تسوي new
+    public Student(String name, int id, double gpa) {
+        this.name = name;
+        this.id = id;
+        this.gpa = gpa;
+    }
+
+    // دالة تعرض بيانات الطالب
+    public void displayInfo() {
+        System.out.println(name + " | " + id + " | GPA: " + gpa);
+    }
+}
+```
+
+الحين ننشئ كائنات من الكلاس ونستخدمها:
+
+```java
+// انشاء كائنين من كلاس Student
+Student s1 = new Student("خالد", 4380001, 4.5);
+Student s2 = new Student("فهد", 4380002, 3.8);
+
+s1.displayInfo(); // خالد | 4380001 | GPA: 4.5
+s2.displayInfo(); // فهد | 4380002 | GPA: 3.8
+```
+
+### الكلمة المفتاحية this
+
+`this` تشير للكائن الحالي. تستخدمها لما يكون اسم الـ parameter نفس اسم الـ attribute عشان جافا تفرّق بينهم:
+
+```java
+public Student(String name, int id) {
+    this.name = name;  // this.name = خاصية الكلاس
+    this.id = id;      // name بدون this = الباراميتر
+}
+```
+
+### الكلمة المفتاحية static
+
+المتغير او الدالة `static` تنتمي **للكلاس نفسه** مو لكائن معين. يعني كل الكائنات يتشاركون فيها:
+
+```java
+public class Student {
+    static int totalStudents = 0; // مشتركة بين كل الكائنات
+
+    public Student(String name) {
+        this.name = name;
+        totalStudents++; // كل ما ننشئ طالب يزيد العداد
+    }
+
+    public static int getTotal() {
+        return totalStudents; // دالة static ما تحتاج كائن
+    }
+}
+```
+
+```java
+Student s1 = new Student("محمد");
+Student s2 = new Student("عبدالله");
+System.out.println(Student.getTotal()); // 2
+```
+
+<Callout type="tip" title="متى تستخدم static؟">
+استخدم `static` لما الدالة او المتغير ما يعتمد على كائن محدد. مثل: عداد لعدد الكائنات، دالة حسابية عامة، ثوابت مشتركة. لو الدالة تحتاج تتعامل مع `this`، ما تقدر تخليها static.
+</Callout>
+
+## 2. التغليف في CSC 113، Encapsulation
+
+التغليف يعني انك **تحمي بيانات الكائن** من الوصول المباشر. تخلي المتغيرات `private` وتوفّر دوال `getter` و `setter` عشان تتحكم في القراءة والكتابة.
+
+ليش مهم؟ تخيّل نظام جامعة يسمح لاي كود يغير معدل الطالب مباشرة بدون تحقق. واحد ممكن يحط معدل 10 من 5 والنظام يقبله. التغليف يمنع هالشيء.
+
+```java
+public class Student {
+    private String name;   // ما يقدر احد يوصل لها مباشرة
+    private double gpa;
+
+    public Student(String name, double gpa) {
+        this.name = name;
+        setGpa(gpa); // نستخدم setter للتحقق
+    }
+
+    // Getter - قراءة فقط
+    public String getName() { return name; }
+    public double getGpa() { return gpa; }
+```
+
+الـ Setter هو المكان اللي تتحكم فيه بالقيم. مثلا تمنع اي معدل خارج النطاق 0-5:
+
+```java
+    // Setter - كتابة مع تحقق
+    public void setGpa(double gpa) {
+        if (gpa >= 0 && gpa <= 5.0)
+            this.gpa = gpa;
+        else
+            System.out.println("خطا: المعدل لازم بين 0 و 5");
+    }
+}
+```
+
+```java
+Student s = new Student("سعد", 4.2);
+System.out.println(s.getName()); // سعد
+s.setGpa(6.0);  // خطا: المعدل لازم بين 0 و 5
+s.setGpa(4.8);  // تمام، القيمة اتغيرت
+// s.gpa = 10;  // خطا! gpa هي private، ما تقدر توصل لها
+```
+
+<Callout type="warning" title="خطا شائع في اختبار التغليف">
+كثير من الطلاب يعرّفون المتغيرات `public` وبعدين يكتبون getters و setters. هذا مو تغليف حقيقي. التغليف الصحيح = **private attributes + public getters/setters مع validation**. لو المتغير public، اي كود يقدر يغيره بدون ما يمر على الـ setter.
+</Callout>
+
+## 3. الوراثة، Inheritance
+
+الوراثة من اقوى مفاهيم OOP. الفكرة: عندك كلاس فيه خصائص مشتركة مع كلاسات ثانية؟ بدل ما تكرر الكود في كل كلاس، تسوي كلاس **اب (superclass)** وتخلي الباقي **يرث (extends)** منه.
+
+### مثال عملي: نظام جامعي
+
+```java
+// الكلاس الاب - شخص عام
+public class Person {
+    protected String name;
+    protected int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void introduce() {
+        System.out.println("اسمي " + name + " وعمري " + age);
+    }
+}
+```
+
+الكلاس `Student` يرث من `Person` باستخدام `extends` ويضيف خصائصه:
+
+```java
+public class Student extends Person {
+    private int studentId;
+    private double gpa;
+
+    public Student(String name, int age, int studentId, double gpa) {
+        super(name, age); // استدعاء منشئ الاب - لازم اول سطر
+        this.studentId = studentId;
+        this.gpa = gpa;
+    }
+
+    @Override
+    public void introduce() {
+        super.introduce(); // نستدعي النسخة الاصلية اول
+        System.out.println("رقمي الجامعي: " + studentId);
+    }
+}
+```
+
+نفس الفكرة مع كلاس المحاضر:
+
+```java
+public class Lecturer extends Person {
+    private String department;
+
+    public Lecturer(String name, int age, String department) {
+        super(name, age);
+        this.department = department;
+    }
+
+    @Override
+    public void introduce() {
+        super.introduce();
+        System.out.println("قسم: " + department);
+    }
+}
+```
+
+### مفاهيم لازم تحفظها عن الوراثة
+
+- **extends**: الكلمة المفتاحية اللي تقول "هذا الكلاس يرث من ذاك"
+- **super()**: استدعاء منشئ الكلاس الاب، لازم يكون **اول سطر** في المنشئ
+- **@Override**: تعليق يوضح انك تعيد تعريف دالة موجودة في الاب
+- **is-a relationship**: الطالب "هو" شخص، `Student is a Person`
+- **جافا تدعم وراثة واحدة فقط**: كلاس يرث من كلاس واحد بس
+
+<Callout type="info" title="ليش protected مو private؟">
+لاحظ اننا استخدمنا `protected` للمتغيرات في الكلاس الاب. السبب ان `private` تمنع حتى الكلاس الابن من الوصول للمتغير. `protected` تسمح للابن يوصل للمتغير مباشرة بس تمنع الكلاسات الخارجية. لو تبي تغليف اقوى، خلي المتغيرات private واستخدم getters في الابن.
+</Callout>
+
+<CTABox title="واجب الوراثة محيّرك؟" description="الوراثة من اكثر المواضيع اللي يطلب فيها طلاب CSC 113 مساعدة. ارسل لنا السؤال على واتساب ونشرحه لك خطوة بخطوة مع الحل الكامل." buttonText="ارسل واجبك على واتساب" buttonUrl="https://wa.me/201557703662?text=مرحبا، احتاج مساعدة في واجب الوراثة - CSC 113 جامعة الملك سعود" />
+
+## 4. تعدد الاشكال، Polymorphism
+
+تعدد الاشكال هو الموضوع اللي يفصل بين "افهم OOP سطحيا" و"افهم OOP فعلا". الفكرة: نفس الدالة تتصرف بشكل مختلف حسب نوع الكائن الفعلي. فيه نوعين:
+
+### النوع الاول: Method Overloading (وقت الترجمة)
+
+نفس اسم الدالة بس باراميترات مختلفة. هذا تعلمته في CSC 111:
+
+```java
+public class Calculator {
+    public int add(int a, int b) { return a + b; }
+    public double add(double a, double b) { return a + b; }
+    public int add(int a, int b, int c) { return a + b + c; }
+}
+```
+
+جافا تختار الدالة المناسبة حسب نوع وعدد الباراميترات اللي تمررها.
+
+### النوع الثاني: Method Overriding + Dynamic Binding (وقت التشغيل)
+
+هنا القوة الحقيقية. المتغير نوعه الاب بس الكائن الفعلي من الابن:
+
+```java
+// المتغير نوعه Person، لكن الكائن Student
+Person p1 = new Student("احمد", 20, 438001, 4.5);
+Person p2 = new Lecturer("خالد", 40, "علوم الحاسب");
+
+p1.introduce(); // تستدعي نسخة Student
+p2.introduce(); // تستدعي نسخة Lecturer
+```
+
+نقدر نحطهم في مصفوفة من نوع الاب ونتعامل معهم بشكل موحّد:
+
+```java
+Person[] people = {p1, p2};
+for (Person p : people) {
+    p.introduce(); // كل كائن يستدعي نسخته الخاصة
+    System.out.println("---");
+}
+```
+
+جافا تعرف وقت التشغيل اي نسخة من الدالة تستدعي. هذا اسمه **Dynamic Binding** وهو من اهم المفاهيم في الاختبار.
+
+<Callout type="warning" title="سؤال Trace في تعدد الاشكال">
+في الاختبار يعطيك كود فيه وراثة وتعدد اشكال ويسالك عن المخرجات. القاعدة: **نوع الكائن الفعلي (new) هو اللي يحدد اي نسخة من الدالة تنستدعي**، مو نوع المتغير. يعني `Person p = new Student(...)` تستدعي دالة Student مو Person. هذا السؤال يتكرر في كل ميدترم تقريبا.
+</Callout>
+
+## 5. الكلاسات المجردة والواجهات، Abstract Classes & Interfaces
+
+### Abstract Class (كلاس مجرّد)
+
+كلاس ما تقدر تنشئ منه كائن مباشرة. هو بس قالب يحدد الشكل العام للكلاسات اللي ترث منه:
+
+```java
+public abstract class Shape {
+    String color;
+
+    public Shape(String color) { this.color = color; }
+
+    // دالة مجردة - الابناء لازم يعرّفونها
+    public abstract double getArea();
+
+    // دالة عادية - الابناء يرثونها زي ما هي
+    public void display() {
+        System.out.println("اللون: " + color + " المساحة: " + getArea());
+    }
+}
+```
+
+لاحظ ان `getArea()` ما لها جسم. كل كلاس ابن لازم يكتب تعريفه الخاص:
+
+```java
+public class Circle extends Shape {
+    double radius;
+
+    public Circle(String color, double radius) {
+        super(color);
+        this.radius = radius;
+    }
+
+    @Override
+    public double getArea() {
+        return Math.PI * radius * radius;
+    }
+}
+```
+
+```java
+public class Rectangle extends Shape {
+    double width, height;
+
+    public Rectangle(String color, double w, double h) {
+        super(color);
+        this.width = w;
+        this.height = h;
+    }
+
+    @Override
+    public double getArea() { return width * height; }
+}
+```
+
+### Interface (واجهة)
+
+الواجهة تحدد **عقد**: اي كلاس ينفّذها لازم يعرّف كل الدوال الموجودة فيها. الميزة ان الكلاس يقدر ينفّذ **اكثر من واجهة**:
+
+```java
+public interface Printable {
+    void print(); // دالة بدون تعريف - مجرد عقد
+}
+
+public interface Saveable {
+    void save(String filename);
+}
+```
+
+```java
+// كلاس ينفّذ واجهتين
+public class Report implements Printable, Saveable {
+    String content;
+
+    public Report(String content) { this.content = content; }
+
+    @Override
+    public void print() {
+        System.out.println("طباعة: " + content);
+    }
+
+    @Override
+    public void save(String filename) {
+        System.out.println("حفظ في: " + filename);
+    }
+}
+```
+
+<Callout type="tip" title="الفرق بين Abstract Class و Interface">
+- **Abstract Class**: يقدر يحتوي دوال معرّفة + دوال مجرّدة + متغيرات. الكلاس يرث من abstract class واحد فقط (`extends`)
+- **Interface**: دوال بدون تعريف فقط (عقود). الكلاس يقدر ينفّذ اكثر من interface (`implements`)
+- القاعدة: استخدم abstract class لما فيه كود مشترك بين الابناء، واستخدم interface لما تبي تحدد "عقد" فقط بدون تفاصيل التنفيذ
+</Callout>
+
+## 6. معالجة الاستثناءات، Exception Handling
+
+البرنامج ممكن يواجه اخطاء وقت التشغيل: المستخدم يدخل نص بدل رقم، قسمة على صفر، ملف مو موجود. بدون معالجة، البرنامج يطيح ويتوقف. معالجة الاستثناءات تخليك تتعامل مع الخطا بشكل ذكي بدل ما البرنامج ينهار.
+
+```java
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
+Scanner input = new Scanner(System.in);
+
+try {
+    System.out.print("ادخل البسط: ");
+    int num = input.nextInt();
+    System.out.print("ادخل المقام: ");
+    int den = input.nextInt();
+    System.out.println("الناتج: " + num / den);
+
+} catch (ArithmeticException e) {
+    System.out.println("خطا: ما تقدر تقسم على صفر!");
+} catch (InputMismatchException e) {
+    System.out.println("خطا: ادخل ارقام فقط!");
+} finally {
+    System.out.println("شكرا لاستخدام البرنامج");
+    input.close();
+}
+```
+
+### ترتيب try / catch / finally
+
+- **try**: الكود اللي ممكن يسبب خطا
+- **catch**: التعامل مع نوع محدد من الاخطاء. تقدر تحط اكثر من catch
+- **finally**: يتنفذ **دائما** سواء صار خطا او لا. تستخدمه لتنظيف الموارد مثل اغلاق الملفات
+
+### انواع الاستثناءات المهمة
+
+| الاستثناء | السبب |
+|-----------|-------|
+| `ArithmeticException` | القسمة على صفر |
+| `ArrayIndexOutOfBoundsException` | فهرس خارج حدود المصفوفة |
+| `NullPointerException` | محاولة استخدام كائن قيمته null |
+| `InputMismatchException` | مدخل بنوع خاطئ |
+| `FileNotFoundException` | ملف مو موجود |
+| `NumberFormatException` | تحويل نص لرقم فشل |
+
+<Callout type="warning" title="finally يتنفذ دائما">
+كثير من الطلاب يفتكرون ان finally يتنفذ بس لما يصير خطا. لا، finally يتنفذ **في كل الحالات**: لو صار خطا، لو ما صار خطا، حتى لو فيه return داخل try. هالنقطة تجي في الاختبار كسؤال صح او خطا.
+</Callout>
+
+## 7. التعامل مع الملفات، File I/O
+
+تبي برنامجك يحفظ بيانات حتى بعد ما يقفل؟ او يقرا بيانات من ملف موجود؟ هذا الموضوع يعلمك كيف.
+
+### الكتابة في ملف
+
+```java
+import java.io.PrintWriter;
+import java.io.FileNotFoundException;
+
+try {
+    PrintWriter writer = new PrintWriter("students.txt");
+    writer.println("خالد,4380001,4.5");
+    writer.println("فهد,4380002,3.8");
+    writer.println("سعد,4380003,4.2");
+    writer.close(); // مهم! بدون close البيانات ما تتحفظ
+    System.out.println("تم الحفظ بنجاح");
+} catch (FileNotFoundException e) {
+    System.out.println("خطا في انشاء الملف");
+}
+```
+
+### القراءة من ملف
+
+```java
+import java.util.Scanner;
+import java.io.File;
+
+try {
+    Scanner reader = new Scanner(new File("students.txt"));
+
+    while (reader.hasNextLine()) {
+        String line = reader.nextLine();
+        String[] parts = line.split(","); // تقسيم بالفاصلة
+        String name = parts[0];
+        double gpa = Double.parseDouble(parts[2]);
+        System.out.println(name + " - معدل: " + gpa);
+    }
+    reader.close();
+
+} catch (FileNotFoundException e) {
+    System.out.println("الملف غير موجود!");
+}
+```
+
+<Callout type="tip" title="لا تنسى close()!">
+لما تفتح ملف للكتابة بـ PrintWriter، لازم تسوي `close()` عشان البيانات تتحفظ فعليا على القرص. نسيان close() من اكثر الاخطاء اللي تخسّر درجات في اللاب. بديل افضل: استخدم try-with-resources اللي يقفل الملف تلقائيا.
+</Callout>
+
+### try-with-resources (الطريقة الافضل)
+
+```java
+// الملف ينقفل تلقائيا حتى لو صار خطا
+try (PrintWriter writer = new PrintWriter("output.txt")) {
+    writer.println("بيانات مهمة");
+    writer.println("بيانات ثانية");
+} catch (FileNotFoundException e) {
+    System.out.println("خطا في الكتابة");
+}
+// ما تحتاج تكتب close() - يصير تلقائي
+```
+
+<CTABox title="مشروعك يحتاج ملفات و Exception Handling؟" description="كثير من مشاريع CSC 113 تطلب قراءة وكتابة ملفات مع معالجة اخطاء. ارسل لنا متطلبات المشروع ونساعدك تصممه وتنفذه بشكل احترافي." buttonText="ارسل متطلبات مشروعك" buttonUrl="https://wa.me/201557703662?text=مرحبا، احتاج مساعدة في مشروع CSC 113 - ملفات ومعالجة استثناءات - جامعة الملك سعود" />
+
+## 8. اساسيات Collections: ArrayList
+
+في CSC 111 تعلمت المصفوفات العادية (`int[]`). مشكلتها ان حجمها **ثابت** ما يتغير بعد الانشاء. `ArrayList` تحل هالمشكلة، تقدر تضيف وتحذف عناصر وهي تكبر وتصغر تلقائيا.
+
+```java
+import java.util.ArrayList;
+
+// انشاء ArrayList من نوع String
+ArrayList<String> names = new ArrayList<>();
+
+// اضافة عناصر
+names.add("خالد");
+names.add("فهد");
+names.add("سعد");
+
+// الحجم
+System.out.println(names.size()); // 3
+
+// الوصول لعنصر
+System.out.println(names.get(0)); // خالد
+
+// حذف عنصر
+names.remove("فهد");
+System.out.println(names.size()); // 2
+```
+
+### ArrayList مع كائنات
+
+هنا الفايدة الحقيقية، تسوي قائمة من كائنات كلاس معين:
+
+```java
+ArrayList<Student> students = new ArrayList<>();
+students.add(new Student("خالد", 4380001, 4.5));
+students.add(new Student("فهد", 4380002, 3.8));
+
+// المرور على كل الطلاب
+for (Student s : students) {
+    s.displayInfo();
+}
+
+// البحث عن طالب بمعدل عالي
+for (Student s : students) {
+    if (s.getGpa() >= 4.0) {
+        System.out.println(s.getName() + " متفوق");
+    }
+}
+```
+
+## انواع اسئلة الاختبارات في CSC 113
+
+<StepList title="انواع الاسئلة المتوقعة في الميدترم والفاينل">
+1. **تتبع الكود (Trace)**: يعطيك كود فيه وراثة و polymorphism ويسالك عن المخرجات. لازم تعرف اي نسخة من الدالة تنستدعي بناء على نوع الكائن الفعلي
+2. **اكتب كلاس كامل**: يعطيك وصف ويطلب منك تكتب كلاس مع constructors و getters/setters ودوال
+3. **صمم نظام وراثة**: يعطيك سيناريو (نظام مكتبة، نظام موظفين) ويطلب منك تصمم الكلاسات وعلاقاتها
+4. **اكمل الكود**: كود ناقص فيه فراغات تكملها
+5. **اشرح المفهوم**: "ما الفرق بين overloading و overriding؟" او "اشرح التغليف مع مثال"
+6. **اكتشاف الاخطاء**: كود فيه اخطاء OOP تلاقيها وتصلحها
+7. **Exception Handling**: يعطيك كود فيه try/catch ويسالك عن المخرجات في حالات مختلفة
+</StepList>
+
+## نصائح للمشروع النهائي
+
+مشروع CSC 113 عادة يطلب منك تبني نظام متكامل يطبّق كل مفاهيم OOP اللي درستها. هذي خطوات تساعدك تنجح فيه:
+
+<StepList title="خطوات النجاح في مشروع CSC 113">
+1. **خطط قبل ما تكتب كود**: ارسم الكلاسات وعلاقاتها على ورقة. حدد مين يرث من مين ووين تستخدم interface
+2. **طبّق التغليف من البداية**: كل المتغيرات private مع getters/setters. لا تأجل هالشيء
+3. **استخدم الوراثة بذكاء**: لو عندك كلاسات فيها خصائص مشتركة، اعمل كلاس اب
+4. **ما تحط كل شيء في main**: وزّع الكود على كلاسات مختلفة كل واحد له مسؤولية
+5. **استخدم Exception Handling**: تعامل مع مدخلات المستخدم وعمليات الملفات بـ try/catch
+6. **اختبر كل جزء لحاله**: لا تنتظر تخلص كل شيء عشان تجرب. كل ما تخلص كلاس، جربه
+7. **اكتب تعليقات (Comments)**: شرح بسيط لكل كلاس ودالة يزيد درجتك ويسهّل عليك المناقشة
+8. **سلّم بدري**: لا تنتظر اخر ليلة. دايم فيه مشاكل ما توقعتها
+</StepList>
+
+<Callout type="info" title="افكار مشاريع تغطي كل المفاهيم">
+نظام ادارة مكتبة (كتب، اعضاء، استعارة)، نظام ادارة موظفين (انواع مختلفة من الموظفين)، نظام حجز فندق، او نظام ادارة مطعم. كلها تحتاج: كلاسات، وراثة، تغليف، تعدد اشكال، ملفات لحفظ البيانات، ومعالجة استثناءات.
+</Callout>
+
+## نصائح للاب العملي
+
+اللاب في CSC 113 جزء اساسي من درجتك ويبني مهاراتك العملية. هذي نصائح تفرق معك:
+
+- **حاول تحل بنفسك اول**. حتى لو ما قدرت تخلص، المحاولة تعلّمك اكثر من نسخ حل زميلك
+- **اقرا رسائل الاخطاء بعناية**. جافا واضحة في رسائلها: `NullPointerException` يعني كائن قيمته null، `cannot access private member` يعني فيه مشكلة تغليف
+- **ارسم العلاقات على ورقة**. قبل ما تكتب كود، ارسم اي كلاس يرث من اي كلاس واي كلاس يحوي اي كلاس
+- **جرب بحالات مختلفة**. ادخل قيم صحيحة وقيم خاطئة وشوف كيف برنامجك يتصرف
+- **لا تخاف تسال الـ TA**. موجود عشان يساعدك، استغل وجوده
+
+## استراتيجية المذاكرة لـ CSC 113
+
+البرمجة مهارة عملية. ما تقدر تذاكرها بالقراءة بس. لازم تكتب كود وتجرب وتغلط وتصلح. هذي خطة مذاكرة مجرّبة:
+
+- **راجع سلايدات المحاضرة** وركز على الامثلة العملية مو بس التعريفات
+- **حل تمارين كتاب Deitel**. الكتاب فيه تمارين ممتازة نهاية كل فصل
+- **اعد حل تمارين اللاب بنفسك** بدون ما تشوف الحل. لو قدرت تحله لحالك يعني فاهمه
+- **حل اختبارات سابقة**. اسال طلاب دفعات قبلك عن نماذج الاسئلة
+- **اكتب الكود بيدك على ورق**. في الاختبار ما فيه compiler يصحح لك. تمرّن على الكتابة بدون IDE
+- **ذاكر مع ربعك**. اشرح لزميلك واطلب منه يشرح لك. اللي يقدر يشرح يعني فاهم
+
+لو تحس انك تحتاج متابعة شخصية في البرمجة والمفاهيم مو واضحة، تعرّف على [خدمة الدروس الخصوصية في البرمجة](/blog/private-programming-tutoring).
+
+## ربط CSC 113 بمسارك الاكاديمي
+
+بعد ما تنهي CSC 113 بنجاح، المادة التالية في مسار البرمجة هي **CSC 212 تراكيب البيانات (Data Structures)**. في CSC 212 راح تستخدم كل مفاهيم OOP اللي تعلمتها هنا لبناء هياكل بيانات مثل القوائم المتصلة (Linked Lists) والاشجار (Trees) والمكدسات (Stacks) وطوابير الانتظار (Queues).
+
+كل هالهياكل مبنية على كلاسات ووراثة وواجهات. لو اساسك في CSC 113 قوي، CSC 212 تصير اسهل بكثير. ولو اساسك ضعيف، راح تعاني لانك تحاول تفهم OOP وتراكيب البيانات في نفس الوقت.
+
+لو تبي تقرا عن مادة تراكيب البيانات من الحين، راجع [شرح CSC 212 تراكيب البيانات](/blog/csc-212-data-structures-ksu). ولو تبي شرح اعمق لاساسيات جافا، اقرا [دليلنا الشامل لتعلم جافا](/blog/java-beginners-guide).
+
+## خلاصة
+
+مادة CSC 113 تغيّر طريقة تفكيرك في البرمجة بالكامل. بدل ما تكتب كود "يمشي الحال" كله في main واحد، تتعلم تصمم برامج منظمة وقابلة للتطوير والصيانة. المفاهيم الاساسية اللي لازم تتقنها:
+
+- **الكلاسات والكائنات** هي اساس كل شيء في OOP
+- **التغليف** يحمي بياناتك ويتحكم في الوصول لها
+- **الوراثة** تمنع تكرار الكود وتنظم العلاقات بين الكلاسات
+- **تعدد الاشكال** يعطيك مرونة كبيرة في التعامل مع كائنات مختلفة بشكل موحّد
+- **الكلاسات المجردة والواجهات** تساعدك تصمم انظمة مرنة وقابلة للتوسعة
+- **معالجة الاستثناءات** تخلي برامجك قوية وما تنهار عند اي خطا
+- **الملفات** تحفظ بياناتك بشكل دائم
+- **ArrayList** تعطيك قوائم مرنة بدل المصفوفات الثابتة
+
+لو فهمت هذي المفاهيم وتمرنت عليها كويس، CSC 113 ما راح تكون عقبة. بالعكس، راح تكون المادة اللي تفتح لك ابواب كل المواد المتقدمة في قسم علوم الحاسب بجامعة الملك سعود.
+
+<CTABox title="واجب CSC 113 ضاغطك والديدلاين قريب؟" description="فريقنا متخصص في مواد قسم علوم الحاسب بجامعة الملك سعود. ارسل لنا الواجب او المشروع على واتساب ونرد عليك بعرض سعر خلال ساعة، شرح وحل كامل." buttonText="ارسل واجبك الان" buttonUrl="https://wa.me/201557703662?text=مرحبا، احتاج مساعدة في واجب CSC 113 برمجة حاسبات 2 - جامعة الملك سعود" />
