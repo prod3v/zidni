@@ -34,7 +34,7 @@ const postAuthors = allAuthors.filter((author) =>
 
 const articleSchema = {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "BlogPosting",
   headline: title,
   description: description,
   image: image ? `${baseUrl}${image}` : undefined,
@@ -56,6 +56,7 @@ const articleSchema = {
   },
   mainEntityOfPage: postUrl,
   keywords: tags.join(", "),
+  inLanguage: "ar",
 };
 
 const breadcrumbSchema = {
