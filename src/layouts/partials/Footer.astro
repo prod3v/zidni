@@ -11,9 +11,10 @@ import social from "@/config/social.json";
       <div class="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr] gap-8 md:gap-12">
         {/* About Column */}
         <div>
-          <div class="text-primary text-xl font-bold mb-3">
-            {config.site.logo_text || "زدني"}
-          </div>
+          <a href="/" class="flex items-center gap-2 mb-3">
+            <img src={config.site.logo} alt={config.site.title} class="h-8 w-8 object-contain" />
+            <span class="text-primary text-lg font-semibold">{config.site.logo_text || "زدني"}</span>
+          </a>
           <p class="text-white/60 text-sm leading-relaxed">
             مدونة تعليمية للطلاب الجامعيين تقدم نصائح دراسية، دروس في البرمجة، وأدلة أكاديمية شاملة لمساعدتك على التفوق
           </p>
