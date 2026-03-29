@@ -1,5 +1,5 @@
 ---
-title: "شرح مادة CPCS 202، برمجة 1 بلغة جافا | جامعة الملك عبدالعزيز"
+title: "شرح مادة CPCS 202، برمجة 1 بلغة جافا - جامعة الملك عبدالعزيز"
 meta_title: "شرح CPCS 202 البرمجة 1 بلغة جافا جامعة الملك عبدالعزيز"
 description: "شرح شامل لمادة CPCS 202 البرمجة 1 بجامعة الملك عبدالعزيز: المتغيرات، الشروط، الحلقات، الدوال، والمصفوفات بلغة جافا. شرح مبسّط بأمثلة عملية ونصائح للنجاح."
 date: 2026-02-13T09:00:00Z
@@ -65,7 +65,7 @@ draft: false
 ### أول برنامج لك في جافا
 
 ```java
-// أول برنامج — يطبع رسالة ترحيب
+// أول برنامج - يطبع رسالة ترحيب
 public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("مرحبا بالعالم!"); // طباعة نص
@@ -105,11 +105,11 @@ String name = "أحمد";      // نص (سلسلة محارف)
 ```java
 int x = 10, y = 3;
 
-System.out.println(x + y);   // 13 — جمع
-System.out.println(x - y);   // 7  — طرح
-System.out.println(x * y);   // 30 — ضرب
-System.out.println(x / y);   // 3  — قسمة صحيحة (انتبه! مو 3.33)
-System.out.println(x % y);   // 1  — باقي القسمة
+System.out.println(x + y);   // 13 - جمع
+System.out.println(x - y);   // 7  - طرح
+System.out.println(x * y);   // 30 - ضرب
+System.out.println(x / y);   // 3  - قسمة صحيحة (انتبه! مو 3.33)
+System.out.println(x % y);   // 1  - باقي القسمة
 ```
 
 ### قراءة مدخلات من المستخدم
@@ -191,7 +191,7 @@ if (credits >= 12) {
         System.out.println("مؤهل للتسجيل المحدود");
     }
 } else {
-    System.out.println("غير مؤهل — أكمل الساعات المطلوبة");
+    System.out.println("غير مؤهل - أكمل الساعات المطلوبة");
 }
 ```
 
@@ -370,8 +370,8 @@ int[] grades = {85, 92, 78, 95, 88};
 double[] scores = new double[5]; // 5 عناصر كلها 0.0
 
 // الوصول للعناصر (الفهرس يبدأ من 0)
-System.out.println(grades[0]); // 85 — أول عنصر
-System.out.println(grades[4]); // 88 — آخر عنصر
+System.out.println(grades[0]); // 85 - أول عنصر
+System.out.println(grades[4]); // 88 - آخر عنصر
 
 // المرور على كل العناصر
 for (int i = 0; i < grades.length; i++) {
@@ -421,7 +421,7 @@ for (int i = 0; i < grades.length; i++) {          // الصفوف (الطلاب
         studentSum += grades[i][j];
     }
     double avg = (double) studentSum / grades[i].length;
-    System.out.println("الطالب " + (i+1) + " — المعدل: " + avg);
+    System.out.println("الطالب " + (i+1) + " - المعدل: " + avg);
 }
 ```
 

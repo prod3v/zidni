@@ -15,6 +15,13 @@ type Props = {
 
 const authors = await getSinglePage("authors");
 const { className, posts, fluid } = Astro.props;
+
+function getExcerpt(post: CollectionEntry<"posts">): string {
+  if (post.data.description) return post.data.description;
+  const body = post.body ?? "";
+  const cleaned = body.replace(/import\s+\S+\s+from\s+["'][^"']+["'];?\s*/g, "");
+  return plainify(cleaned);
+}
 ---
 
 <div
@@ -88,7 +95,7 @@ const { className, posts, fluid } = Astro.props;
           </a>
         </h3>
         <p class="text-text line-clamp-2 leading-relaxed">
-          {plainify(post.body ?? "")}
+          {getExcerpt(post)}
         </p>
       </div>
     ))

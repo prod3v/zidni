@@ -133,7 +133,7 @@ int main() {
     // عدد عشري (دقة عادية)
     float gpa = 3.75f;
 
-    // عدد عشري (دقة مزدوجة — أكثر دقة)
+    // عدد عشري (دقة مزدوجة - أكثر دقة)
     double pi = 3.14159265;
 ```
 
@@ -173,7 +173,7 @@ int main() {
 إذا كانت عندك قيمة ما تتغير، عرّفها كثابت باستخدام `const`:
 
 ```cpp
-const double TAX_RATE = 0.15;    // نسبة الضريبة — لا يمكن تغييرها
+const double TAX_RATE = 0.15;    // نسبة الضريبة - لا يمكن تغييرها
 const int MAX_STUDENTS = 40;     // أقصى عدد طلاب
 ```
 
@@ -189,10 +189,10 @@ int main() {
     int age;
     double gpa;
 
-    // الإخراج — طباعة على الشاشة
+    // الإخراج - طباعة على الشاشة
     cout << "أدخل اسمك: ";
 
-    // الإدخال — قراءة من المستخدم
+    // الإدخال - قراءة من المستخدم
     cin >> name;
 
     cout << "أدخل عمرك: ";
@@ -253,19 +253,19 @@ cout << (x <= y) << endl;  // أصغر من أو يساوي: 1
 ```cpp
 bool a = true, b = false;
 
-cout << (a && b) << endl;  // AND (و): false — لازم الاثنين true
-cout << (a || b) << endl;  // OR (أو): true — يكفي واحد true
-cout << (!a) << endl;      // NOT (نفي): false — يعكس القيمة
+cout << (a && b) << endl;  // AND (و): false - لازم الاثنين true
+cout << (a || b) << endl;  // OR (أو): true - يكفي واحد true
+cout << (!a) << endl;      // NOT (نفي): false - يعكس القيمة
 ```
 
 ### عمليات الزيادة والنقصان
 
 ```cpp
 int counter = 5;
-counter++;   // زيادة بواحد — الآن counter = 6
-counter--;   // نقصان بواحد — الآن counter = 5
-counter += 3; // زيادة بثلاثة — الآن counter = 8
-counter *= 2; // ضرب في اثنين — الآن counter = 16
+counter++;   // زيادة بواحد - الآن counter = 6
+counter--;   // نقصان بواحد - الآن counter = 5
+counter += 3; // زيادة بثلاثة - الآن counter = 8
+counter *= 2; // ضرب في اثنين - الآن counter = 16
 ```
 
 ## الشروط (Conditionals)
@@ -637,13 +637,13 @@ int main() {
 #include <iostream>
 using namespace std;
 
-// التمرير بالقيمة — نسخة من المتغير
+// التمرير بالقيمة - نسخة من المتغير
 void doubleByValue(int x) {
     x = x * 2;
     // التغيير لا يؤثر على المتغير الأصلي
 }
 
-// التمرير بالمرجع — المتغير نفسه
+// التمرير بالمرجع - المتغير نفسه
 void doubleByReference(int &x) {
     x = x * 2;
     // التغيير يؤثر على المتغير الأصلي
@@ -657,10 +657,10 @@ int main() {
     int num = 5;
 
     doubleByValue(num);
-    cout << "بعد التمرير بالقيمة: " << num << endl;    // 5 — ما تغيّر
+    cout << "بعد التمرير بالقيمة: " << num << endl;    // 5 - ما تغيّر
 
     doubleByReference(num);
-    cout << "بعد التمرير بالمرجع: " << num << endl;     // 10 — تغيّر!
+    cout << "بعد التمرير بالمرجع: " << num << endl;     // 10 - تغيّر!
 
     return 0;
 }
@@ -719,7 +719,7 @@ int original = 10;
 int &ref = original;  // ref هو اسم ثاني لنفس المتغير
 
 ref = 20;
-cout << original << endl;  // 20 — تغيّرت لأن ref و original نفس الشيء
+cout << original << endl;  // 20 - تغيّرت لأن ref و original نفس الشيء
 ```
 
 <Callout type="tip" title="لا تقلق من المؤشرات">
@@ -740,13 +740,13 @@ using namespace std;
 // تعريف كلاس الطالب
 class Student {
 private:
-    // البيانات — خاصة لا يمكن الوصول لها مباشرة من الخارج
+    // البيانات - خاصة لا يمكن الوصول لها مباشرة من الخارج
     string name;
     int id;
     double gpa;
 
 public:
-    // الدالة البانية (Constructor) — تُنفذ عند إنشاء كائن جديد
+    // الدالة البانية (Constructor) - تُنفذ عند إنشاء كائن جديد
     Student(string n, int i, double g) {
         name = n;
         id = i;
@@ -831,7 +831,7 @@ public:
 الآن ننشئ كلاس `UniversityStudent` الذي يرث من `Person` ويضيف خاصية التخصص:
 
 ```cpp
-// الكلاس الابن — يرث من Person
+// الكلاس الابن - يرث من Person
 class UniversityStudent : public Person {
 private:
     string major;
@@ -865,7 +865,7 @@ public:
 ### 1. نسيان الفاصلة المنقوطة
 
 ```cpp
-// خطأ — راح يعطيك compilation error
+// خطأ - راح يعطيك compilation error
 cout << "مرحبا"
 
 // صح
@@ -877,10 +877,10 @@ cout << "مرحبا";
 ```cpp
 int x = 5;
 
-// هذا تعيين — يضع القيمة 10 في x
+// هذا تعيين - يضع القيمة 10 في x
 x = 10;
 
-// هذا مقارنة — يتحقق هل x يساوي 10
+// هذا مقارنة - يتحقق هل x يساوي 10
 if (x == 10) { ... }
 ```
 
@@ -889,7 +889,7 @@ if (x == 10) { ... }
 ```cpp
 int arr[3] = {1, 2, 3};
 // العناصر: arr[0], arr[1], arr[2]
-cout << arr[3]; // خطأ! تجاوزت الحدود — سلوك غير متوقع
+cout << arr[3]; // خطأ! تجاوزت الحدود - سلوك غير متوقع
 ```
 
 في C++ هذا الخطأ خطير لأن المترجم لن يعطيك تحذير، البرنامج ببساطة يقرأ من مكان خاطئ في الذاكرة.
@@ -913,17 +913,17 @@ switch (x) {
 
 ```cpp
 int x;          // لم يُعطَ قيمة ابتدائية
-cout << x;      // قيمة عشوائية (garbage value) — نتيجة غير متوقعة
+cout << x;      // قيمة عشوائية (garbage value) - نتيجة غير متوقعة
 ```
 
 ### 6. الحلقات اللا نهائية
 
 ```cpp
-// خطأ — i لن يتغير أبدًا
+// خطأ - i لن يتغير أبدًا
 int i = 0;
 while (i < 10) {
     cout << i;
-    // نسيت i++ — حلقة لا نهائية!
+    // نسيت i++ - حلقة لا نهائية!
 }
 ```
 
