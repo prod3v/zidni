@@ -24,9 +24,10 @@ const filterByCategory = taxonomyFilter(posts, "categories", category);
 const sortedPosts = sortByDate(filterByCategory);
 
 const title = humanize(category || "");
+const description = `تصفّح ${sortedPosts.length} مقال${sortedPosts.length === 1 ? "" : "ة"} في تصنيف "${title}" على مدونة زدني — محتوى أكاديمي للطلاب الجامعيين.`;
 ---
 
-<Base title={title || "تصنيف"}>
+<Base title={`${title} | زدني`} description={description}>
   <div class="section">
     <div class="container">
       <p class="text-center text-2xl mb-4">مقالات من تصنيف</p>

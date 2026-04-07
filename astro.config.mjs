@@ -56,7 +56,13 @@ export default defineConfig({
   fonts: fontsConfig,
   integrations: [
     react(),
-    sitemap(),
+    sitemap({
+      filter: (page) => {
+        // exclude single-post course-code tag pages (e.g. /tags/cpcs-202)
+        const courseCodePattern = /\/tags\/(cpcs|cpit|csc|cs|عال)-\d/i;
+        return !courseCodePattern.test(page);
+      },
+    }),
     AutoImport({
       imports: [
         "@/shortcodes/Button",
