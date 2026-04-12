@@ -58,9 +58,11 @@ export default defineConfig({
     react(),
     sitemap({
       filter: (page) => {
-        // exclude single-post course-code tag pages (e.g. /tags/cpcs-202)
-        const courseCodePattern = /\/tags\/(cpcs|cpit|csc|cs|عال)-\d/i;
-        return !courseCodePattern.test(page);
+        // exclude all individual tag pages (thin content — noindexed if < 3 posts)
+        if (/\/tags\/[^/]+\/?$/.test(page)) return false;
+        // exclude authors index (noindexed)
+        if (/\/authors\/?$/.test(page)) return false;
+        return true;
       },
     }),
     AutoImport({

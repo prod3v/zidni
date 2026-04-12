@@ -27,7 +27,7 @@ const title = humanize(tag || "");
 const description = `تصفّح ${sortedPosts.length} مقال${sortedPosts.length === 1 ? "" : "ة"} بوسم "${title}" على مدونة زدني — محتوى أكاديمي للطلاب الجامعيين.`;
 ---
 
-<Base title={`${title} | زدني`} description={description}>
+<Base title={`${title} | زدني`} description={description} noindex={sortedPosts.length < 3}>
   <div class="section">
     <div class="container">
       <p class="text-center text-2xl mb-4">مقالات بوسم</p>
